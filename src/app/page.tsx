@@ -193,7 +193,9 @@ export default function Home() {
                     href={`/projects/${project.slug}`}
                     className="text-sm font-semibold text-[#2E90FA] hover:text-[#1D7CE5]"
                   >
-                    View project →
+                    {project.slug === "workflow-automations"
+                      ? "Read More →"
+                      : "View project →"}
                   </Link>
                 </div>
               </article>

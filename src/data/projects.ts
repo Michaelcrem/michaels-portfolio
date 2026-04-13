@@ -26,17 +26,17 @@ export const projects: Project[] = [
   },
   {
     slug: "insight-dashboard",
-    title: "Mortgage Calculator",
+    title: "MobileSettings Page Mockup",
     description:
-      "A tool used to calculate monthly mortgage payments based off home price, down payment, and mortgage loan type.",
+      "Wanted to get back into 100 days of design challenges and created a quick mockup of a settings page for a mobile app.",
     year: "2024",
     image: "/projects/mortgage-calculator-preview.png",
   },
   {
     slug: "workflow-automations",
-    title: "Rule Manager Help Guide Page",
+    title: "Day to Day Work Development",
     description:
-      "An interactive Rule Manager Help Guide that provides clear, step-by-step support for navigating and managing improved rules and guides platform.",
+      "Read more of my day to day work development and how I'm improving my skills.",
     year: "2024",
     image: "/projects/rule-manager-preview-v3.svg",
   },
