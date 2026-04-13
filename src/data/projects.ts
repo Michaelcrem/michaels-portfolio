@@ -30,7 +30,7 @@ export const projects: Project[] = [
     description:
       "A tool used to calculate monthly mortgage payments based off home price, down payment, and mortgage loan type.",
     year: "2024",
-    image: "/projects/insight-dashboard.png",
+    image: "/projects/mortgage-calculator-preview.png",
   },
   {
     slug: "workflow-automations",
@@ -38,6 +38,6 @@ export const projects: Project[] = [
     description:
       "An interactive Rule Manager Help Guide that provides clear, step-by-step support for navigating and managing improved rules and guides platform.",
     year: "2024",
-    image: "/projects/workflow-automations-v4.png",
+    image: "/projects/rule-manager-preview-v3.svg",
   },
 ];

@@ -181,7 +181,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-24">
-        <Link className="text-sm text-[#2E90FA] hover:text-[#1D7CE5]" href="/">
+        <Link
+          className="relative z-10 inline-flex text-sm text-[#2E90FA] hover:text-[#1D7CE5]"
+          href="/"
+        >
           ← Back to home
         </Link>
 

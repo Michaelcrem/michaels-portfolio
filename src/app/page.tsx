@@ -155,7 +155,7 @@ export default function Home() {
                 >
                   <div
                     className={`relative w-full ${
-                      project.isWide ? "aspect-[21/9]" : "aspect-[16/10]"
+                      project.isWide ? "aspect-[21/8]" : "aspect-[16/10]"
                     }`}
                   >
                     <Image
@@ -169,7 +169,11 @@ export default function Home() {
                       }
                       quality={90}
                       unoptimized={project.isWide}
-                      className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                      className={`object-cover transition duration-300 ${
+                        project.isWide
+                          ? "scale-[1.08] group-hover:scale-[1.1]"
+                          : "group-hover:scale-[1.03]"
+                      }`}
                     />
                   </div>
                 </Link>
