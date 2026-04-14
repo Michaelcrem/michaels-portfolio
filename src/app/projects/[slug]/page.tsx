@@ -95,7 +95,7 @@ const projectDetails: Record<
   },
   "workflow-automations": {
     intro:
-      "During my time at American Bureau of Shipping (ABS), we rolled out a new Rule Manager platform that enables users to search and access company Rules and Guide documents used by surveyors to classify vessels. I contributed to the rollout by working on the Rules and Guides platform and designing a dedicated Help Guide webpage to provide clear, easy-to-follow instructions and improve overall user adoption.",
+      "At American Bureau of Shipping, I worked as a Web Developer focused on building and improving the company’s digital platforms. Day to day, I worked with React and Adobe Experience Manager (AEM) to develop new features, enhance site performance, and support content updates. I collaborated closely with designers and developers to create a better user experience across the site. One of the projects I’m most proud of was co-developing an emissions calculator that allows ship owners to estimate fuel usage and emissions costs, helping them make more efficient and cost-conscious decisions.\n\nIn my current role at Virtus Investment Partners, I manage a portfolio of ten affiliate websites and partner with our development team to roll out design updates and ongoing improvements. My work focuses on keeping our sites modern, consistent, and optimized for performance. I also collaborate with our email marketing and social media teams to develop digital content and ensure everything aligns across channels. Overall, my role blends hands-on development with cross-functional collaboration, allowing me to contribute to both the technical and strategic side of our digital presence.",
     type: "Product",
     stack: ["Documentation", "UX", "Web"],
     liveUrl: "#",
@@ -125,30 +125,7 @@ export function generateStaticParams() {
 const splitParagraphs = (text: string) =>
   text
     .split("\n\n")
-    .flatMap((section) => {
-      const normalized = section
-        .replaceAll("Chart.js", "Chartjs")
-        .replaceAll("Node.js", "Nodejs");
-      const sentences = normalized.match(/[^.!?]+[.!?]+/g) ?? [normalized];
-      const groups: string[] = [];
-      for (let i = 0; i < sentences.length; i += 2) {
-        groups.push(sentences.slice(i, i + 2).join(" ").trim());
-      }
-      if (groups.length > 2) {
-        groups[1] = `${groups[1]} ${groups.slice(2).join(" ")}`.trim();
-        groups.splice(2);
-      } else if (groups.length > 1) {
-        const lastGroup = groups[groups.length - 1];
-        const lastSentences = lastGroup.match(/[^.!?]+[.!?]+/g) ?? [lastGroup];
-        if (lastSentences.length === 1) {
-          groups[groups.length - 2] = `${groups[groups.length - 2]} ${lastGroup}`.trim();
-          groups.pop();
-        }
-      }
-      return groups.map((group) =>
-        group.replaceAll("Chartjs", "Chart.js").replaceAll("Nodejs", "Node.js")
-      );
-    })
+    .map((paragraph) => paragraph.trim())
     .filter(Boolean);
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -223,6 +200,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
 
+        {isRuleManager && (
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-6 py-[40px]">
+              <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
+              <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                {splitParagraphs(details.purpose).map((paragraph, index) => (
+                  <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {slug === "workflow-automations" && (
+          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+            <Image
+              src="/projects/rule-manager-preview-v3.svg"
+              alt="Day to day work development preview"
+              width={1400}
+              height={900}
+              sizes="(max-width: 768px) 100vw, 900px"
+              className="h-auto w-full"
+            />
+          </div>
+        )}
+
         {isMedicalPortfolio ? (
           <div className="flex flex-col gap-8">
             <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
@@ -283,17 +286,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         )}
 
-        <div className="flex flex-col gap-8">
+        {!isRuleManager && (
           <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-6 py-[40px]">
-              <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
-              <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
-                {splitParagraphs(details.purpose).map((paragraph, index) => (
-                  <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
-                ))}
-              </div>
-            </div>
             <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-6 py-[40px]">
+                <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
+                <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                  {splitParagraphs(details.purpose).map((paragraph, index) => (
+                    <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col gap-8">
               {isMedicalPortfolio && (
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                 <Image
@@ -419,9 +423,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </div>
               )}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8">
             {slug === "clinic-scheduler" && (
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-6 py-[40px]">
@@ -635,8 +639,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               </div>
             )}
+            </div>
           </div>
-        </div>
+        )}
 
         <section className="flex flex-col gap-4 rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-8">
           <h2 className="text-2xl font-semibold">Lessons Learned</h2>
