@@ -12,6 +12,10 @@ const projectDetails: Record<
     stack: string[];
     liveUrl?: string;
     purpose: string;
+    /** Shown above “Project Purpose and Goal” when set (e.g. Day to Day Work Development). */
+    purposePreamble?: string;
+    /** Shown after purpose + visuals on Day to Day when set. */
+    designApproach?: string;
     stackExplanation: string;
     heroImage: string;
     detailImages: { src: string; alt: string }[];
@@ -76,7 +80,7 @@ const projectDetails: Record<
   },
   "insight-dashboard": {
     intro:
-      "This mortgage calculator features a clean, easy-to-follow UI that makes estimating your total monthly home payment simple and intuitive. It calculates your full monthly cost—including principal, property taxes, and insurance—and clearly breaks down each component so you can understand exactly where your money is going and plan with confidence.",
+      "I have experience working as a Web Developer across multiple organizations, where I’ve focused on building applications with React and designing intuitive, user-friendly interfaces. In my previous role at American Bureau of Shipping, I contributed to developing and enhancing web platforms using React and Adobe Experience Manager (AEM), including co-creating a tool that helped ship owners estimate fuel usage and emissions costs. In my current role at Virtus Investment Partners, I manage and support multiple affiliate websites, working closely with development, marketing, and social media teams to implement design updates and create cohesive digital experiences. Overall, my work centers on combining strong React development skills with thoughtful UI design to build efficient and engaging web applications.",
     type: "Product",
     stack: ["Pug", "Chart.js"],
     liveUrl: "https://mortgage--calculator-c1611120b7c4.herokuapp.com/",
@@ -94,13 +98,14 @@ const projectDetails: Record<
     role: ["UI designer", "Front-end developer"],
   },
   "workflow-automations": {
-    intro:
-      "I have experience working as a Web Developer across multiple organizations, where I’ve focused on building applications with React and designing intuitive, user-friendly interfaces. In my previous role at American Bureau of Shipping, I contributed to developing and enhancing web platforms using React and Adobe Experience Manager (AEM), including co-creating a tool that helped ship owners estimate fuel usage and emissions costs. In my current role at Virtus Investment Partners, I manage and support multiple affiliate websites, working closely with development, marketing, and social media teams to implement design updates and create cohesive digital experiences. Overall, my work centers on combining strong React development skills with thoughtful UI design to build efficient and engaging web applications.",
+    intro: "",
     type: "Product",
     stack: ["Documentation", "UX", "Web"],
     liveUrl: "#",
+    purposePreamble:
+      "I played a key role in the redesign of the Silvant website, an affiliate of Virtus Investment Partners, where I focused on both visual design and cross-functional collaboration. I worked closely with the development team to translate design concepts into scalable, user-friendly experiences, ensuring the final product aligned with both technical requirements and user needs. My contributions included designing page layouts, refining site structure, and helping create a cohesive visual system that elevated the overall user experience.\n\nThroughout the project, I partnered with multiple product managers to develop infographics, define content hierarchy, and maintain strict adherence to brand guidelines. This required balancing creative design with strategic thinking to ensure that each page effectively communicated key information while remaining visually engaging. Working at Virtus also meant collaborating across multiple affiliate teams, giving me the opportunity to align Silvant's design with broader organizational standards while still tailoring the experience to their unique audience and goals.",
     purpose:
-      "The goal of this project was to support the successful rollout of the new Rule Manager platform by ensuring users could easily understand and navigate the system. Because the platform introduced new workflows and search functionality, it was critical to create a centralized Help Guide that reduced confusion and minimized support requests. I focused on designing a clean, structured web page that clearly explained key features such as search tools, document access, and retired publications. The objective was to make complex documentation feel approachable through strong visual hierarchy, concise explanations, and supporting interface screenshots. Ultimately, the project aimed to improve user adoption, enhance usability, and provide surveyors with a seamless way to access the rules and guides necessary for vessel classification.",
+      "Following the acquisition of Silvant by Virtus Investment Partners, the primary goal of the project was to centralize and elevate Silvant’s marketing and web presence under a unified strategy. As part of a broader initiative, we were simultaneously transitioning affiliate sites from KERN to Statamic CMS, which created a natural opportunity to modernize Silvant’s digital experience. The purpose of the redesign was not only to improve performance and scalability through a more flexible CMS, but also to ensure a seamless transition for all stakeholders involved—including Financial Advisors, Marketing Managers, and Product Owners—by prioritizing usability, clarity, and efficient content management workflows.\n\nA key component of the project’s purpose was to balance innovation with brand continuity. Through extensive research into current trends in financial services design, we aimed to enhance the site’s visual and functional appeal while preserving the recognizable elements that existing users trusted. Maintaining Silvant’s signature earthy green color palette was a deliberate decision to support brand familiarity, while introducing a more refined layout, improved information hierarchy, and modern design elements. Ultimately, the project was driven by the need to create a refreshed, cohesive, and user-centered experience that aligned with both Silvant’s identity and the evolving standards of the financial industry.",
     stackExplanation:
       "This project was built using Ceros as the primary design and development tool. I chose Ceros because it allows for rapid, drag-and-drop creation of interactive web experiences without requiring extensive front-end development, making it ideal for a fast-moving enterprise rollout. Its visual editor enabled me to design structured layouts, embed visuals, and maintain strong visual hierarchy while keeping the experience user-friendly. After completing the build in Ceros, the page was integrated and hosted within Adobe Experience Manager (AEM) to align with the organization’s broader web infrastructure. Hosting it in AEM ensured consistency with brand standards, centralized content management, and seamless deployment within the existing ABS digital ecosystem. This stack allowed for both speed in design and stability in enterprise-level hosting.",
     heroImage: "/projects/rule-manager-hero.svg",
@@ -111,6 +116,8 @@ const projectDetails: Record<
       "August 2023, Launch",
     ],
     role: ["UX content designer", "Implementation lead"],
+    designApproach:
+      "My design approach for Silvant started in Figma with low-fidelity page shells, then moved to higher fidelity as content models stabilized in Statamic. I prioritized scan-friendly layouts for advisory audiences: generous whitespace, a clear typographic scale for headings and body copy, and repeatable patterns for product tiles, disclosures, and calls to action.\n\nI iterated with engineering on breakpoints and CMS-driven components so marketing could publish updates without breaking the visual system. Infographics and iconography were simplified to align with broader Virtus patterns while keeping Silvant’s earthy greens as the anchor for recognition and trust.",
   },
 };
 
@@ -202,6 +209,25 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {isRuleManager && (
           <div className="flex flex-col gap-8">
+            {details.purposePreamble ? (
+              <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                {splitParagraphs(details.purposePreamble).map((paragraph, index) => (
+                  <p key={`purpose-preamble-${paragraph.slice(0, 24)}-${index}`}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+            <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+              <Image
+                src="/projects/rule-manager-preview-v3.svg"
+                alt="Day to day work development preview"
+                width={1400}
+                height={900}
+                sizes="(max-width: 768px) 100vw, 900px"
+                className="h-auto w-full"
+              />
+            </div>
             <div className="flex flex-col gap-6 py-[40px]">
               <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
               <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
@@ -209,20 +235,44 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
                 ))}
               </div>
+              <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                {/* Large Figma-export SVG; <img> avoids next/image SVG restrictions. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/silvant-group-47.svg"
+                  alt="Silvant website redesign mockup"
+                  width={1728}
+                  height={1117}
+                  className="h-auto w-full"
+                  decoding="async"
+                />
+              </div>
             </div>
-          </div>
-        )}
-
-        {slug === "workflow-automations" && (
-          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-            <Image
-              src="/projects/rule-manager-preview-v3.svg"
-              alt="Day to day work development preview"
-              width={1400}
-              height={900}
-              sizes="(max-width: 768px) 100vw, 900px"
-              className="h-auto w-full"
-            />
+            {details.designApproach ? (
+              <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-6 py-[40px]">
+                  <h2 className="text-2xl font-semibold">Design Approach</h2>
+                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                    {splitParagraphs(details.designApproach).map((paragraph, index) => (
+                      <p key={`design-approach-${paragraph.slice(0, 24)}-${index}`}>
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/projects/silvant-macbook-16-mockup.svg"
+                    alt="Silvant design mockup on MacBook Pro"
+                    width={1728}
+                    height={1117}
+                    className="h-auto w-full"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            ) : null}
           </div>
         )}
 
@@ -257,7 +307,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               ))}
             </div>
           </div>
-        ) : (
+        ) : slug === "workflow-automations" ? null : (
           <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
             <div className="relative aspect-[16/9] w-full">
               <Image
