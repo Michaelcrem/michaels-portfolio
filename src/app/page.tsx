@@ -168,7 +168,9 @@ export default function Home() {
                           : "(max-width: 768px) 100vw, 520px"
                       }
                       quality={90}
-                      unoptimized={project.isWide}
+                      unoptimized={
+                        project.isWide || project.image.endsWith(".svg")
+                      }
                       className={`object-cover transition duration-300 ${
                         project.isWide
                           ? "scale-[1.08] group-hover:scale-[1.1]"
@@ -193,8 +195,8 @@ export default function Home() {
                     href={`/projects/${project.slug}`}
                     className="text-sm font-semibold text-[#2E90FA] hover:text-[#1D7CE5]"
                   >
-                    {project.slug === "workflow-automations"
-                      ? "Read More →"
+                    {project.slug === "insight-dashboard"
+                      ? "Read more →"
                       : "View project →"}
                   </Link>
                 </div>

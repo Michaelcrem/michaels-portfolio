@@ -12,9 +12,9 @@ const projectDetails: Record<
     stack: string[];
     liveUrl?: string;
     purpose: string;
-    /** Shown above “Project Purpose and Goal” when set (e.g. Day to Day Work Development). */
+    /** Shown above “Project Purpose and Goal” when set (e.g. Financial Site Design). */
     purposePreamble?: string;
-    /** Shown after purpose + visuals on Day to Day when set. */
+    /** Shown after purpose + visuals on Financial Site Design when set. */
     designApproach?: string;
     stackExplanation: string;
     heroImage: string;
@@ -174,26 +174,43 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <div className="flex flex-col gap-8">
           <h1 className="text-4xl font-semibold sm:text-5xl">{project.title}</h1>
-          <div className="rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]/70 px-12 py-10 text-lg text-[var(--muted)]">
-            <div className="flex flex-col gap-7 sm:flex-row sm:items-start sm:gap-36">
-              <div className="flex flex-col gap-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
-                  Timeline
-                </p>
-                {details.timeline.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
-              <div className="flex flex-col gap-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
-                  My Role
-                </p>
-                {details.role.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
+          {slug === "insight-dashboard" && (
+            <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
+              <div className="relative aspect-[16/9] w-full">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  width={1536}
+                  height={1024}
+                  className="h-full w-full object-cover object-top"
+                  decoding="async"
+                />
               </div>
             </div>
-          </div>
+          )}
+          {slug !== "insight-dashboard" && (
+            <div className="rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]/70 px-12 py-10 text-lg text-[var(--muted)]">
+              <div className="flex flex-col gap-7 sm:flex-row sm:items-start sm:gap-36">
+                <div className="flex flex-col gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
+                    Timeline
+                  </p>
+                  {details.timeline.map((item) => (
+                    <p key={item}>{item}</p>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
+                    My Role
+                  </p>
+                  {details.role.map((item) => (
+                    <p key={item}>{item}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col gap-8">
             <div
               className={`flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)] ${
@@ -221,7 +238,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <Image
                 src="/projects/rule-manager-preview-v3.svg"
-                alt="Day to day work development preview"
+                alt="Financial site design preview"
                 width={1400}
                 height={900}
                 sizes="(max-width: 768px) 100vw, 900px"
@@ -307,7 +324,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               ))}
             </div>
           </div>
-        ) : slug === "workflow-automations" ? null : (
+        ) : slug === "workflow-automations" || slug === "insight-dashboard" ? null : (
           <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
             <div className="relative aspect-[16/9] w-full">
               <Image
@@ -322,32 +339,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         )}
 
-        {slug === "insight-dashboard" && (
-          <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
-            <video
-              className="h-auto w-full"
-              src="/videos/mortgage-calculator.mov"
-              autoPlay
-              muted
-              loop
-              playsInline
-              disablePictureInPicture
-            />
-          </div>
-        )}
-
         {!isRuleManager && (
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-6 py-[40px]">
-                <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
-                <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
-                  {splitParagraphs(details.purpose).map((paragraph, index) => (
-                    <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
-                  ))}
+              {slug !== "insight-dashboard" && (
+                <div className="flex flex-col gap-6 py-[40px]">
+                  <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
+                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                    {splitParagraphs(details.purpose).map((paragraph, index) => (
+                      <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col gap-8">
+              )}
+              {slug !== "insight-dashboard" && (
+                <div className="flex flex-col gap-8">
               {isMedicalPortfolio && (
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                 <Image
@@ -473,7 +479,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </div>
               )}
-              </div>
+                </div>
+              )}
             </div>
             <div className="flex flex-col gap-8">
             {slug === "clinic-scheduler" && (
@@ -607,14 +614,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               </div>
           )}
-          <div className="flex flex-col gap-6 py-[40px]">
-            <h2 className="text-2xl font-semibold">Web Stack Explanation</h2>
-            <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
-              {splitParagraphs(details.stackExplanation).map((paragraph, index) => (
-                <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
-              ))}
+          {slug !== "insight-dashboard" && (
+            <div className="flex flex-col gap-6 py-[40px]">
+              <h2 className="text-2xl font-semibold">Web Stack Explanation</h2>
+              <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                {splitParagraphs(details.stackExplanation).map((paragraph, index) => (
+                  <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           {slug === "clinic-scheduler" && (
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <div className="relative aspect-[4/1] w-full">
@@ -641,7 +650,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               </div>
             )}
-            {!isMedicalPortfolio && slug !== "workflow-automations" && (
+            {!isMedicalPortfolio &&
+              slug !== "workflow-automations" &&
+              details.detailImages.length > 0 && (
               <div className="flex flex-col gap-8">
                 <div className="grid gap-8 md:grid-cols-2">
                   {(details.detailImages[0]?.src.includes("eu-ets-flow")
@@ -693,16 +704,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         )}
 
-        <section className="flex flex-col gap-4 rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-8">
-          <h2 className="text-2xl font-semibold">Lessons Learned</h2>
-          <div className="flex flex-col gap-4 text-lg leading-8 text-[var(--muted)]">
-            {splitParagraphs(
-              "This project reinforced a clear, minimalist design approach built on the Untitled UI system in Figma, accelerated by using Cursor to scaffold the portfolio quickly, and strengthened by building reusable React components that keep the experience consistent and scalable."
-            ).map((paragraph, index) => (
-              <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
-            ))}
-          </div>
-        </section>
+        {slug !== "insight-dashboard" && (
+          <section className="flex flex-col gap-4 rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-8">
+            <h2 className="text-2xl font-semibold">Lessons Learned</h2>
+            <div className="flex flex-col gap-4 text-lg leading-8 text-[var(--muted)]">
+              {splitParagraphs(
+                "This project reinforced a clear, minimalist design approach built on the Untitled UI system in Figma, accelerated by using Cursor to scaffold the portfolio quickly, and strengthened by building reusable React components that keep the experience consistent and scalable."
+              ).map((paragraph, index) => (
+                <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

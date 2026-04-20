@@ -17,6 +17,14 @@ export const projects: Project[] = [
     image: "/projects/medical-portfolio-preview.png",
   },
   {
+    slug: "workflow-automations",
+    title: "Financial Site Design",
+    description:
+      "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
+    year: "2024",
+    image: "/projects/rule-manager-preview-v3.svg",
+  },
+  {
     slug: "clinic-scheduler",
     title: "EU ETS Calculator",
     description:
@@ -26,18 +34,10 @@ export const projects: Project[] = [
   },
   {
     slug: "insight-dashboard",
-    title: "MobileSettings Page Mockup",
+    title: "Get To Know Me",
     description:
-      "Wanted to get back into 100 days of design challenges and created a quick mockup of a settings page for a mobile app.",
+      "Web developer with a passion for film and photography, blending creativity and technology to build engaging digital experiences.",
     year: "2024",
-    image: "/projects/mortgage-calculator-preview.png",
-  },
-  {
-    slug: "workflow-automations",
-    title: "Day to Day Work Development",
-    description:
-      "Read more of my day to day work development and how I'm improving my skills.",
-    year: "2024",
-    image: "/projects/rule-manager-preview-v3.svg",
+    image: "/projects/mobile-settings-mockup-preview.svg",
   },
 ];
