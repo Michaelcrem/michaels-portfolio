@@ -2,32 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 import { projects } from "@/data/projects";
-import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Home() {
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
-  const [sweepColor, setSweepColor] = useState("#ffffff");
-
-  const handleThemeToggle = (previousTheme: "light" | "dark") => {
-    setSweepColor(previousTheme === "dark" ? "#0a0a0a" : "#ffffff");
-    setAnimationKey((key) => key + 1);
-    setIsAnimating(true);
-    window.setTimeout(() => setIsAnimating(false), 700);
-  };
   return (
     <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      {isAnimating && (
-        <div
-          key={animationKey}
-          className="theme-curtain"
-          style={{ ["--curtain-color" as string]: sweepColor }}
-          aria-hidden="true"
-        />
-      )}
       <header className="sticky top-0 z-20 border-b border-[color:var(--border)] bg-[color:var(--background)]/80 backdrop-blur">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
@@ -43,7 +23,6 @@ export default function Home() {
             <a className="hover:text-[var(--foreground)]" href="#contact">
               Contact
             </a>
-            <ThemeToggle onToggle={handleThemeToggle} />
           </nav>
         </div>
       </header>

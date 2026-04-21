@@ -80,7 +80,7 @@ const projectDetails: Record<
   },
   "insight-dashboard": {
     intro:
-      "I have experience working as a Web Developer across multiple organizations, where I’ve focused on building applications with React and designing intuitive, user-friendly interfaces. In my previous role at American Bureau of Shipping, I contributed to developing and enhancing web platforms using React and Adobe Experience Manager (AEM), including co-creating a tool that helped ship owners estimate fuel usage and emissions costs. In my current role at Virtus Investment Partners, I manage and support multiple affiliate websites, working closely with development, marketing, and social media teams to implement design updates and create cohesive digital experiences. Overall, my work centers on combining strong React development skills with thoughtful UI design to build efficient and engaging web applications.",
+      "I have experience working as a Web Developer across multiple organizations, where I’ve focused on building applications with React and designing intuitive, user-friendly interfaces. In my previous role at American Bureau of Shipping, I contributed to developing and enhancing web platforms using React and Adobe Experience Manager (AEM), including co-creating a tool that helped ship owners estimate fuel usage and emissions costs.\n\nIn my current role at Virtus Investment Partners, I manage and support multiple affiliate websites, working closely with development, marketing, and social media teams to implement design updates and create cohesive digital experiences. Overall, my work centers on combining strong React development skills with thoughtful UI design to build efficient and engaging web applications.",
     type: "Product",
     stack: ["Pug", "Chart.js"],
     liveUrl: "https://mortgage--calculator-c1611120b7c4.herokuapp.com/",
@@ -111,11 +111,12 @@ const projectDetails: Record<
     heroImage: "/projects/rule-manager-hero.svg",
     detailImages: [],
     timeline: [
-      "June 2023, Requirements",
-      "July 2023, Content Design",
-      "August 2023, Launch",
+      "October 2024, Requirements",
+      "January 2025, Content Design",
+      "March 2025, Implementation",
+      "June 2025, Launch",
     ],
-    role: ["UX content designer", "Implementation lead"],
+    role: ["UX content designer"],
     designApproach:
       "My design approach for Silvant started in Figma with low-fidelity page shells, then moved to higher fidelity as content models stabilized in Statamic. I prioritized scan-friendly layouts for advisory audiences: generous whitespace, a clear typographic scale for headings and body copy, and repeatable patterns for product tiles, disclosures, and calls to action.\n\nI iterated with engineering on breakpoints and CMS-driven components so marketing could publish updates without breaking the visual system. Infographics and iconography were simplified to align with broader Virtus patterns while keeping Silvant’s earthy greens as the anchor for recognition and trust.",
   },
@@ -134,6 +135,26 @@ const splitParagraphs = (text: string) =>
     .split("\n\n")
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
+
+/** Splits "May 2023, Research" so the label after the comma can be emphasized. */
+function formatTimelineEntry(item: string) {
+  const idx = item.indexOf(",");
+  if (idx === -1) {
+    return item;
+  }
+  const datePart = item.slice(0, idx).trim();
+  const labelPart = item.slice(idx + 1).trim();
+  if (!labelPart) {
+    return datePart;
+  }
+  return (
+    <>
+      <span className="text-[var(--muted)]">{datePart}</span>
+      {", "}
+      <span className="font-semibold text-[var(--foreground)]">{labelPart}</span>
+    </>
+  );
+}
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
@@ -190,23 +211,37 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           )}
           {slug !== "insight-dashboard" && (
-            <div className="rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]/70 px-12 py-10 text-lg text-[var(--muted)]">
-              <div className="flex flex-col gap-7 sm:flex-row sm:items-start sm:gap-36">
-                <div className="flex flex-col gap-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
+            <div className="rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]/90 px-5 py-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:rounded-3xl sm:px-8 sm:py-9 md:px-10 md:py-10">
+              <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:gap-x-10 md:gap-x-14">
+                <div className="flex min-w-0 flex-col gap-3 sm:gap-3.5">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-strong)] sm:text-xs sm:tracking-[0.2em]">
                     Timeline
                   </p>
-                  {details.timeline.map((item) => (
-                    <p key={item}>{item}</p>
-                  ))}
+                  <div className="flex flex-col gap-2.5 sm:gap-3">
+                    {details.timeline.map((item) => (
+                      <p
+                        key={item}
+                        className="text-[13px] leading-snug text-[var(--muted)] sm:text-sm sm:leading-relaxed md:text-base"
+                      >
+                        {formatTimelineEntry(item)}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-col gap-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
+                <div className="flex min-w-0 flex-col gap-3 border-l border-[color:var(--border)] pl-5 sm:gap-3.5 sm:pl-8 md:pl-10">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-strong)] sm:text-xs sm:tracking-[0.2em]">
                     My Role
                   </p>
-                  {details.role.map((item) => (
-                    <p key={item}>{item}</p>
-                  ))}
+                  <div className="flex flex-col gap-2">
+                    {details.role.map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex w-fit max-w-full rounded-full border border-[color:var(--border)] bg-[var(--surface-strong)] px-2.5 py-1 text-[11px] font-semibold leading-tight text-[var(--foreground)] sm:px-3 sm:py-1 sm:text-xs md:text-sm"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -306,7 +341,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 priority
               />
             </div>
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-2 gap-8">
               {details.detailImages.map((image, index) => (
                 <div
                   key={`${image.src}-${index}`}
@@ -403,8 +438,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               )}
               {isMedicalPortfolio && (
-                <div className="grid gap-8 md:grid-cols-2 md:gap-x-16">
-                  <div className="flex flex-col gap-8 py-[40px] text-lg leading-8 text-[var(--muted)]">
+                <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:items-stretch md:gap-x-16 md:gap-y-0">
+                  <div className="flex w-full flex-col gap-8 py-[40px] text-lg leading-8 text-[var(--muted)]">
                     <h3 className="text-xl font-semibold text-[var(--foreground)]">
                       Blue Theme
                     </h3>
@@ -418,15 +453,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       professionalism with warmth.
                     </p>
                   </div>
-                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <Image
-                      src="/projects/medical-portfolio-blue-theme-v3.png"
-                      alt="Blue theme buttons and typography"
-                      width={1400}
-                      height={900}
-                      sizes="(max-width: 768px) 100vw, 520px"
-                      className="h-auto w-full scale-[1.08]"
-                    />
+                  <div className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] md:h-full">
+                    <div className="relative aspect-[16/10] w-full min-h-0 md:aspect-auto md:h-full md:min-h-[18rem]">
+                      <Image
+                        src="/projects/medical-portfolio-blue-theme-v3.png"
+                        alt="Blue theme buttons and typography"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 520px"
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
               )}
@@ -455,7 +491,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               )}
               {slug === "clinic-scheduler" && (
-                <div className="grid gap-8 md:grid-cols-2">
+                <div className="grid grid-cols-2 gap-8">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                     <div className="relative aspect-[1/1] w-full">
                       <Image
@@ -654,7 +690,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               slug !== "workflow-automations" &&
               details.detailImages.length > 0 && (
               <div className="flex flex-col gap-8">
-                <div className="grid gap-8 md:grid-cols-2">
+                <div className="grid grid-cols-2 gap-8">
                   {(details.detailImages[0]?.src.includes("eu-ets-flow")
                     ? details.detailImages.slice(1)
                     : details.detailImages
