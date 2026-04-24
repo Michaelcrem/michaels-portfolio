@@ -8,224 +8,136 @@ import { projects } from "@/data/projects";
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <header className="sticky top-0 z-20 border-b border-[color:var(--border)] bg-[color:var(--background)]/80 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
-            MC
+      <header className="sticky top-0 z-20 bg-[var(--background)]">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-14 py-8 md:px-24 md:py-10 lg:px-32 xl:px-40 2xl:px-52">
+          <p className="text-base font-bold tracking-[0.22em] text-[var(--foreground)] md:text-lg">
+            M<span className="mx-1">C</span>
           </p>
-          <nav className="flex items-center gap-6 text-sm text-[var(--muted)]">
-            <a className="hover:text-[var(--foreground)]" href="#projects">
-              Projects
+          <nav className="flex items-center gap-11 text-sm font-normal tracking-[0.06em] text-[var(--foreground)] md:gap-16 md:text-[15px] md:tracking-[0.08em]">
+            <a className="transition hover:opacity-60" href="#projects">
+              Work
             </a>
-            <a className="hover:text-[var(--foreground)]" href="#experience">
-              Experience
+            <a className="transition hover:opacity-60" href="#about">
+              About
             </a>
-            <a className="hover:text-[var(--foreground)]" href="#contact">
+            <a className="transition hover:opacity-60" href="#contact">
               Contact
             </a>
           </nav>
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-6 py-16">
-        <section className="flex flex-col gap-10">
-          <div className="flex flex-col gap-6">
-            <div className="relative flex flex-col gap-2 text-[var(--muted-strong)]">
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3">
-                  <span className="h-px w-12 bg-[color:var(--border)]" aria-hidden="true" />
-                </div>
-                <div className="flex items-center gap-2">
-                  <a
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--border)] text-[var(--muted)] transition hover:border-[color:var(--foreground)] hover:text-[var(--foreground)]"
-                    href="https://www.linkedin.com/in/michael-cremonini/"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="LinkedIn"
-                  >
-                    <Image
-                      src="/icons/linkedin-icon.svg"
-                      alt=""
-                      width={18}
-                      height={18}
-                      className="theme-icon h-[18px] w-[18px]"
-                    />
-                  </a>
-                  <a
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--border)] text-[var(--muted)] transition hover:border-[color:var(--foreground)] hover:text-[var(--foreground)]"
-                    href="https://github.com/Michaelcrem"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="GitHub"
-                  >
-                    <Image
-                      src="/icons/github-icon.svg"
-                      alt=""
-                      width={18}
-                      height={18}
-                      className="theme-icon h-[18px] w-[18px]"
-                    />
-                  </a>
-                  <a
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--border)] text-[var(--muted)] transition hover:border-[color:var(--foreground)] hover:text-[var(--foreground)]"
-                    href="https://dribbble.com/michaelcrem"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Dribbble"
-                  >
-                    <Image
-                      src="/icons/dribbble-icon.svg"
-                      alt=""
-                      width={16}
-                      height={16}
-                      className="theme-icon h-4 w-4"
-                    />
-                  </a>
-                </div>
-              </div>
-              
-            </div>
-            <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">
-              Howdy, I&apos;m Michael.
-              <span className="block">
-                Web <span className="text-[#2E90FA]">Developer</span>, Designer,
-              </span>
-              <span className="block">and Life Long Learner.</span>
+      <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-14 pb-28 pt-12 md:gap-28 md:px-24 md:pb-40 md:pt-20 lg:gap-32 lg:px-32 lg:pt-24 xl:px-40 2xl:px-52">
+        <section id="about" className="flex w-full flex-col gap-8 md:gap-10">
+          <div className="flex max-w-4xl flex-col items-start gap-3 md:gap-4">
+            <h1 className="text-[clamp(2.15rem,5vw,3.15rem)] font-semibold leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
+              Michael Cremonini —
             </h1>
-            <p className="max-w-2xl text-lg text-[var(--muted)]">
-              I&apos;m a creative web developer and digital marketing strategist
-              who loves turning ideas into polished, user-centered experiences.
-              With a background in front-end development and UI/UX design, I
-              build products that are visually compelling and thoughtfully
-              engineered.
+            <p className="m-0 flex w-full flex-col gap-3 md:gap-4 text-[clamp(1.65rem,3.9vw,2.45rem)] font-extralight leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
+              <span className="block">Designing and building</span>
+              <span className="block">thoughtful digital experiences.</span>
             </p>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <a
-              className="rounded-full bg-[#2E90FA] px-6 py-3 text-sm font-semibold text-white hover:bg-[#1D7CE5]"
-              href="#contact"
-            >
-              Let&apos;s talk
-            </a>
-            <a
-              className="rounded-full border border-[color:var(--border)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] hover:border-[color:var(--foreground)]"
-              href="#projects"
-            >
-              View projects
-            </a>
-          </div>
+          <a
+            href="#projects"
+            className="inline-block w-fit border-b border-[var(--foreground)] pb-0.5 text-[15px] font-normal tracking-[0.04em] text-[var(--foreground)] transition hover:opacity-60 md:text-base"
+          >
+            View work{"\u00a0\u00a0"}→
+          </a>
         </section>
 
-        <section id="projects" className="flex flex-col gap-8">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold">Featured projects</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
+        <section id="projects" className="flex flex-col gap-8 md:gap-10">
+          <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
+            Featured projects
+          </h2>
+          <div className="flex flex-col gap-10 md:gap-14 lg:gap-16">
             {projects.map((project) => (
               <article
                 key={project.slug}
-                className={`group rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] p-6 shadow-lg shadow-black/20 ${
-                  project.isWide ? "md:col-span-2" : ""
-                }`}
+                className="flex flex-col gap-6 md:gap-8"
               >
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="block overflow-hidden rounded-xl border border-[color:var(--border)] bg-[var(--surface-strong)]"
+                  className="group block overflow-hidden rounded-2xl bg-[#f2f2f2] transition md:rounded-3xl"
                 >
                   <div
                     className={`relative w-full ${
-                      project.isWide ? "aspect-[21/8]" : "aspect-[16/10]"
+                      project.isWide ? "aspect-[22/9]" : "aspect-[16/9]"
                     }`}
                   >
                     <Image
                       src={project.image}
                       alt={`${project.title} preview`}
                       fill
-                      sizes={
-                        project.isWide
-                          ? "(max-width: 768px) 100vw, (max-width: 1400px) 1400px, 1600px"
-                          : "(max-width: 768px) 100vw, 520px"
-                      }
+                      sizes="(max-width: 768px) 100vw, 896px"
                       quality={90}
                       unoptimized={
                         project.isWide || project.image.endsWith(".svg")
                       }
-                      className={`object-cover transition duration-300 ${
-                        project.isWide
-                          ? "scale-[1.08] group-hover:scale-[1.1]"
-                          : "group-hover:scale-[1.03]"
-                      }`}
+                      className="h-full w-full object-cover object-center transition duration-300 ease-out group-hover:scale-[1.02]"
                     />
                   </div>
                 </Link>
-                <div className="mt-5 flex flex-col gap-3">
-                  <div>
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="text-lg font-semibold text-[var(--foreground)] hover:text-[#1D7CE5]"
-                    >
-                      {project.title}
-                    </Link>
-                    <p className="mt-2 text-sm text-[var(--muted)]">
-                      {project.description}
-                    </p>
-                  </div>
+                <div className="flex flex-col gap-2 md:gap-2.5">
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="text-sm font-semibold text-[#2E90FA] hover:text-[#1D7CE5]"
+                    className="w-fit text-xl font-semibold leading-snug tracking-tight text-[var(--foreground)] transition hover:opacity-70 md:text-2xl"
                   >
-                    {project.slug === "insight-dashboard"
-                      ? "Read more →"
-                      : "View project →"}
+                    {project.title}
                   </Link>
+                  <p className="max-w-2xl text-base leading-relaxed text-[#666666]">
+                    {project.description}
+                  </p>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="experience" className="flex flex-col gap-8">
-          <h2 className="text-2xl font-semibold">Experience</h2>
-          <div className="flex flex-col gap-6">
+        <section id="experience" className="flex flex-col gap-8 md:gap-10">
+          <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
+            Experience
+          </h2>
+          <div className="flex flex-col gap-8 md:gap-10">
             {[
               {
                 role: "Digital Marketing Specialist",
                 company: "Virtus Investment Partners",
-                time: "2024 - Present",
-                detail: "Designed marketing and product experiences with a focus on user experience and conversion."
-,
+                time: "2024 – now",
+                detail:
+                  "Designed marketing and product experiences with a focus on user experience and conversion.",
               },
               {
                 role: "Web Developer",
                 company: "American Bureau of Shipping",
-                time: "2023 - 2024",
+                time: "2023 – 2024",
                 detail:
                   "Developed react components and led the front-end design for EU ETS Calculator.",
               },
-        
             ].map((item) => (
               <div
                 key={`${item.role}-${item.company}`}
-                className="rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] p-6"
+                className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(6.25rem,max-content)_1fr] sm:gap-x-10 sm:gap-y-0 md:gap-x-14 lg:gap-x-20"
               >
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div>
-                    <h3 className="text-lg font-semibold">{item.role}</h3>
-                    <p className="text-sm text-[var(--muted-strong)]">{item.company}</p>
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]">
-                    {item.time}
-                  </span>
+                <p className="text-sm tabular-nums text-[var(--muted-strong)] sm:pt-0.5">
+                  {item.time}
+                </p>
+                <div className="flex min-w-0 flex-col gap-1">
+                  <p className="text-base font-semibold leading-snug tracking-tight text-[var(--foreground)]">
+                    {item.role} at {item.company}
+                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--muted)]">
+                    {item.detail}
+                  </p>
                 </div>
-                <p className="mt-3 text-sm text-[var(--muted)]">{item.detail}</p>
               </div>
             ))}
           </div>
         </section>
 
 
-        <section id="contact" className="flex flex-col gap-6">
-          <h2 className="text-2xl font-semibold">Contact</h2>
+        <section id="contact" className="flex flex-col gap-8 md:gap-10">
+          <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
           <p className="max-w-xl text-sm text-[var(--muted)]">
             Want to collaborate or chat about a new project? Send a quick note
             and I will get back to you.

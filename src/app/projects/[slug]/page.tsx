@@ -116,7 +116,7 @@ const projectDetails: Record<
       "March 2025, Implementation",
       "June 2025, Launch",
     ],
-    role: ["UX content designer"],
+    role: ["UI Designer"],
     designApproach:
       "My design approach for Silvant started in Figma with low-fidelity page shells, then moved to higher fidelity as content models stabilized in Statamic. I prioritized scan-friendly layouts for advisory audiences: generous whitespace, a clear typographic scale for headings and body copy, and repeatable patterns for product tiles, disclosures, and calls to action.\n\nI iterated with engineering on breakpoints and CMS-driven components so marketing could publish updates without breaking the visual system. Infographics and iconography were simplified to align with broader Virtus patterns while keeping Silvant’s earthy greens as the anchor for recognition and trust.",
   },
@@ -185,7 +185,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-24">
+      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-10 py-24 md:px-16 lg:px-24 xl:px-28">
         <Link
           className="relative z-10 inline-flex text-sm text-[#2E90FA] hover:text-[#1D7CE5]"
           href="/"
