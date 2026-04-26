@@ -4,6 +4,7 @@ export type Project = {
   description: string;
   year: string;
   image: string;
+  previewImage?: string;
   isWide?: boolean;
 };
 
@@ -23,6 +24,7 @@ export const projects: Project[] = [
       "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
     year: "2024",
     image: "/projects/rule-manager-preview-v3.svg",
+    previewImage: "/projects/silvant-group-47.svg",
   },
   {
     slug: "clinic-scheduler",

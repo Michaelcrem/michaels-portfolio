@@ -33,17 +33,57 @@ export default function Home() {
             <h1 className="text-[clamp(2.15rem,5vw,3.15rem)] font-semibold leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
               Michael Cremonini —
             </h1>
-            <p className="m-0 flex w-full flex-col gap-3 md:gap-4 text-[clamp(1.65rem,3.9vw,2.45rem)] font-extralight leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
+            <p className="m-0 flex w-full flex-col gap-1 md:gap-1.5 text-[clamp(1.4rem,3.2vw,2.05rem)] font-extralight leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
               <span className="block">Designing and building</span>
               <span className="block">thoughtful digital experiences.</span>
             </p>
           </div>
-          <a
-            href="#projects"
-            className="inline-block w-fit border-b border-[var(--foreground)] pb-0.5 text-[15px] font-normal tracking-[0.04em] text-[var(--foreground)] transition hover:opacity-60 md:text-base"
-          >
-            View work{"\u00a0\u00a0"}→
-          </a>
+        </section>
+
+        <section
+          aria-label="Featured project previews"
+          className="-mt-4 bg-[var(--background)] py-4 md:-mt-5 md:py-5"
+        >
+          <div className="flex w-full flex-nowrap items-center justify-center gap-0 px-1 sm:px-0">
+            {projects.map((project, index) => (
+              <div
+                key={`preview-${project.slug}`}
+                className={`group relative flex flex-col items-center ${
+                  index > 0 ? "-ml-1 sm:-ml-1.5 md:-ml-1 lg:-ml-2" : ""
+                }`}
+                style={{ zIndex: index }}
+              >
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className={`relative aspect-square h-[4.25rem] w-[4.25rem] overflow-hidden rounded-2xl border-2 border-white bg-[var(--background)] shadow-[0_14px_30px_rgba(15,23,42,0.18),0_6px_12px_rgba(15,23,42,0.08)] transition duration-300 sm:h-28 sm:w-28 md:h-[10.5rem] md:w-[10.5rem] hover:z-20 hover:scale-[1.02] hover:rotate-0 hover:shadow-[0_26px_56px_rgba(15,23,42,0.32),0_10px_20px_rgba(15,23,42,0.14)] ${
+                    index % 4 === 0
+                      ? "-rotate-6"
+                      : index % 4 === 1
+                        ? "-rotate-3"
+                        : index % 4 === 2
+                          ? "rotate-3"
+                          : "rotate-6"
+                  }`}
+                >
+                  <Image
+                    src={project.previewImage ?? project.image}
+                    alt={`${project.title} thumbnail preview`}
+                    fill
+                    sizes="(max-width: 640px) 72px, (max-width: 900px) 112px, 176px"
+                    quality={85}
+                    unoptimized={
+                      Boolean(project.isWide) ||
+                      (project.previewImage ?? project.image).endsWith(".svg")
+                    }
+                    className="h-full w-full object-cover object-center transition duration-300 group-hover:scale-[1.03]"
+                  />
+                </Link>
+                <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap text-[11px] font-medium tracking-tight text-[var(--foreground)] opacity-0 transition duration-200 group-hover:opacity-100">
+                  {project.title}
+                </span>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section id="projects" className="flex flex-col gap-8 md:gap-10">
@@ -54,11 +94,11 @@ export default function Home() {
             {projects.map((project) => (
               <article
                 key={project.slug}
-                className="flex flex-col gap-6 md:gap-8"
+                className="flex min-w-0 flex-col gap-6 md:gap-8"
               >
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="group block overflow-hidden rounded-2xl bg-[#f2f2f2] transition md:rounded-3xl"
+                  className="group block overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--background)] transition md:rounded-3xl"
                 >
                   <div
                     className={`relative w-full ${
@@ -78,10 +118,10 @@ export default function Home() {
                     />
                   </div>
                 </Link>
-                <div className="flex flex-col gap-2 md:gap-2.5">
+                <div className="flex min-w-0 flex-col gap-2 md:gap-2.5">
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="w-fit text-xl font-semibold leading-snug tracking-tight text-[var(--foreground)] transition hover:opacity-70 md:text-2xl"
+                    className="block w-full min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] transition hover:opacity-70 md:text-xl"
                   >
                     {project.title}
                   </Link>
@@ -101,7 +141,7 @@ export default function Home() {
           <div className="flex flex-col gap-8 md:gap-10">
             {[
               {
-                role: "Digital Marketing Specialist",
+                role: "Digital Specialist",
                 company: "Virtus Investment Partners",
                 time: "2024 – now",
                 detail:
@@ -117,16 +157,16 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={`${item.role}-${item.company}`}
-                className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(6.25rem,max-content)_1fr] sm:gap-x-10 sm:gap-y-0 md:gap-x-14 lg:gap-x-20"
+                className="grid grid-cols-1 gap-2 sm:grid-cols-[11rem_1fr] sm:gap-x-4 sm:gap-y-0 md:gap-x-6 lg:gap-x-8"
               >
-                <p className="text-sm tabular-nums text-[var(--muted-strong)] sm:pt-0.5">
+                <p className="whitespace-nowrap text-lg tabular-nums leading-snug text-[var(--muted-strong)] sm:pt-0.5 md:text-xl">
                   {item.time}
                 </p>
                 <div className="flex min-w-0 flex-col gap-1">
-                  <p className="text-base font-semibold leading-snug tracking-tight text-[var(--foreground)]">
+                  <p className="min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] md:text-xl">
                     {item.role} at {item.company}
                   </p>
-                  <p className="text-sm leading-relaxed text-[var(--muted)]">
+                  <p className="max-w-2xl text-base leading-relaxed text-[#666666]">
                     {item.detail}
                   </p>
                 </div>
@@ -138,32 +178,59 @@ export default function Home() {
 
         <section id="contact" className="flex flex-col gap-8 md:gap-10">
           <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
-          <p className="max-w-xl text-sm text-[var(--muted)]">
+          <p className="max-w-2xl text-base leading-relaxed text-[#666666]">
             Want to collaborate or chat about a new project? Send a quick note
             and I will get back to you.
           </p>
-          <div className="flex flex-wrap gap-4 text-sm">
+          <div className="flex flex-wrap items-center gap-8">
             <a
-              className="rounded-full border border-[color:var(--border)] px-5 py-2 hover:border-[color:var(--foreground)]"
+              className="inline-flex text-[var(--foreground)] transition hover:opacity-60"
               href="mailto:michaelcrem@gmail.com"
+              aria-label="Email"
             >
-              michaelcrem@gmail.com
+              <svg
+                className="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
             </a>
             <a
-              className="rounded-full border border-[color:var(--border)] px-5 py-2 hover:border-[color:var(--foreground)]"
+              className="inline-flex text-[var(--foreground)] transition hover:opacity-60"
               href="https://www.linkedin.com/in/michael-cremonini/"
               target="_blank"
               rel="noreferrer"
+              aria-label="LinkedIn"
             >
-              LinkedIn
+              <Image
+                src="/icons/linkedin-icon.svg"
+                alt=""
+                width={24}
+                height={24}
+                className="theme-icon h-6 w-6"
+              />
             </a>
             <a
-              className="rounded-full border border-[color:var(--border)] px-5 py-2 hover:border-[color:var(--foreground)]"
+              className="inline-flex text-[var(--foreground)] transition hover:opacity-60"
               href="https://github.com/Michaelcrem"
               target="_blank"
               rel="noreferrer"
+              aria-label="GitHub"
             >
-              GitHub
+              <Image
+                src="/icons/github-icon.svg"
+                alt=""
+                width={24}
+                height={24}
+                className="theme-icon h-6 w-6"
+              />
             </a>
           </div>
         </section>
