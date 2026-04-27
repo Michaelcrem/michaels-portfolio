@@ -30,7 +30,7 @@ export default function Home() {
       <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-14 pb-28 pt-8 md:gap-28 md:px-24 md:pb-40 md:pt-14 lg:gap-32 lg:px-32 lg:pt-16 xl:px-40 2xl:px-52">
         <section id="about" className="flex w-full flex-col gap-8 md:gap-10">
           <div className="flex max-w-4xl flex-col items-start gap-3 md:gap-4">
-            <h1 className="text-[clamp(2.15rem,5vw,3.15rem)] font-semibold leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
+            <h1 className="whitespace-nowrap text-[clamp(1.65rem,6.8vw,3.15rem)] font-semibold leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
               Michael Cremonini
             </h1>
             <p className="m-0 flex w-full flex-col gap-1 md:gap-1.5 text-[clamp(1.4rem,3.2vw,2.05rem)] font-extralight leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
@@ -127,7 +127,7 @@ export default function Home() {
                   >
                     {project.title}
                   </Link>
-                  <p className="max-w-2xl text-base leading-relaxed text-[#666666]">
+                  <p className="max-w-2xl text-sm leading-6 text-[#666666] md:text-base md:leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -168,7 +168,7 @@ export default function Home() {
                   <p className="min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] md:text-xl">
                     {item.role} at {item.company}
                   </p>
-                  <p className="max-w-2xl text-base leading-relaxed text-[#666666]">
+                  <p className="max-w-2xl text-sm leading-6 text-[#666666] md:text-base md:leading-relaxed">
                     {item.detail}
                   </p>
                 </div>
@@ -180,7 +180,7 @@ export default function Home() {
 
         <section id="contact" className="flex flex-col gap-8 md:gap-10">
           <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
-          <p className="max-w-2xl text-base leading-relaxed text-[#666666]">
+          <p className="max-w-2xl text-sm leading-6 text-[#666666] md:text-base md:leading-relaxed">
             Want to collaborate or chat about a new project? Send a quick note
             and I will get back to you.
           </p>
