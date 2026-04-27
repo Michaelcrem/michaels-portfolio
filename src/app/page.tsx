@@ -27,11 +27,11 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-14 pb-28 pt-12 md:gap-28 md:px-24 md:pb-40 md:pt-20 lg:gap-32 lg:px-32 lg:pt-24 xl:px-40 2xl:px-52">
+      <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-14 pb-28 pt-8 md:gap-28 md:px-24 md:pb-40 md:pt-14 lg:gap-32 lg:px-32 lg:pt-16 xl:px-40 2xl:px-52">
         <section id="about" className="flex w-full flex-col gap-8 md:gap-10">
           <div className="flex max-w-4xl flex-col items-start gap-3 md:gap-4">
             <h1 className="text-[clamp(2.15rem,5vw,3.15rem)] font-semibold leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
-              Michael Cremonini —
+              Michael Cremonini
             </h1>
             <p className="m-0 flex w-full flex-col gap-1 md:gap-1.5 text-[clamp(1.4rem,3.2vw,2.05rem)] font-extralight leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
               <span className="block">Designing and building</span>
@@ -42,7 +42,7 @@ export default function Home() {
 
         <section
           aria-label="Featured project previews"
-          className="-mt-4 bg-[var(--background)] py-4 md:-mt-5 md:py-5"
+          className="-mt-8 bg-[var(--background)] py-4 md:-mt-9 md:py-5"
         >
           <div className="flex w-full flex-nowrap items-center justify-center gap-0 px-1 sm:px-0">
             {projects.map((project, index) => (

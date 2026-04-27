@@ -182,6 +182,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const isMedicalPortfolio = slug === "portfolio-os";
   const isRuleManager = slug === "workflow-automations";
   const isEuEts = slug === "clinic-scheduler";
+  const lessonsLearnedText =
+    slug === "workflow-automations"
+      ? "This project taught me how to balance brand consistency with modernization inside a large financial organization. I learned to translate stakeholder feedback from product, marketing, and engineering into a cohesive interface system that stayed true to Silvant's identity while aligning with Virtus standards. It also reinforced the value of designing content-first, reusable components during a CMS migration so teams can publish confidently without breaking visual consistency."
+      : slug === "clinic-scheduler"
+        ? "This project reinforced how critical clarity is when designing tools for complex, data-heavy decisions. I learned to simplify technical EU ETS calculations into a guided flow that users could trust quickly, while still preserving analytical depth. It also highlighted the importance of close collaboration with engineering to align UI behavior, edge-case handling, and real-time calculation feedback so the final product felt both accurate and intuitive."
+        : "This project reinforced a clear, minimalist design approach built on the Untitled UI system in Figma, accelerated by using Cursor to scaffold the portfolio quickly, and strengthened by building reusable React components that keep the experience consistent and scalable.";
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
@@ -745,7 +751,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h2 className="text-2xl font-semibold">Lessons Learned</h2>
             <div className="flex flex-col gap-4 text-lg leading-8 text-[var(--muted)]">
               {splitParagraphs(
-                "This project reinforced a clear, minimalist design approach built on the Untitled UI system in Figma, accelerated by using Cursor to scaffold the portfolio quickly, and strengthened by building reusable React components that keep the experience consistent and scalable."
+                lessonsLearnedText
               ).map((paragraph, index) => (
                 <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
               ))}
