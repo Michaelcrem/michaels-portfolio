@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import ZoomableImage from "@/components/ZoomableImage";
 import { projects } from "@/data/projects";
 
 const projectDetails: Record<
@@ -130,6 +132,51 @@ export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    return {
+      title: "Project not found",
+      description: "The requested project could not be found.",
+    };
+  }
+
+  const details = projectDetails[slug];
+  const pageDescription =
+    details?.intro?.slice(0, 180) ||
+    details?.purpose?.slice(0, 180) ||
+    project.description;
+
+  return {
+    title: project.title,
+    description: pageDescription,
+    alternates: {
+      canonical: `/projects/${slug}`,
+    },
+    openGraph: {
+      title: `${project.title} | Michael Cremonini`,
+      description: pageDescription,
+      url: `/projects/${slug}`,
+      images: [
+        {
+          url: details?.heroImage ?? project.image,
+          alt: `${project.title} preview image`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | Michael Cremonini`,
+      description: pageDescription,
+      images: [details?.heroImage ?? project.image],
+    },
+  };
+}
+
 const splitParagraphs = (text: string) =>
   text
     .split("\n\n")
@@ -191,7 +238,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-10 py-24 md:px-16 lg:px-24 xl:px-28">
+      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-4 py-20 sm:px-8 md:px-12 md:py-24 lg:px-20 xl:px-24">
         <Link
           className="relative z-10 inline-flex text-sm text-[#2E90FA] hover:text-[#1D7CE5]"
           href="/"
@@ -200,25 +247,23 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </Link>
 
         <div className="flex flex-col gap-8">
-          <h1 className="text-4xl font-semibold sm:text-5xl">{project.title}</h1>
+          <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl">{project.title}</h1>
           {slug === "insight-dashboard" && (
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
               <div className="relative aspect-[16/9] w-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomableImage
                   src={project.image}
                   alt={`${project.title} preview`}
                   width={1536}
                   height={1024}
                   className="h-full w-full object-cover object-top"
-                  decoding="async"
                 />
               </div>
             </div>
           )}
           {slug !== "insight-dashboard" && (
             <div className="rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]/90 px-5 py-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:rounded-3xl sm:px-8 sm:py-9 md:px-10 md:py-10">
-              <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:gap-x-10 md:gap-x-14">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-10 md:gap-x-14">
                 <div className="flex min-w-0 flex-col gap-3 sm:gap-3.5">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-strong)] sm:text-xs sm:tracking-[0.2em]">
                     Timeline
@@ -254,8 +299,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           )}
           <div className="flex flex-col gap-8">
             <div
-              className={`flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)] ${
-                isMedicalPortfolio || slug === "clinic-scheduler" ? "py-[40px]" : ""
+              className={`flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8 ${
+                isMedicalPortfolio || slug === "clinic-scheduler" ? "py-6 md:py-10" : ""
               }`}
             >
               {splitParagraphs(details.intro).map((paragraph, index) => (
@@ -268,7 +313,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {isRuleManager && (
           <div className="flex flex-col gap-8">
             {details.purposePreamble ? (
-              <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+              <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                 {splitParagraphs(details.purposePreamble).map((paragraph, index) => (
                   <p key={`purpose-preamble-${paragraph.slice(0, 24)}-${index}`}>
                     {paragraph}
@@ -277,40 +322,39 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </div>
             ) : null}
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-              <Image
+              <ZoomableImage
                 src="/projects/rule-manager-preview-v3.svg"
                 alt="Financial site design preview"
                 width={1400}
                 height={900}
                 sizes="(max-width: 768px) 100vw, 900px"
                 className="h-auto w-full"
+                unoptimized
               />
             </div>
-            <div className="flex flex-col gap-6 py-[40px]">
+            <div className="flex flex-col gap-6 py-6 md:py-10">
               <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
-              <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+              <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                 {splitParagraphs(details.purpose).map((paragraph, index) => (
                   <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
                 ))}
               </div>
               <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                {/* Large Figma-export SVG; <img> avoids next/image SVG restrictions. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomableImage
                   src="/projects/silvant-group-47.svg"
                   alt="Silvant website redesign mockup"
                   width={1728}
                   height={1117}
                   className="h-auto w-full"
-                  decoding="async"
+                  unoptimized
                 />
               </div>
             </div>
             {details.designApproach ? (
               <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-6 py-[40px]">
+                <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold">Design Approach</h2>
-                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                  <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     {splitParagraphs(details.designApproach).map((paragraph, index) => (
                       <p key={`design-approach-${paragraph.slice(0, 24)}-${index}`}>
                         {paragraph}
@@ -319,14 +363,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </div>
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <ZoomableImage
                     src="/projects/silvant-macbook-16-mockup.svg"
                     alt="Silvant design mockup on MacBook Pro"
                     width={1728}
                     height={1117}
                     className="h-auto w-full"
-                    decoding="async"
+                    unoptimized
                   />
                 </div>
               </div>
@@ -337,29 +380,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {isMedicalPortfolio ? (
           <div className="flex flex-col gap-8">
             <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
-              <Image
-                src={details.heroImage}
-                alt={`${project.title} preview`}
-                width={1600}
-                height={900}
-                sizes="(max-width: 768px) 100vw, 900px"
-                className="h-auto w-full"
-                priority
-              />
+              <div className="relative aspect-[4/3] w-full sm:aspect-[16/10] md:aspect-[16/9]">
+                <ZoomableImage
+                  src={details.heroImage}
+                  alt={`${project.title} preview`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 900px) 90vw, 900px"
+                  className="object-cover object-top"
+                  priority
+                  unoptimized={details.heroImage.endsWith(".svg")}
+                />
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               {details.detailImages.map((image, index) => (
                 <div
                   key={`${image.src}-${index}`}
                   className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]"
                 >
-                  <Image
+                  <ZoomableImage
                     src={image.src}
                     alt={image.alt}
                     width={1200}
                     height={900}
                     sizes="(max-width: 768px) 100vw, 520px"
                     className="h-auto w-full"
+                    unoptimized={image.src.endsWith(".svg")}
                   />
                 </div>
               ))}
@@ -367,14 +413,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         ) : slug === "workflow-automations" || slug === "insight-dashboard" ? null : (
           <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
-            <div className="relative aspect-[16/9] w-full">
-              <Image
+            <div className="relative aspect-[4/3] w-full sm:aspect-[16/10] md:aspect-[16/9]">
+              <ZoomableImage
                 src={details.heroImage}
                 alt={`${project.title} preview`}
                 fill
                 sizes="(max-width: 768px) 100vw, 900px"
                 className="object-cover"
                 priority
+                unoptimized={details.heroImage.endsWith(".svg")}
               />
             </div>
           </div>
@@ -384,9 +431,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-8">
               {slug !== "insight-dashboard" && (
-                <div className="flex flex-col gap-6 py-[40px]">
+                <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
-                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                  <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     {splitParagraphs(details.purpose).map((paragraph, index) => (
                       <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
                     ))}
@@ -397,7 +444,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="flex flex-col gap-8">
               {isMedicalPortfolio && (
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                <Image
+                <ZoomableImage
                   src="/projects/medical-portfolio-about-section.png"
                   alt="Medical student portfolio about section preview"
                   width={1400}
@@ -410,7 +457,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {slug === "clinic-scheduler" && (
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                   <div className="relative aspect-[5/2] w-full">
-                    <Image
+                    <ZoomableImage
                       src="/projects/eu-ets-growth.png"
                       alt="EU ETS growth metrics preview"
                       fill
@@ -420,9 +467,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </div>
               )}
-              <div className="flex flex-col gap-6 py-[40px]">
+              <div className="flex flex-col gap-6 py-6 md:py-10">
                 <h2 className="text-2xl font-semibold">Design Approach</h2>
-                <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                   {splitParagraphs(
                     "My design approach focused on creating an interface that feels approachable, organized, and easy to navigate. I used rounded, bubble-inspired shapes in the icons and headers to soften the layout and make the design feel more welcoming and engaging. These rounded forms help reduce visual rigidity while guiding the user’s eye naturally through each section of the page.\n\nTo support this structure, I incorporated multiple shades of blue to create hierarchy and visual depth. Lighter blues provide subtle background structure, while deeper tones highlight important elements like icons and headers. This combination helps maintain a cohesive design while keeping the interface clean, modern, and easy to interact with."
                   ).map((paragraph, index) => (
@@ -433,7 +480,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {isMedicalPortfolio && (
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                   <div className="relative aspect-[4/1] w-full">
-                    <Image
+                    <ZoomableImage
                       src="/projects/medical-portfolio-grid-left.png"
                       alt="Medical student portfolio grid layout preview"
                       fill
@@ -445,7 +492,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               )}
               {isMedicalPortfolio && (
                 <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:items-stretch md:gap-x-16 md:gap-y-0">
-                  <div className="flex w-full flex-col gap-8 py-[40px] text-lg leading-8 text-[var(--muted)]">
+                  <div className="flex w-full flex-col gap-8 py-6 md:py-10 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     <h3 className="text-xl font-semibold text-[var(--foreground)]">
                       Blue Theme
                     </h3>
@@ -461,7 +508,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                   <div className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] md:h-full">
                     <div className="relative aspect-[16/10] w-full min-h-0 md:aspect-auto md:h-full md:min-h-[18rem]">
-                      <Image
+                      <ZoomableImage
                         src="/projects/medical-portfolio-blue-theme-v3.png"
                         alt="Blue theme buttons and typography"
                         fill
@@ -474,7 +521,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               )}
               {slug === "workflow-automations" && (
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <Image
+                  <ZoomableImage
                     src="/projects/rule-manager-design-approach.png"
                     alt="Rule Manager help guide design approach"
                     width={1600}
@@ -497,10 +544,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               )}
               {slug === "clinic-scheduler" && (
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                     <div className="relative aspect-[1/1] w-full">
-                      <Image
+                      <ZoomableImage
                         src="/projects/eu-ets-color-palette-v2.png"
                         alt="EU ETS calculator color palette"
                         fill
@@ -510,7 +557,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </div>
                   </div>
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <Image
+                    <ZoomableImage
                       src="/projects/eu-ets-typography-v4.png"
                       alt="EU ETS typography preview"
                       width={1400}
@@ -527,11 +574,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="flex flex-col gap-8">
             {slug === "clinic-scheduler" && (
               <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-6 py-[40px]">
+                <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold">
                     Prototype Flow Explanation
                   </h2>
-                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                  <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     <p>
                       The EU ETS Calculator is designed to guide users through a
                       structured and intuitive process for estimating emissions-related
@@ -542,7 +589,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
                 {details.detailImages[0]?.src.includes("eu-ets-flow") && (
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <Image
+                    <ZoomableImage
                       src={details.detailImages[0].src}
                       alt={details.detailImages[0].alt}
                       width={1600}
@@ -552,11 +599,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     />
                   </div>
                 )}
-                <div className="flex flex-col gap-6 py-[40px]">
+                <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold text-[var(--foreground)]">
                     IMO Input & Validation
                   </h2>
-                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                  <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     <p>
                       The user begins on the primary input screen, where they are
                       prompted to enter a 7-digit IMO number (International Maritime
@@ -575,7 +622,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="flex flex-col gap-8">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                     <div className="relative aspect-[1814/658] w-full">
-                      <Image
+                      <ZoomableImage
                         src="/projects/eu-ets-imo-invalid-v10.png"
                         alt="EU ETS calculator invalid IMO input"
                         fill
@@ -585,11 +632,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-6 py-[40px]">
+                <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold text-[var(--foreground)]">
                     IMO Submission & Multi-Ship Entry
                   </h2>
-                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                  <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     <p>
                       Once a valid IMO is entered, the user can click the <b>“Submit”</b>{" "}
                       button.
@@ -613,7 +660,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                   <div className="relative aspect-[1814/658] w-full">
-                    <Image
+                    <ZoomableImage
                       src="/projects/eu-ets-imo-multi-ship.png"
                       alt="EU ETS multi-ship entry preview"
                       fill
@@ -622,11 +669,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col gap-6 py-[40px]">
+                <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold">
                     Output & Results Display
                   </h2>
-                  <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+                  <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     <p>
                       Upon calculation, the application returns key EU ETS metrics for
                       the selected vessels:
@@ -645,7 +692,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                   <div className="relative aspect-[1814/658] w-full">
-                    <Image
+                    <ZoomableImage
                       src="/projects/eu-ets-output-results-v2.png"
                       alt="EU ETS output results preview"
                       fill
@@ -657,9 +704,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </div>
           )}
           {slug !== "insight-dashboard" && (
-            <div className="flex flex-col gap-6 py-[40px]">
+            <div className="flex flex-col gap-6 py-6 md:py-10">
               <h2 className="text-2xl font-semibold">Web Stack Explanation</h2>
-              <div className="flex w-full flex-col gap-8 text-lg leading-8 text-[var(--muted)]">
+              <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                 {splitParagraphs(details.stackExplanation).map((paragraph, index) => (
                   <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
                 ))}
@@ -669,7 +716,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {slug === "clinic-scheduler" && (
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <div className="relative aspect-[4/1] w-full">
-                <Image
+                <ZoomableImage
                   src="/projects/eu-ets-web-stack-icons.png"
                   alt="EU ETS web stack icons"
                   fill
@@ -682,7 +729,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {isMedicalPortfolio && (
               <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                 <div className="relative aspect-[4/1] w-full">
-                  <Image
+                  <ZoomableImage
                     src="/projects/medical-portfolio-stack-icons.png"
                     alt="Web stack icons"
                     fill
@@ -696,7 +743,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               slug !== "workflow-automations" &&
               details.detailImages.length > 0 && (
               <div className="flex flex-col gap-8">
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
                   {(details.detailImages[0]?.src.includes("eu-ets-flow")
                     ? details.detailImages.slice(1)
                     : details.detailImages
@@ -711,7 +758,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         }`}
                       >
                         {isRuleManager ? (
-                          <Image
+                          <ZoomableImage
                             src={image.src}
                             alt={image.alt}
                             width={1200}
@@ -727,7 +774,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                               isFlow ? "aspect-[21/9]" : "aspect-[16/9]"
                             }`}
                           >
-                            <Image
+                            <ZoomableImage
                               src={image.src}
                               alt={image.alt}
                               fill
@@ -749,7 +796,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {slug !== "insight-dashboard" && (
           <section className="flex flex-col gap-4 rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-8">
             <h2 className="text-2xl font-semibold">Lessons Learned</h2>
-            <div className="flex flex-col gap-4 text-lg leading-8 text-[var(--muted)]">
+            <div className="flex flex-col gap-4 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
               {splitParagraphs(
                 lessonsLearnedText
               ).map((paragraph, index) => (

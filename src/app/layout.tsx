@@ -13,9 +13,55 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Michael Cremonini | Portfolio",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://michaels-portfolio.vercel.app"
+  ),
+  title: {
+    default: "Michael Cremonini | Portfolio",
+    template: "%s | Michael Cremonini",
+  },
   description:
-    "Portfolio site for Michael Cremonini: projects, experience, and contact.",
+    "Digital portfolio for Michael Cremonini featuring selected projects, experience, and contact information.",
+  keywords: [
+    "Michael Cremonini",
+    "portfolio",
+    "web developer",
+    "UI designer",
+    "frontend",
+  ],
+  authors: [{ name: "Michael Cremonini" }],
+  creator: "Michael Cremonini",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Michael Cremonini | Portfolio",
+    description:
+      "Digital portfolio featuring selected projects, experience, and contact information.",
+    url: "/",
+    siteName: "Michael Cremonini Portfolio",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Michael Cremonini Portfolio",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Michael Cremonini | Portfolio",
+    description:
+      "Digital portfolio featuring selected projects, experience, and contact information.",
+    images: ["/twitter-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
