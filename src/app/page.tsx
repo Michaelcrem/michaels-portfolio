@@ -1,19 +1,50 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { projects } from "@/data/projects";
 
 export default function Home() {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const closeMobileNav = () => setIsMobileNavOpen(false);
+
   return (
     <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <header className="sticky top-0 z-20 bg-[var(--background)]">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-14 py-8 md:px-24 md:py-10 lg:px-32 xl:px-40 2xl:px-52">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-6 sm:px-8 md:px-24 md:py-10 lg:px-32 xl:px-40 2xl:px-52">
           <p className="text-base font-bold tracking-[0.22em] text-[var(--foreground)] md:text-lg">
             M<span className="mx-1">C</span>
           </p>
-          <nav className="flex items-center gap-11 text-sm font-normal tracking-[0.06em] text-[var(--foreground)] md:gap-16 md:text-[15px] md:tracking-[0.08em]">
+          <button
+            type="button"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[color:var(--border)] md:hidden"
+            aria-expanded={isMobileNavOpen}
+            aria-controls="mobile-nav-links"
+            aria-label={isMobileNavOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setIsMobileNavOpen((value) => !value)}
+          >
+            <span className="relative block h-4 w-4">
+              <span
+                className={`absolute left-0 top-[2px] block h-[1.5px] w-4 bg-[var(--foreground)] transition ${
+                  isMobileNavOpen ? "translate-y-[5px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[7px] block h-[1.5px] w-4 bg-[var(--foreground)] transition ${
+                  isMobileNavOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[12px] block h-[1.5px] w-4 bg-[var(--foreground)] transition ${
+                  isMobileNavOpen ? "-translate-y-[5px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+          <nav className="hidden items-center gap-11 text-sm font-normal tracking-[0.06em] text-[var(--foreground)] md:flex md:gap-16 md:text-[15px] md:tracking-[0.08em]">
             <a className="transition hover:opacity-60" href="#projects">
               Work
             </a>
@@ -25,6 +56,34 @@ export default function Home() {
             </a>
           </nav>
         </div>
+        {isMobileNavOpen && (
+          <div
+            id="mobile-nav-links"
+            className="mx-auto flex w-full max-w-5xl flex-col gap-3 border-t border-[color:var(--border)] px-4 pb-4 pt-3 text-sm tracking-[0.05em] sm:px-8 md:hidden"
+          >
+            <a
+              className="transition hover:opacity-60"
+              href="#projects"
+              onClick={closeMobileNav}
+            >
+              Work
+            </a>
+            <a
+              className="transition hover:opacity-60"
+              href="#about"
+              onClick={closeMobileNav}
+            >
+              About
+            </a>
+            <a
+              className="transition hover:opacity-60"
+              href="#contact"
+              onClick={closeMobileNav}
+            >
+              Contact
+            </a>
+          </div>
+        )}
       </header>
 
       <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-14 pb-28 pt-8 md:gap-28 md:px-24 md:pb-40 md:pt-14 lg:gap-32 lg:px-32 lg:pt-16 xl:px-40 2xl:px-52">
@@ -86,15 +145,15 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" className="flex flex-col gap-8 md:gap-10">
+        <section id="projects" className="flex flex-col gap-10 md:gap-10">
           <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
             Featured projects
           </h2>
-          <div className="flex flex-col gap-10 md:gap-14 lg:gap-16">
+          <div className="flex flex-col gap-14 md:gap-14 lg:gap-16">
             {projects.map((project) => (
               <article
                 key={project.slug}
-                className="flex min-w-0 flex-col gap-6 md:gap-8"
+                className="flex min-w-0 flex-col gap-7 md:gap-8"
               >
                 <Link
                   href={`/projects/${project.slug}`}
@@ -120,14 +179,14 @@ export default function Home() {
                     />
                   </div>
                 </Link>
-                <div className="flex min-w-0 flex-col gap-2 md:gap-2.5">
+                <div className="flex min-w-0 flex-col gap-2.5 md:gap-2.5">
                   <Link
                     href={`/projects/${project.slug}`}
                     className="block w-full min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] transition hover:opacity-70 md:text-xl"
                   >
                     {project.title}
                   </Link>
-                  <p className="max-w-2xl text-sm leading-6 text-[#666666] md:text-base md:leading-relaxed">
+                  <p className="max-w-2xl text-sm leading-5 text-[#666666] md:text-base md:leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -168,7 +227,7 @@ export default function Home() {
                   <p className="min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] md:text-xl">
                     {item.role} at {item.company}
                   </p>
-                  <p className="max-w-2xl text-sm leading-6 text-[#666666] md:text-base md:leading-relaxed">
+                  <p className="max-w-2xl text-sm leading-5 text-[#666666] md:text-base md:leading-relaxed">
                     {item.detail}
                   </p>
                 </div>
@@ -180,7 +239,7 @@ export default function Home() {
 
         <section id="contact" className="flex flex-col gap-8 md:gap-10">
           <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
-          <p className="max-w-2xl text-sm leading-6 text-[#666666] md:text-base md:leading-relaxed">
+          <p className="max-w-2xl text-sm leading-5 text-[#666666] md:text-base md:leading-relaxed">
             Want to collaborate or chat about a new project? Send a quick note
             and I will get back to you.
           </p>
