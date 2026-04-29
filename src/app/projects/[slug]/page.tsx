@@ -713,32 +713,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </div>
             </div>
           )}
-          {slug === "clinic-scheduler" && (
-            <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-              <div className="relative aspect-[4/1] w-full">
-                <ZoomableImage
-                  src="/projects/eu-ets-web-stack-icons.png"
-                  alt="EU ETS web stack icons"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 900px"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          )}
-          {isMedicalPortfolio && (
-              <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                <div className="relative aspect-[4/1] w-full">
-                  <ZoomableImage
-                    src="/projects/medical-portfolio-stack-icons.png"
-                    alt="Web stack icons"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 900px"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            )}
             {!isMedicalPortfolio &&
               slug !== "workflow-automations" &&
               details.detailImages.length > 0 && (
