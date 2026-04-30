@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const socialPreviewVersion = "v=20260430-1";
+const ogImageUrl = `/opengraph-image?${socialPreviewVersion}`;
+const twitterImageUrl = `/twitter-image?${socialPreviewVersion}`;
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Michael Cremonini Portfolio",
     images: [
       {
-        url: "/opengraph-image",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: "Michael Cremonini Portfolio",
@@ -56,7 +60,7 @@ export const metadata: Metadata = {
     title: "Michael Cremonini | Portfolio",
     description:
       "Digital portfolio featuring selected projects, experience, and contact information.",
-    images: ["/twitter-image"],
+    images: [twitterImageUrl],
   },
   robots: {
     index: true,

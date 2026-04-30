@@ -6,6 +6,10 @@ import { notFound } from "next/navigation";
 import ZoomableImage from "@/components/ZoomableImage";
 import { projects } from "@/data/projects";
 
+const socialPreviewVersion = "v=20260430-1";
+const ogImageUrl = `/opengraph-image?${socialPreviewVersion}`;
+const twitterImageUrl = `/twitter-image?${socialPreviewVersion}`;
+
 const projectDetails: Record<
   string,
   {
@@ -163,7 +167,7 @@ export async function generateMetadata({
       url: `/projects/${slug}`,
       images: [
         {
-          url: "/opengraph-image",
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: "Michael Cremonini Portfolio homepage preview",
@@ -174,7 +178,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${project.title} | Michael Cremonini`,
       description: pageDescription,
-      images: ["/twitter-image"],
+      images: [twitterImageUrl],
     },
   };
 }
