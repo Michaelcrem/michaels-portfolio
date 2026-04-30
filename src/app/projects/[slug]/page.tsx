@@ -163,8 +163,10 @@ export async function generateMetadata({
       url: `/projects/${slug}`,
       images: [
         {
-          url: details?.heroImage ?? project.image,
-          alt: `${project.title} preview image`,
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "Michael Cremonini Portfolio homepage preview",
         },
       ],
     },
@@ -172,7 +174,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${project.title} | Michael Cremonini`,
       description: pageDescription,
-      images: [details?.heroImage ?? project.image],
+      images: ["/twitter-image"],
     },
   };
 }
