@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const socialPreviewVersion = "v=20260502-static";
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://michaels-portfolio.vercel.app";
-const ogImageUrl = `${siteUrl}/social-preview.png?${socialPreviewVersion}`;
-const twitterImageUrl = ogImageUrl;
+import {
+  getProductionSiteUrl,
+  SOCIAL_PREVIEW_IMAGE_PATH,
+} from "@/lib/site";
+
+const siteUrl = getProductionSiteUrl();
+const ogImageUrl = `${siteUrl}${SOCIAL_PREVIEW_IMAGE_PATH}`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,7 +62,7 @@ export const metadata: Metadata = {
     title: "Michael Cremonini | Portfolio",
     description:
       "Digital portfolio featuring selected projects, experience, and contact information.",
-    images: [twitterImageUrl],
+    images: [ogImageUrl],
   },
   robots: {
     index: true,
@@ -77,15 +79,6 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <meta name="image" content={ogImageUrl} />
-        <meta property="og:image" content={ogImageUrl} />
-        <meta property="og:image:secure_url" content={ogImageUrl} />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="544" />
-        <meta name="twitter:image" content={twitterImageUrl} />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

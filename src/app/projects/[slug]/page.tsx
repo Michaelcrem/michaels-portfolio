@@ -5,12 +5,13 @@ import { notFound } from "next/navigation";
 
 import ZoomableImage from "@/components/ZoomableImage";
 import { projects } from "@/data/projects";
+import {
+  getProductionSiteUrl,
+  SOCIAL_PREVIEW_IMAGE_PATH,
+} from "@/lib/site";
 
-const socialPreviewVersion = "v=20260502-static";
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://michaels-portfolio.vercel.app";
-const ogImageUrl = `${siteUrl}/social-preview.png?${socialPreviewVersion}`;
-const twitterImageUrl = ogImageUrl;
+const siteUrl = getProductionSiteUrl();
+const ogImageUrl = `${siteUrl}${SOCIAL_PREVIEW_IMAGE_PATH}`;
 
 const projectDetails: Record<
   string,
@@ -180,7 +181,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${project.title} | Michael Cremonini`,
       description: pageDescription,
-      images: [twitterImageUrl],
+      images: [ogImageUrl],
     },
   };
 }
