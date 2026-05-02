@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const socialPreviewVersion = "v=20260430-1";
+const socialPreviewVersion = "v=20260502-2";
 const ogImageUrl = `/opengraph-image?${socialPreviewVersion}`;
 const twitterImageUrl = `/twitter-image?${socialPreviewVersion}`;
 

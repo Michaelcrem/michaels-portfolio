@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import ZoomableImage from "@/components/ZoomableImage";
 import { projects } from "@/data/projects";
 
-const socialPreviewVersion = "v=20260430-1";
+const socialPreviewVersion = "v=20260502-2";
 const ogImageUrl = `/opengraph-image?${socialPreviewVersion}`;
 const twitterImageUrl = `/twitter-image?${socialPreviewVersion}`;
 
