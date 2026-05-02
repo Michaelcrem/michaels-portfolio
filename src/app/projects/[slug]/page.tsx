@@ -6,9 +6,11 @@ import { notFound } from "next/navigation";
 import ZoomableImage from "@/components/ZoomableImage";
 import { projects } from "@/data/projects";
 
-const socialPreviewVersion = "v=20260502-2";
-const ogImageUrl = `/opengraph-image?${socialPreviewVersion}`;
-const twitterImageUrl = `/twitter-image?${socialPreviewVersion}`;
+const socialPreviewVersion = "v=20260502-static";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://michaels-portfolio.vercel.app";
+const ogImageUrl = `${siteUrl}/social-preview.png?${socialPreviewVersion}`;
+const twitterImageUrl = ogImageUrl;
 
 const projectDetails: Record<
   string,
@@ -168,8 +170,8 @@ export async function generateMetadata({
       images: [
         {
           url: ogImageUrl,
-          width: 1200,
-          height: 630,
+          width: 1024,
+          height: 544,
           alt: "Michael Cremonini Portfolio homepage preview",
         },
       ],

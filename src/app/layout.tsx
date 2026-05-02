@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const socialPreviewVersion = "v=20260502-2";
-const ogImageUrl = `/opengraph-image?${socialPreviewVersion}`;
-const twitterImageUrl = `/twitter-image?${socialPreviewVersion}`;
+const socialPreviewVersion = "v=20260502-static";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://michaels-portfolio.vercel.app";
+const ogImageUrl = `${siteUrl}/social-preview.png?${socialPreviewVersion}`;
+const twitterImageUrl = ogImageUrl;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,9 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://michaels-portfolio.vercel.app"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Michael Cremonini | Portfolio",
     template: "%s | Michael Cremonini",
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: ogImageUrl,
-        width: 1200,
-        height: 630,
+        width: 1024,
+        height: 544,
         alt: "Michael Cremonini Portfolio",
       },
     ],
@@ -77,6 +77,15 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <meta name="image" content={ogImageUrl} />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:secure_url" content={ogImageUrl} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="544" />
+        <meta name="twitter:image" content={twitterImageUrl} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
