@@ -179,7 +179,11 @@ export default function Home() {
                       src={project.image}
                       alt={`${project.title} preview`}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 896px"
+                      sizes={
+                        project.slug === "workflow-automations"
+                          ? "(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+                          : "(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 896px"
+                      }
                       quality={project.previewUnoptimized ? 100 : 90}
                       decoding={project.previewUnoptimized ? "sync" : "async"}
                       priority={Boolean(project.previewUnoptimized)}

@@ -332,11 +332,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             ) : null}
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <ZoomableImage
-                src="/projects/financial-site-design-preview-2400w.png"
+                src="/projects/financial-site-design-preview-group72-3200w.png"
                 alt="Financial site design preview"
-                width={2400}
-                height={1551}
-                sizes="(max-width: 768px) 100vw, 896px"
+                width={3200}
+                height={2069}
+                sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 1200px"
                 className="h-auto w-full"
               />
             </div>
