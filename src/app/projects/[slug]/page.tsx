@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 
 import ZoomableImage from "@/components/ZoomableImage";
 import { projects } from "@/data/projects";
-import { CRISP_SCREENSHOT_IMG } from "@/lib/crisp-screenshot-image";
 import {
   getProductionSiteUrl,
   SOCIAL_PREVIEW_IMAGE_PATH,
@@ -238,7 +237,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const isMedicalPortfolio = slug === "portfolio-os";
   const isRuleManager = slug === "workflow-automations";
-  const isEuEts = slug === "clinic-scheduler";
+  const relatedProjects = projects.filter((item) => item.slug !== slug);
   const lessonsLearnedText =
     slug === "workflow-automations"
       ? "This project taught me how to balance brand consistency with modernization inside a large financial organization. I learned to translate stakeholder feedback from product, marketing, and engineering into a cohesive interface system that stayed true to Silvant's identity while aligning with Virtus standards. It also reinforced the value of designing content-first, reusable components during a CMS migration so teams can publish confidently without breaking visual consistency."
@@ -333,13 +332,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             ) : null}
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <ZoomableImage
-                src="/projects/financial-site-design-preview.png"
+                src="/projects/financial-site-design-preview-group70.svg"
                 alt="Financial site design preview"
-                width={1024}
-                height={701}
+                width={1728}
+                height={1117}
                 sizes="(max-width: 768px) 100vw, 896px"
-                className={`h-auto w-full ${CRISP_SCREENSHOT_IMG}`}
-                quality={100}
+                className="h-auto w-full"
                 unoptimized
               />
             </div>
@@ -763,6 +761,54 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </section>
         )}
+
+        <section
+          aria-labelledby="related-work-heading"
+          className="flex flex-col gap-5 border-t border-[color:var(--border)] pt-10"
+        >
+          <div className="flex flex-col gap-1">
+            <h2
+              id="related-work-heading"
+              className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted-strong)]"
+            >
+              More work
+            </h2>
+            <p className="text-sm leading-snug text-[var(--muted)]">
+              A few other projects worth a look.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+            {relatedProjects.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/projects/${item.slug}`}
+                className="group flex min-w-0 gap-3 rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] p-3 transition hover:border-[#2E90FA]/35 hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] sm:p-3.5"
+              >
+                <div className="relative h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-lg border border-[color:var(--border)] bg-[var(--surface-strong)] sm:h-16 sm:w-24">
+                  <Image
+                    src={item.image}
+                    alt={`${item.title} preview`}
+                    fill
+                    sizes="96px"
+                    quality={85}
+                    className="object-cover object-center"
+                    unoptimized={
+                      Boolean(item.isWide) ||
+                      Boolean(item.previewUnoptimized) ||
+                      item.image.endsWith(".svg")
+                    }
+                  />
+                </div>
+                <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
+                  <span className="truncate text-sm font-semibold text-[var(--foreground)] transition group-hover:text-[#2E90FA]">
+                    {item.title}
+                  </span>
+                  <span className="text-xs text-[var(--muted)]">{item.year}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

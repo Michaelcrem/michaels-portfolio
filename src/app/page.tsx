@@ -133,15 +133,16 @@ export default function Home() {
                     fill
                     sizes="(max-width: 640px) 96px, (max-width: 900px) 128px, 176px"
                     quality={project.previewUnoptimized ? 100 : 85}
+                    decoding={project.previewUnoptimized ? "sync" : "async"}
                     unoptimized={
                       Boolean(project.isWide) ||
                       Boolean(project.previewUnoptimized) ||
                       (project.previewImage ?? project.image).endsWith(".svg")
                     }
-                    className={`h-full w-full object-cover object-center transition duration-300 ${
+                    className={`h-full w-full object-cover object-center ${
                       project.previewUnoptimized
                         ? CRISP_SCREENSHOT_IMG
-                        : "group-hover:scale-[1.03]"
+                        : "transition duration-300 group-hover:scale-[1.03]"
                     }`}
                   />
                 </Link>
@@ -180,16 +181,17 @@ export default function Home() {
                       fill
                       sizes="(max-width: 768px) 100vw, 896px"
                       quality={project.previewUnoptimized ? 100 : 90}
+                      decoding={project.previewUnoptimized ? "sync" : "async"}
                       priority={Boolean(project.previewUnoptimized)}
                       unoptimized={
                         project.isWide ||
                         Boolean(project.previewUnoptimized) ||
                         project.image.endsWith(".svg")
                       }
-                      className={`h-full w-full object-cover object-center transition duration-300 ease-out ${
+                      className={`h-full w-full object-cover object-center ${
                         project.previewUnoptimized
                           ? CRISP_SCREENSHOT_IMG
-                          : "group-hover:scale-[1.02]"
+                          : "transition duration-300 ease-out group-hover:scale-[1.02]"
                       }`}
                     />
                   </div>

@@ -20,7 +20,7 @@ export default function ZoomableImage({
   const sharedImageProps = {
     ...props,
     quality: computedQuality,
-    decoding: "async" as const,
+    decoding: props.decoding ?? ("async" as const),
   };
   const loadingProps: Partial<ImageProps> = isPriority
     ? {}
