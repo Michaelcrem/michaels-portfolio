@@ -332,11 +332,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             ) : null}
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <ZoomableImage
-                src="/projects/rule-manager-preview-v3.svg"
+                src="/projects/financial-site-design-preview-group63.svg"
                 alt="Financial site design preview"
-                width={1400}
-                height={900}
-                sizes="(max-width: 768px) 100vw, 900px"
+                width={2980}
+                height={2042}
+                sizes="(max-width: 768px) 100vw, 896px"
                 className="h-auto w-full"
                 unoptimized
               />
@@ -388,14 +388,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {isMedicalPortfolio ? (
           <div className="flex flex-col gap-8">
-            <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
-              <div className="relative aspect-[4/3] w-full sm:aspect-[16/10] md:aspect-[16/9]">
+            <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
+              <div className="relative aspect-[16/10] w-full sm:aspect-[16/9]">
                 <ZoomableImage
                   src={details.heroImage}
                   alt={`${project.title} preview`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 900px) 90vw, 900px"
-                  className="object-cover object-top"
+                  className="object-contain object-center"
                   priority
                   unoptimized={details.heroImage.endsWith(".svg")}
                 />
@@ -452,15 +452,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {slug !== "insight-dashboard" && (
                 <div className="flex flex-col gap-8">
               {isMedicalPortfolio && (
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                <ZoomableImage
-                  src="/projects/medical-portfolio-about-section.png"
-                  alt="Medical student portfolio about section preview"
-                  width={1400}
-                  height={900}
-                  sizes="(max-width: 768px) 100vw, 900px"
-                  className="h-auto w-full"
-                />
+                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
+                  <div className="relative aspect-[16/10] w-full sm:aspect-[16/9]">
+                    <ZoomableImage
+                      src="/projects/medical-portfolio-about-section.svg"
+                      alt="Medical student portfolio about section preview"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 900px"
+                      className="object-cover object-center"
+                      unoptimized
+                    />
+                  </div>
                 </div>
               )}
               {slug === "clinic-scheduler" && (
@@ -496,35 +498,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       sizes="(max-width: 768px) 100vw, 900px"
                       className="object-cover"
                     />
-                  </div>
-                </div>
-              )}
-              {isMedicalPortfolio && (
-                <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:items-stretch md:gap-x-16 md:gap-y-0">
-                  <div className="flex w-full flex-col gap-8 py-6 md:py-10 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
-                    <h3 className="text-xl font-semibold text-[var(--foreground)]">
-                      Blue Theme
-                    </h3>
-                    <p>
-                      Blue conveys trust, clarity, and professionalism—qualities that
-                      align well with both healthcare and academic environments.
-                    </p>
-                    <p>
-                      The rounded shapes soften the interface and create a more
-                      approachable, user-friendly feel, helping balance
-                      professionalism with warmth.
-                    </p>
-                  </div>
-                  <div className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] md:h-full">
-                    <div className="relative aspect-[16/10] w-full min-h-0 md:aspect-auto md:h-full md:min-h-[18rem]">
-                      <ZoomableImage
-                        src="/projects/medical-portfolio-blue-theme-v3.png"
-                        alt="Blue theme buttons and typography"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 520px"
-                        className="object-cover"
-                      />
-                    </div>
                   </div>
                 </div>
               )}

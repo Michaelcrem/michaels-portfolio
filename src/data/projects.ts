@@ -15,7 +15,7 @@ export const projects: Project[] = [
     description:
       "A lightweight, modular portfolio site showcasing a medical student’s experience and personal story.",
     year: "2026",
-    image: "/projects/medical-portfolio-preview.png",
+    image: "/projects/medical-portfolio-preview-group59.svg",
   },
   {
     slug: "workflow-automations",
@@ -23,8 +23,7 @@ export const projects: Project[] = [
     description:
       "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
     year: "2024",
-    image: "/projects/rule-manager-preview-v3.svg",
-    previewImage: "/projects/silvant-group-47.svg",
+    image: "/projects/financial-site-design-preview-group63.svg",
   },
   {
     slug: "clinic-scheduler",
