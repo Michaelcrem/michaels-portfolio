@@ -6,6 +6,8 @@ export type Project = {
   image: string;
   previewImage?: string;
   isWide?: boolean;
+  /** Skip next/image compression for sharper screenshots at the same pixel size. */
+  previewUnoptimized?: boolean;
 };
 
 export const projects: Project[] = [
@@ -15,7 +17,7 @@ export const projects: Project[] = [
     description:
       "A lightweight, modular portfolio site showcasing a medical student’s experience and personal story.",
     year: "2026",
-    image: "/projects/medical-portfolio-preview-group59.svg",
+    image: "/projects/medical-portfolio-preview-group67.svg",
   },
   {
     slug: "workflow-automations",
@@ -23,7 +25,8 @@ export const projects: Project[] = [
     description:
       "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
     year: "2024",
-    image: "/projects/financial-site-design-preview-group63.svg",
+    image: "/projects/financial-site-design-preview.png",
+    previewUnoptimized: true,
   },
   {
     slug: "clinic-scheduler",

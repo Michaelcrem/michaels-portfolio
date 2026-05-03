@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { CRISP_SCREENSHOT_IMG } from "@/lib/crisp-screenshot-image";
 import { projects } from "@/data/projects";
 
 export default function Home() {
@@ -114,7 +115,9 @@ export default function Home() {
               >
                 <Link
                   href={`/projects/${project.slug}`}
-                  className={`relative aspect-square h-[5.5rem] w-[5.5rem] overflow-hidden rounded-2xl border-2 border-white bg-[var(--background)] shadow-[0_14px_30px_rgba(15,23,42,0.18),0_6px_12px_rgba(15,23,42,0.08)] transition duration-300 sm:h-32 sm:w-32 md:h-[10.5rem] md:w-[10.5rem] hover:z-20 hover:scale-[1.02] hover:rotate-0 hover:shadow-[0_26px_56px_rgba(15,23,42,0.32),0_10px_20px_rgba(15,23,42,0.14)] ${
+                  className={`relative aspect-square h-[5.5rem] w-[5.5rem] overflow-hidden rounded-2xl border-2 border-white bg-[var(--background)] shadow-[0_14px_30px_rgba(15,23,42,0.18),0_6px_12px_rgba(15,23,42,0.08)] transition duration-300 sm:h-32 sm:w-32 md:h-[10.5rem] md:w-[10.5rem] hover:z-20 ${
+                    project.previewUnoptimized ? "" : "hover:scale-[1.02]"
+                  } hover:rotate-0 hover:shadow-[0_26px_56px_rgba(15,23,42,0.32),0_10px_20px_rgba(15,23,42,0.14)] ${
                     index % 4 === 0
                       ? "-rotate-6"
                       : index % 4 === 1
@@ -129,12 +132,17 @@ export default function Home() {
                     alt={`${project.title} thumbnail preview`}
                     fill
                     sizes="(max-width: 640px) 96px, (max-width: 900px) 128px, 176px"
-                    quality={85}
+                    quality={project.previewUnoptimized ? 100 : 85}
                     unoptimized={
                       Boolean(project.isWide) ||
+                      Boolean(project.previewUnoptimized) ||
                       (project.previewImage ?? project.image).endsWith(".svg")
                     }
-                    className="h-full w-full object-cover object-center transition duration-300 group-hover:scale-[1.03]"
+                    className={`h-full w-full object-cover object-center transition duration-300 ${
+                      project.previewUnoptimized
+                        ? CRISP_SCREENSHOT_IMG
+                        : "group-hover:scale-[1.03]"
+                    }`}
                   />
                 </Link>
                 <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap text-[11px] font-medium tracking-tight text-[var(--foreground)] opacity-0 transition duration-200 group-hover:opacity-100">
@@ -171,11 +179,18 @@ export default function Home() {
                       alt={`${project.title} preview`}
                       fill
                       sizes="(max-width: 768px) 100vw, 896px"
-                      quality={90}
+                      quality={project.previewUnoptimized ? 100 : 90}
+                      priority={Boolean(project.previewUnoptimized)}
                       unoptimized={
-                        project.isWide || project.image.endsWith(".svg")
+                        project.isWide ||
+                        Boolean(project.previewUnoptimized) ||
+                        project.image.endsWith(".svg")
                       }
-                      className="h-full w-full object-cover object-center transition duration-300 ease-out group-hover:scale-[1.02]"
+                      className={`h-full w-full object-cover object-center transition duration-300 ease-out ${
+                        project.previewUnoptimized
+                          ? CRISP_SCREENSHOT_IMG
+                          : "group-hover:scale-[1.02]"
+                      }`}
                     />
                   </div>
                 </Link>

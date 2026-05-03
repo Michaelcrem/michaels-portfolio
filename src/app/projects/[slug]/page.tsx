@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import ZoomableImage from "@/components/ZoomableImage";
 import { projects } from "@/data/projects";
+import { CRISP_SCREENSHOT_IMG } from "@/lib/crisp-screenshot-image";
 import {
   getProductionSiteUrl,
   SOCIAL_PREVIEW_IMAGE_PATH,
@@ -332,12 +333,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             ) : null}
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <ZoomableImage
-                src="/projects/financial-site-design-preview-group63.svg"
+                src="/projects/financial-site-design-preview.png"
                 alt="Financial site design preview"
-                width={2980}
-                height={2042}
+                width={1024}
+                height={701}
                 sizes="(max-width: 768px) 100vw, 896px"
-                className="h-auto w-full"
+                className={`h-auto w-full ${CRISP_SCREENSHOT_IMG}`}
+                quality={100}
                 unoptimized
               />
             </div>
