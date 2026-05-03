@@ -170,10 +170,6 @@ export default function Home() {
                 >
                   <div
                     className={`relative w-full ${
-                      project.slug === "workflow-automations"
-                        ? "bg-[var(--surface-strong)]"
-                        : ""
-                    } ${
                       project.isWide
                         ? "aspect-[16/9] sm:aspect-[22/9]"
                         : "aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9]"
@@ -192,11 +188,7 @@ export default function Home() {
                         Boolean(project.previewUnoptimized) ||
                         project.image.endsWith(".svg")
                       }
-                      className={`h-full w-full object-center ${
-                        project.slug === "workflow-automations"
-                          ? "max-sm:object-contain sm:object-cover"
-                          : "object-cover"
-                      } ${
+                      className={`h-full w-full object-cover object-center ${
                         project.previewUnoptimized
                           ? CRISP_SCREENSHOT_IMG
                           : "transition duration-300 ease-out group-hover:scale-[1.02]"

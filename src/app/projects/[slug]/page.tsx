@@ -332,13 +332,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             ) : null}
             <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
               <ZoomableImage
-                src="/projects/financial-site-design-preview-group70.svg"
+                src="/projects/financial-site-design-preview-2400w.png"
                 alt="Financial site design preview"
-                width={1728}
-                height={1117}
+                width={2400}
+                height={1551}
                 sizes="(max-width: 768px) 100vw, 896px"
                 className="h-auto w-full"
-                unoptimized
               />
             </div>
             <div className="flex flex-col gap-6 py-6 md:py-10">
