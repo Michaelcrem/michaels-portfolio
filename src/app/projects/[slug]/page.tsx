@@ -457,7 +457,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
                   <div className="relative aspect-[16/10] w-full sm:aspect-[16/9]">
                     <ZoomableImage
-                      src="/projects/medical-portfolio-about-section.svg"
+                      src="/projects/medical-portfolio-about-section.png"
                       alt="Medical student portfolio about section preview"
                       fill
                       sizes="(max-width: 768px) 100vw, 900px"
