@@ -170,6 +170,10 @@ export default function Home() {
                 >
                   <div
                     className={`relative w-full ${
+                      project.slug === "workflow-automations"
+                        ? "bg-[var(--surface-strong)]"
+                        : ""
+                    } ${
                       project.isWide
                         ? "aspect-[16/9] sm:aspect-[22/9]"
                         : "aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9]"
@@ -179,7 +183,7 @@ export default function Home() {
                       src={project.image}
                       alt={`${project.title} preview`}
                       fill
-                      sizes="(max-width: 768px) 100vw, 896px"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 896px"
                       quality={project.previewUnoptimized ? 100 : 90}
                       decoding={project.previewUnoptimized ? "sync" : "async"}
                       priority={Boolean(project.previewUnoptimized)}
@@ -188,7 +192,11 @@ export default function Home() {
                         Boolean(project.previewUnoptimized) ||
                         project.image.endsWith(".svg")
                       }
-                      className={`h-full w-full object-cover object-center ${
+                      className={`h-full w-full object-center ${
+                        project.slug === "workflow-automations"
+                          ? "max-sm:object-contain sm:object-cover"
+                          : "object-cover"
+                      } ${
                         project.previewUnoptimized
                           ? CRISP_SCREENSHOT_IMG
                           : "transition duration-300 ease-out group-hover:scale-[1.02]"

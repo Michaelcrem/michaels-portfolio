@@ -26,6 +26,7 @@ export const projects: Project[] = [
       "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
     year: "2024",
     image: "/projects/financial-site-design-preview-group70.svg",
+    previewUnoptimized: true,
   },
   {
     slug: "clinic-scheduler",
