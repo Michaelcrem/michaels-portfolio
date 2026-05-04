@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -72,11 +73,11 @@ const projectDetails: Record<
     detailImages: [
       {
         src: "/projects/medical-portfolio-bottom-1-v2.png",
-        alt: "Medical student portfolio interface preview",
+        alt: "Medical student portfolio color palette",
       },
       {
         src: "/projects/medical-portfolio-bottom-2.png",
-        alt: "Medical student portfolio details preview",
+        alt: "Medical student portfolio icon design",
       },
     ],
     timeline: [
@@ -212,6 +213,23 @@ function formatTimelineEntry(item: string) {
   );
 }
 
+function ProjectMediaCaption({
+  caption,
+  children,
+}: {
+  caption: string;
+  children: ReactNode;
+}) {
+  return (
+    <figure className="m-0 flex w-full flex-col gap-2">
+      {children}
+      <figcaption className="w-full text-center text-xs leading-snug text-[var(--muted)] sm:text-[13px]">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
@@ -237,7 +255,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const isMedicalPortfolio = slug === "portfolio-os";
   const isRuleManager = slug === "workflow-automations";
-  const relatedProjects = projects.filter((item) => item.slug !== slug);
+  const relatedProjects = projects.filter(
+    (item) => item.slug !== slug && item.slug !== "insight-dashboard",
+  );
   const lessonsLearnedText =
     slug === "workflow-automations"
       ? "This project taught me how to balance brand consistency with modernization inside a large financial organization. I learned to translate stakeholder feedback from product, marketing, and engineering into a cohesive interface system that stayed true to Silvant's identity while aligning with Virtus standards. It also reinforced the value of designing content-first, reusable components during a CMS migration so teams can publish confidently without breaking visual consistency."
@@ -258,21 +278,23 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="flex flex-col gap-8">
           <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl">{project.title}</h1>
           {slug === "insight-dashboard" && (
-            <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
-              <div className="relative aspect-[16/9] w-full">
-                <ZoomableImage
-                  src={project.image}
-                  alt={`${project.title} preview`}
-                  width={1536}
-                  height={1024}
-                  className="h-full w-full object-cover object-top"
-                />
+            <ProjectMediaCaption caption="Mortgage calculator interface preview">
+              <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
+                <div className="relative aspect-[16/9] w-full">
+                  <ZoomableImage
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    width={1536}
+                    height={1024}
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
               </div>
-            </div>
+            </ProjectMediaCaption>
           )}
           {slug !== "insight-dashboard" && (
             <div className="rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]/90 px-5 py-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:rounded-3xl sm:px-8 sm:py-9 md:px-10 md:py-10">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-10 md:gap-x-14">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-10 md:gap-x-14">
                 <div className="flex min-w-0 flex-col gap-3 sm:gap-3.5">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-strong)] sm:text-xs sm:tracking-[0.2em]">
                     Timeline
@@ -288,7 +310,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     ))}
                   </div>
                 </div>
-                <div className="flex min-w-0 flex-col gap-3 border-l border-[color:var(--border)] pl-5 sm:gap-3.5 sm:pl-8 md:pl-10">
+                <div className="flex min-w-0 flex-col gap-3 border-l border-[color:var(--border)] pl-4 sm:gap-3.5 sm:pl-8 md:pl-10">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-strong)] sm:text-xs sm:tracking-[0.2em]">
                     My Role
                   </p>
@@ -330,16 +352,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ))}
               </div>
             ) : null}
-            <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-              <ZoomableImage
-                src="/projects/financial-site-design-preview-group72-3200w.png"
-                alt="Financial site design preview"
-                width={3200}
-                height={2069}
-                sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 1200px"
-                className="h-auto w-full"
-              />
-            </div>
+            <ProjectMediaCaption caption="Financial site design — composite preview">
+              <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                <div className="relative aspect-[1/1] w-full sm:aspect-[3200/2069]">
+                  <ZoomableImage
+                    src="/projects/financial-site-design-preview-group72-3200w.png"
+                    alt="Financial site design preview"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 1200px"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </ProjectMediaCaption>
             <div className="flex flex-col gap-6 py-6 md:py-10">
               <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
               <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
@@ -347,16 +372,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
                 ))}
               </div>
-              <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                <ZoomableImage
-                  src="/projects/silvant-group-47.svg"
-                  alt="Silvant website redesign mockup"
-                  width={1728}
-                  height={1117}
-                  className="h-auto w-full"
-                  unoptimized
-                />
-              </div>
+              <ProjectMediaCaption caption="Infographic design desktop-mobile">
+                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                  <div className="relative aspect-[1/1] w-full sm:aspect-[1728/1117]">
+                    <ZoomableImage
+                      src="/projects/silvant-group-47.svg"
+                      alt="Infographic design desktop-mobile"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 900px"
+                      className="object-cover sm:object-contain"
+                      unoptimized
+                    />
+                  </div>
+                </div>
+              </ProjectMediaCaption>
             </div>
             {details.designApproach ? (
               <div className="flex flex-col gap-8">
@@ -370,16 +399,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     ))}
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <ZoomableImage
-                    src="/projects/silvant-macbook-16-mockup.svg"
-                    alt="Silvant design mockup on MacBook Pro"
-                    width={1728}
-                    height={1117}
-                    className="h-auto w-full"
-                    unoptimized
-                  />
-                </div>
+                <ProjectMediaCaption caption="Silvant mood board">
+                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                    <div className="relative aspect-[1/1] w-full sm:aspect-[1728/1117]">
+                      <ZoomableImage
+                        src="/projects/silvant-macbook-16-mockup.svg"
+                        alt="Silvant mood board"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 900px"
+                        className="object-cover sm:object-contain"
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+                </ProjectMediaCaption>
               </div>
             ) : null}
           </div>
@@ -387,52 +420,99 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {isMedicalPortfolio ? (
           <div className="flex flex-col gap-8">
-            <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
-              <div className="relative aspect-[16/10] w-full sm:aspect-[16/9]">
-                <ZoomableImage
-                  src={details.heroImage}
-                  alt={`${project.title} preview`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 900px) 90vw, 900px"
-                  className="object-contain object-center"
-                  priority
-                  unoptimized={details.heroImage.endsWith(".svg")}
-                />
+            <ProjectMediaCaption caption="Medical student portfolio — hero overview">
+              <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
+                <div className="relative aspect-[4/3] w-full sm:aspect-[16/9]">
+                  <div className="absolute inset-0 sm:hidden">
+                    <ZoomableImage
+                      src={project.previewImage ?? project.image}
+                      alt={`${project.title} preview`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 900px) 90vw, 900px"
+                      className="object-cover object-center"
+                      priority
+                      unoptimized={(project.previewImage ?? project.image).endsWith(
+                        ".svg",
+                      )}
+                    />
+                  </div>
+                  <div className="absolute inset-0 hidden sm:block">
+                    <ZoomableImage
+                      src={details.heroImage}
+                      alt={`${project.title} preview`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 900px) 90vw, 900px"
+                      className="object-contain object-center"
+                      loading="lazy"
+                      unoptimized={details.heroImage.endsWith(".svg")}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
+            </ProjectMediaCaption>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               {details.detailImages.map((image, index) => (
-                <div
-                  key={`${image.src}-${index}`}
-                  className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]"
-                >
-                  <ZoomableImage
-                    src={image.src}
-                    alt={image.alt}
-                    width={1200}
-                    height={900}
-                    sizes="(max-width: 768px) 100vw, 520px"
-                    className="h-auto w-full"
-                    unoptimized={image.src.endsWith(".svg")}
-                  />
-                </div>
+                <ProjectMediaCaption key={`${image.src}-${index}`} caption={image.alt}>
+                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                    <ZoomableImage
+                      src={image.src}
+                      alt={image.alt}
+                      width={1200}
+                      height={900}
+                      sizes="(max-width: 768px) 100vw, 520px"
+                      className="h-auto w-full"
+                      unoptimized={image.src.endsWith(".svg")}
+                    />
+                  </div>
+                </ProjectMediaCaption>
               ))}
             </div>
           </div>
         ) : slug === "workflow-automations" || slug === "insight-dashboard" ? null : (
-          <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
-            <div className="relative aspect-[4/3] w-full sm:aspect-[16/10] md:aspect-[16/9]">
-              <ZoomableImage
-                src={details.heroImage}
-                alt={`${project.title} preview`}
-                fill
-                sizes="(max-width: 768px) 100vw, 900px"
-                className="object-cover"
-                priority
-                unoptimized={details.heroImage.endsWith(".svg")}
-              />
+          <ProjectMediaCaption caption={`${project.title} — hero preview`}>
+            <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
+              <div className="relative aspect-[1/1] w-full sm:aspect-[16/10] md:aspect-[16/9]">
+                {slug === "clinic-scheduler" ? (
+                  <>
+                    <div className="absolute inset-0 sm:hidden">
+                      <ZoomableImage
+                        src={project.previewImage ?? project.image}
+                        alt={`${project.title} preview`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="object-cover"
+                        priority
+                        unoptimized={(project.previewImage ?? project.image).endsWith(
+                          ".svg",
+                        )}
+                      />
+                    </div>
+                    <div className="absolute inset-0 hidden sm:block">
+                      <ZoomableImage
+                        src={details.heroImage}
+                        alt={`${project.title} preview`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="object-cover"
+                        loading="lazy"
+                        unoptimized={details.heroImage.endsWith(".svg")}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <ZoomableImage
+                    src={details.heroImage}
+                    alt={`${project.title} preview`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 900px"
+                    className="object-cover"
+                    priority
+                    unoptimized={details.heroImage.endsWith(".svg")}
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          </ProjectMediaCaption>
         )}
 
         {!isRuleManager && (
@@ -451,31 +531,35 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {slug !== "insight-dashboard" && (
                 <div className="flex flex-col gap-8">
               {isMedicalPortfolio && (
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
-                  <div className="relative aspect-[16/10] w-full sm:aspect-[16/9]">
-                    <ZoomableImage
-                      src="/projects/medical-portfolio-about-section.png"
-                      alt="Medical student portfolio about section preview"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 900px"
-                      className="object-cover object-center"
-                      unoptimized
-                    />
+                <ProjectMediaCaption caption="Medical student portfolio — about section">
+                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
+                    <div className="relative aspect-[4/3] w-full sm:aspect-[16/9]">
+                      <ZoomableImage
+                        src="/projects/medical-portfolio-about-section.png"
+                        alt="Medical student portfolio about section preview"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="object-cover object-center"
+                        unoptimized
+                      />
+                    </div>
                   </div>
-                </div>
+                </ProjectMediaCaption>
               )}
               {slug === "clinic-scheduler" && (
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <div className="relative aspect-[5/2] w-full">
-                    <ZoomableImage
-                      src="/projects/eu-ets-growth.png"
-                      alt="EU ETS growth metrics preview"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 900px"
-                      className="object-cover"
-                    />
+                <ProjectMediaCaption caption="EU ETS calculator — growth and traction metrics">
+                  <div className="overflow-hidden rounded-2xl bg-[var(--surface)]">
+                    <div className="relative aspect-[5/2] w-full">
+                      <ZoomableImage
+                        src="/projects/eu-ets-growth.png"
+                        alt="EU ETS growth metrics preview"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="object-cover object-center scale-[1.18]"
+                      />
+                    </div>
                   </div>
-                </div>
+                </ProjectMediaCaption>
               )}
               <div className="flex flex-col gap-6 py-6 md:py-10">
                 <h2 className="text-2xl font-semibold">Design Approach</h2>
@@ -488,65 +572,78 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               </div>
               {isMedicalPortfolio && (
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <div className="relative aspect-[4/1] w-full">
-                    <ZoomableImage
-                      src="/projects/medical-portfolio-grid-left.png"
-                      alt="Medical student portfolio grid layout preview"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 900px"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              )}
-              {slug === "workflow-automations" && (
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <ZoomableImage
-                    src="/projects/rule-manager-design-approach.png"
-                    alt="Rule Manager help guide design approach"
-                    width={1600}
-                    height={900}
-                    sizes="(max-width: 768px) 100vw, 900px"
-                    className="h-auto w-full"
-                  />
-                </div>
-              )}
-              {slug === "workflow-automations" && (
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <video
-                    className="h-auto w-full"
-                    src="/videos/rule-manager-help-guide.mov"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                </div>
-              )}
-              {slug === "clinic-scheduler" && (
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+                <ProjectMediaCaption caption="Medical student portfolio — experience grid layout">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <div className="relative aspect-[1/1] w-full">
+                    <div className="relative aspect-[4/1] w-full">
                       <ZoomableImage
-                        src="/projects/eu-ets-color-palette-v2.png"
-                        alt="EU ETS calculator color palette"
+                        src="/projects/medical-portfolio-grid-left.png"
+                        alt="Medical student portfolio grid layout preview"
                         fill
-                        sizes="(max-width: 768px) 100vw, 520px"
+                        sizes="(max-width: 768px) 100vw, 900px"
                         className="object-cover"
                       />
                     </div>
                   </div>
+                </ProjectMediaCaption>
+              )}
+              {slug === "workflow-automations" && (
+                <ProjectMediaCaption caption="Rule Manager — help guide design approach">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <ZoomableImage
-                      src="/projects/eu-ets-typography-v4.png"
-                      alt="EU ETS typography preview"
-                      width={1400}
-                      height={900}
-                      sizes="(max-width: 768px) 100vw, 520px"
-                      className="h-auto w-full"
-                    />
+                    <div className="relative aspect-[1/1] w-full sm:aspect-[16/9]">
+                      <ZoomableImage
+                        src="/projects/rule-manager-design-approach.png"
+                        alt="Rule Manager help guide design approach"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
+                </ProjectMediaCaption>
+              )}
+              {slug === "workflow-automations" && (
+                <ProjectMediaCaption caption="Rule Manager — help guide interaction preview">
+                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                    <div className="relative aspect-[1/1] w-full sm:aspect-video">
+                      <video
+                        className="h-full w-full object-cover"
+                        src="/videos/rule-manager-help-guide.mov"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                    </div>
+                  </div>
+                </ProjectMediaCaption>
+              )}
+              {slug === "clinic-scheduler" && (
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+                  <ProjectMediaCaption caption="EU ETS calculator — color palette">
+                    <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                      <div className="relative aspect-[1/1] w-full">
+                        <ZoomableImage
+                          src="/projects/eu-ets-color-palette-v2.png"
+                          alt="EU ETS calculator color palette"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 520px"
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+                  </ProjectMediaCaption>
+                  <ProjectMediaCaption caption="EU ETS calculator — typography">
+                    <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                      <ZoomableImage
+                        src="/projects/eu-ets-typography-v4.png"
+                        alt="EU ETS typography preview"
+                        width={1400}
+                        height={900}
+                        sizes="(max-width: 768px) 100vw, 520px"
+                        className="h-auto w-full"
+                      />
+                    </div>
+                  </ProjectMediaCaption>
                 </div>
               )}
                 </div>
@@ -569,16 +666,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </div>
                 {details.detailImages[0]?.src.includes("eu-ets-flow") && (
-                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <ZoomableImage
-                      src={details.detailImages[0].src}
-                      alt={details.detailImages[0].alt}
-                      width={1600}
-                      height={900}
-                      sizes="(max-width: 768px) 100vw, 900px"
-                      className="h-auto w-full"
-                    />
-                  </div>
+                  <ProjectMediaCaption caption={details.detailImages[0].alt}>
+                    <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                      <ZoomableImage
+                        src={details.detailImages[0].src}
+                        alt={details.detailImages[0].alt}
+                        width={1600}
+                        height={900}
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="h-auto w-full"
+                      />
+                    </div>
+                  </ProjectMediaCaption>
                 )}
                 <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold text-[var(--foreground)]">
@@ -601,17 +700,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </div>
                 <div className="flex flex-col gap-8">
-                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <div className="relative aspect-[1814/658] w-full">
-                      <ZoomableImage
-                        src="/projects/eu-ets-imo-invalid-v10.png"
-                        alt="EU ETS calculator invalid IMO input"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 900px"
-                        className="object-cover"
-                      />
+                  <ProjectMediaCaption caption="EU ETS calculator — invalid IMO input state">
+                    <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                      <div className="relative aspect-[1814/658] w-full">
+                        <ZoomableImage
+                          src="/projects/eu-ets-imo-invalid-v10.png"
+                          alt="EU ETS calculator invalid IMO input"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 900px"
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </ProjectMediaCaption>
                 </div>
                 <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold text-[var(--foreground)]">
@@ -639,17 +740,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </ul>
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <div className="relative aspect-[1814/658] w-full">
-                    <ZoomableImage
-                      src="/projects/eu-ets-imo-multi-ship.png"
-                      alt="EU ETS multi-ship entry preview"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 900px"
-                      className="object-cover"
-                    />
+                <ProjectMediaCaption caption="EU ETS calculator — multi-ship IMO entry">
+                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                    <div className="relative aspect-[1814/658] w-full">
+                      <ZoomableImage
+                        src="/projects/eu-ets-imo-multi-ship.png"
+                        alt="EU ETS multi-ship entry preview"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
+                </ProjectMediaCaption>
                 <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold">
                     Output & Results Display
@@ -671,17 +774,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </p>
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                  <div className="relative aspect-[1814/658] w-full">
-                    <ZoomableImage
-                      src="/projects/eu-ets-output-results-v2.png"
-                      alt="EU ETS output results preview"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 900px"
-                      className="object-cover"
-                    />
+                <ProjectMediaCaption caption="EU ETS calculator — results and outputs">
+                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                    <div className="relative aspect-[1814/658] w-full">
+                      <ZoomableImage
+                        src="/projects/eu-ets-output-results-v2.png"
+                        alt="EU ETS output results preview"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 900px"
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
+                </ProjectMediaCaption>
               </div>
           )}
           {slug !== "insight-dashboard" && (
@@ -706,39 +811,43 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     const isFlow = image.src.includes("eu-ets-flow");
 
                     return (
-                      <div
+                      <ProjectMediaCaption
                         key={`${image.src}-${index}`}
-                        className={`overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] ${
-                          isRuleManager ? "w-full md:max-w-[520px] md:mx-auto" : ""
-                        }`}
+                        caption={image.alt}
                       >
-                        {isRuleManager ? (
-                          <ZoomableImage
-                            src={image.src}
-                            alt={image.alt}
-                            width={1200}
-                            height={900}
-                            sizes="(max-width: 768px) 100vw, 520px"
-                            className="h-auto w-full"
-                            quality={95}
-                            unoptimized
-                          />
-                        ) : (
-                          <div
-                            className={`relative w-full ${
-                              isFlow ? "aspect-[21/9]" : "aspect-[16/9]"
-                            }`}
-                          >
+                        <div
+                          className={`overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] ${
+                            isRuleManager ? "w-full md:max-w-[520px] md:mx-auto" : ""
+                          }`}
+                        >
+                          {isRuleManager ? (
                             <ZoomableImage
                               src={image.src}
                               alt={image.alt}
-                              fill
-                              sizes="(max-width: 768px) 100vw, 420px"
-                              className={isFlow ? "object-contain" : "object-cover"}
+                              width={1200}
+                              height={900}
+                              sizes="(max-width: 768px) 100vw, 520px"
+                              className="h-auto w-full"
+                              quality={95}
+                              unoptimized
                             />
-                          </div>
-                        )}
-                      </div>
+                          ) : (
+                            <div
+                              className={`relative w-full ${
+                                isFlow ? "aspect-[21/9]" : "aspect-[16/9]"
+                              }`}
+                            >
+                              <ZoomableImage
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 420px"
+                                className={isFlow ? "object-contain" : "object-cover"}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </ProjectMediaCaption>
                     );
                   })}
                 </div>
@@ -783,7 +892,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 href={`/projects/${item.slug}`}
                 className="group flex min-w-0 gap-3 rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] p-3 transition hover:border-[#2E90FA]/35 hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] sm:p-3.5"
               >
-                <div className="relative h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-lg border border-[color:var(--border)] bg-[var(--surface-strong)] sm:h-16 sm:w-24">
+                <div className="relative size-14 shrink-0 overflow-hidden rounded-lg border border-[color:var(--border)] bg-[var(--surface-strong)] sm:h-16 sm:w-24">
                   <Image
                     src={item.image}
                     alt={`${item.title} preview`}

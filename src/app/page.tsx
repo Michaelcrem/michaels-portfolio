@@ -12,6 +12,10 @@ export default function Home() {
 
   const closeMobileNav = () => setIsMobileNavOpen(false);
 
+  const featuredProjectCards = projects.filter(
+    (project) => project.slug !== "insight-dashboard",
+  );
+
   return (
     <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <header className="sticky top-0 z-20 bg-[var(--background)]">
@@ -52,9 +56,12 @@ export default function Home() {
             <a className="transition hover:opacity-60" href="#about">
               About
             </a>
-            <a className="transition hover:opacity-60" href="#contact">
+            <Link
+              className="transition hover:opacity-60"
+              href="/projects/insight-dashboard"
+            >
               Contact
-            </a>
+            </Link>
           </nav>
         </div>
         {isMobileNavOpen && (
@@ -76,13 +83,13 @@ export default function Home() {
             >
               About
             </a>
-            <a
+            <Link
               className="transition hover:opacity-60"
-              href="#contact"
+              href="/projects/insight-dashboard"
               onClick={closeMobileNav}
             >
               Contact
-            </a>
+            </Link>
           </div>
         )}
       </header>
@@ -159,7 +166,7 @@ export default function Home() {
             Featured projects
           </h2>
           <div className="flex flex-col gap-14 md:gap-14 lg:gap-16">
-            {projects.map((project) => (
+            {featuredProjectCards.map((project) => (
               <article
                 key={project.slug}
                 className="flex min-w-0 flex-col gap-7 md:gap-8"
