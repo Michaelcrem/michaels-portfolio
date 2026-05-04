@@ -370,11 +370,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                   <div className="relative aspect-[1/1] w-full sm:aspect-[1728/1117]">
                     <ZoomableImage
-                      src="/projects/homepage-firm-design.png"
+                      src="/projects/financial-purpose-top-group75-1.svg"
                       alt="Homepage and firm design"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 900px"
-                      className="object-cover"
+                      className="object-cover sm:object-contain"
+                      unoptimized
                     />
                   </div>
                 </div>
