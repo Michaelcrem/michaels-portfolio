@@ -221,7 +221,7 @@ function ProjectMediaCaption({
   children: ReactNode;
 }) {
   return (
-    <figure className="m-0 flex w-full flex-col gap-2">
+    <figure className="m-0 flex w-full flex-col gap-2 pb-4 md:pb-6">
       {children}
       <figcaption className="w-full text-center text-xs leading-snug text-[var(--muted)] sm:text-[13px]">
         {caption}
@@ -277,21 +277,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <div className="flex flex-col gap-8">
           <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl">{project.title}</h1>
-          {slug === "insight-dashboard" && (
-            <ProjectMediaCaption caption="Mortgage calculator interface preview">
-              <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface-strong)]">
-                <div className="relative aspect-[16/9] w-full">
-                  <ZoomableImage
-                    src={project.image}
-                    alt={`${project.title} preview`}
-                    width={1536}
-                    height={1024}
-                    className="h-full w-full object-cover object-top"
-                  />
-                </div>
-              </div>
-            </ProjectMediaCaption>
-          )}
           {slug !== "insight-dashboard" && (
             <div className="rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]/90 px-5 py-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:rounded-3xl sm:px-8 sm:py-9 md:px-10 md:py-10">
               <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-10 md:gap-x-14">
@@ -344,34 +329,67 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {isRuleManager && (
           <div className="flex flex-col gap-8">
             {details.purposePreamble ? (
-              <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
-                {splitParagraphs(details.purposePreamble).map((paragraph, index) => (
+              <div className="flex w-full flex-col gap-5 text-base leading-7 text-[var(--muted)] md:gap-8 md:text-lg md:leading-8">
+                {splitParagraphs(details.purposePreamble)
+                  .slice(0, 1)
+                  .map((paragraph, index) => (
                   <p key={`purpose-preamble-${paragraph.slice(0, 24)}-${index}`}>
                     {paragraph}
                   </p>
-                ))}
+                  ))}
               </div>
             ) : null}
-            <ProjectMediaCaption caption="Financial site design — composite preview">
-              <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                <div className="relative aspect-[1/1] w-full sm:aspect-[3200/2069]">
-                  <ZoomableImage
-                    src="/projects/financial-site-design-preview-group72-3200w.png"
-                    alt="Financial site design preview"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 1200px"
-                    className="object-cover"
-                  />
+            <div className="pt-6 md:pt-10">
+              <ProjectMediaCaption caption="Financial site design — composite preview">
+                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                  <div className="relative aspect-[1/1] w-full sm:aspect-[3200/2069]">
+                    <ZoomableImage
+                      src="/projects/financial-site-design-preview-group72-3200w.png"
+                      alt="Financial site design preview"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 1200px"
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
-              </div>
-            </ProjectMediaCaption>
-            <div className="flex flex-col gap-6 py-6 md:py-10">
+              </ProjectMediaCaption>
+            </div>
+            <p className="text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
+              Throughout the project, I partnered with multiple product managers to
+              develop infographics, define content hierarchy, and maintain strict
+              adherence to brand guidelines. This required balancing creative design
+              with strategic thinking to ensure that each page effectively communicated
+              key information while remaining visually engaging. Working at Virtus also
+              meant collaborating across multiple affiliate teams, giving me the
+              opportunity to align Silvant's design with broader organizational
+              standards while still tailoring the experience to their unique audience
+              and goals.
+            </p>
+            <div className="pt-6 md:pt-10">
+              <ProjectMediaCaption caption="Homepage and firm design">
+                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                  <div className="relative aspect-[1/1] w-full sm:aspect-[1728/1117]">
+                    <ZoomableImage
+                      src="/projects/financial-purpose-top-group75-1.svg"
+                      alt="Homepage and firm design"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 900px"
+                      className="object-cover sm:object-contain"
+                      unoptimized
+                    />
+                  </div>
+                </div>
+              </ProjectMediaCaption>
+            </div>
+            <div className="flex flex-col gap-6 py-6 md:gap-8 md:py-10">
               <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
               <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                 {splitParagraphs(details.purpose).map((paragraph, index) => (
                   <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
                 ))}
               </div>
+            </div>
+            <div className="pt-6 md:pt-10">
               <ProjectMediaCaption caption="Infographic design desktop-mobile">
                 <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                   <div className="relative aspect-[1/1] w-full sm:aspect-[1728/1117]">
@@ -389,7 +407,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
             {details.designApproach ? (
               <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-6 py-6 md:py-10">
+                <div className="flex flex-col gap-6 py-6 md:gap-8 md:py-10">
                   <h2 className="text-2xl font-semibold">Design Approach</h2>
                   <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
                     {splitParagraphs(details.designApproach).map((paragraph, index) => (
@@ -399,20 +417,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     ))}
                   </div>
                 </div>
-                <ProjectMediaCaption caption="Silvant mood board">
-                  <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                    <div className="relative aspect-[1/1] w-full sm:aspect-[1728/1117]">
-                      <ZoomableImage
-                        src="/projects/silvant-macbook-16-mockup.svg"
-                        alt="Silvant mood board"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 900px"
-                        className="object-cover sm:object-contain"
-                        unoptimized
-                      />
+                <div className="pt-6 md:pt-10">
+                  <ProjectMediaCaption caption="Silvant mood board">
+                    <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                      <div className="relative aspect-[1/1] w-full sm:aspect-[1728/1117]">
+                        <ZoomableImage
+                          src="/projects/silvant-macbook-16-mockup.svg"
+                          alt="Silvant mood board"
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 900px"
+                          className="object-cover sm:object-contain"
+                          unoptimized
+                        />
+                      </div>
                     </div>
-                  </div>
-                </ProjectMediaCaption>
+                  </ProjectMediaCaption>
+                </div>
               </div>
             ) : null}
           </div>

@@ -53,12 +53,15 @@ export default function Home() {
             <a className="transition hover:opacity-60" href="#projects">
               Work
             </a>
-            <a className="transition hover:opacity-60" href="#about">
-              About
-            </a>
             <Link
               className="transition hover:opacity-60"
               href="/projects/insight-dashboard"
+            >
+              About
+            </Link>
+            <Link
+              className="transition hover:opacity-60"
+              href="#experience"
             >
               Contact
             </Link>
@@ -76,16 +79,16 @@ export default function Home() {
             >
               Work
             </a>
-            <a
-              className="transition hover:opacity-60"
-              href="#about"
-              onClick={closeMobileNav}
-            >
-              About
-            </a>
             <Link
               className="transition hover:opacity-60"
               href="/projects/insight-dashboard"
+              onClick={closeMobileNav}
+            >
+              About
+            </Link>
+            <Link
+              className="transition hover:opacity-60"
+              href="#experience"
               onClick={closeMobileNav}
             >
               Contact
@@ -121,7 +124,13 @@ export default function Home() {
                 style={{ zIndex: index }}
               >
                 <Link
-                  href={`/projects/${project.slug}`}
+                  href={
+                    project.slug === "insight-dashboard"
+                      ? "https://dribbble.com/shots/26098752-User-Profile-Mobile-Prototype"
+                      : `/projects/${project.slug}`
+                  }
+                  target={project.slug === "insight-dashboard" ? "_blank" : undefined}
+                  rel={project.slug === "insight-dashboard" ? "noreferrer" : undefined}
                   className={`relative aspect-square h-[5.5rem] w-[5.5rem] overflow-hidden rounded-2xl border-2 border-white bg-[var(--background)] shadow-[0_14px_30px_rgba(15,23,42,0.18),0_6px_12px_rgba(15,23,42,0.08)] transition duration-300 sm:h-32 sm:w-32 md:h-[10.5rem] md:w-[10.5rem] hover:z-20 ${
                     project.previewUnoptimized ? "" : "hover:scale-[1.02]"
                   } hover:rotate-0 hover:shadow-[0_26px_56px_rgba(15,23,42,0.32),0_10px_20px_rgba(15,23,42,0.14)] ${
