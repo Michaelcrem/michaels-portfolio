@@ -374,7 +374,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       alt="Homepage and firm design"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1536px) 90vw, 900px"
-                      className="object-cover sm:object-contain"
+                      className="object-cover"
                       unoptimized
                     />
                   </div>
