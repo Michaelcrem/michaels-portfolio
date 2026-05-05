@@ -84,7 +84,6 @@ const projectDetails: Record<
       "November 2025, Research",
       "December 2025, Design",
       "January 2026, Beta Testing",
-      "February 2026, Shipped",
     ],
     role: ["Lead Designer", "Lead Developer"],
   },

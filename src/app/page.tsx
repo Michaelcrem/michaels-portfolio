@@ -70,7 +70,7 @@ export default function Home() {
         {isMobileNavOpen && (
           <div
             id="mobile-nav-links"
-            className="mx-auto flex w-full max-w-5xl flex-col gap-3 border-t border-[color:var(--border)] px-4 pb-4 pt-3 text-sm tracking-[0.05em] sm:px-8 md:hidden"
+            className="mx-auto flex w-full max-w-5xl flex-col gap-3 border-t border-[color:var(--border)] bg-[var(--surface-strong)] px-4 pb-4 pt-3 text-sm tracking-[0.05em] shadow-[0_12px_24px_rgba(15,23,42,0.12)] sm:px-8 md:hidden"
           >
             <a
               className="transition hover:opacity-60"
@@ -250,7 +250,7 @@ export default function Home() {
                 company: "American Bureau of Shipping",
                 time: "2023 – 2024",
                 detail:
-                  "Developed react components and led the front-end design for EU ETS Calculator.",
+                  "Developed React components and led the front-end design for EU ETS Calculator.",
               },
             ].map((item) => (
               <div
