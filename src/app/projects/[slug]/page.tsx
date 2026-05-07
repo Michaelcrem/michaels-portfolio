@@ -112,7 +112,7 @@ const projectDetails: Record<
     stack: ["Documentation", "UX", "Web"],
     liveUrl: "#",
     purposePreamble:
-      "I played a key role in the redesign of the Silvant website, an affiliate of Virtus Investment Partners, where I focused on both visual design and cross-functional collaboration. I worked closely with the development team to translate design concepts into scalable, user-friendly experiences, ensuring the final product aligned with both technical requirements and user needs. My contributions included designing page layouts, refining site structure, and helping create a cohesive visual system that elevated the overall user experience.\n\nThroughout the project, I partnered with multiple product managers to develop infographics, define content hierarchy, and maintain strict adherence to brand guidelines. This required balancing creative design with strategic thinking to ensure that each page effectively communicated key information while remaining visually engaging. Working at Virtus also meant collaborating across multiple affiliate teams, giving me the opportunity to align Silvant's design with broader organizational standards while still tailoring the experience to their unique audience and goals.",
+      "I redesigned the Silvant Financial website, an affiliate of Virtus Investment Partners, with a focus on creating a cleaner and more user-friendly experience. I worked closely with the development team to make sure the designs translated smoothly into the final build while still meeting technical needs. My work included redesigning page layouts, improving the overall site structure, and helping create a more cohesive visual style across the site.\n\nThroughout the project, I worked closely with several product managers to create infographics, organize content structure, and make sure everything stayed aligned with brand guidelines. A big part of the process was finding the balance between making information easy to understand while still keeping the pages visually engaging and clean. Since Virtus has multiple affiliate teams, I also had the opportunity to collaborate across different groups and make sure the Silvant redesign fit within the larger company standards while still feeling tailored to Silvant’s audience and goals.",
     purpose:
       "Following the acquisition of Silvant by Virtus Investment Partners, the primary goal of the project was to centralize and elevate Silvant’s marketing and web presence under a unified strategy. As part of a broader initiative, we were simultaneously transitioning affiliate sites from KERN to Statamic CMS, which created a natural opportunity to modernize Silvant’s digital experience. The purpose of the redesign was not only to improve performance and scalability through a more flexible CMS, but also to ensure a seamless transition for all stakeholders involved—including Financial Advisors, Marketing Managers, and Product Owners—by prioritizing usability, clarity, and efficient content management workflows.\n\nA key component of the project’s purpose was to balance innovation with brand continuity. Through extensive research into current trends in financial services design, we aimed to enhance the site’s visual and functional appeal while preserving the recognizable elements that existing users trusted. Maintaining Silvant’s signature earthy green color palette was a deliberate decision to support brand familiarity, while introducing a more refined layout, improved information hierarchy, and modern design elements. Ultimately, the project was driven by the need to create a refreshed, cohesive, and user-centered experience that aligned with both Silvant’s identity and the evolving standards of the financial industry.",
     stackExplanation:
@@ -354,15 +354,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </ProjectMediaCaption>
             </div>
             <p className="text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
-              Throughout the project, I partnered with multiple product managers to
-              develop infographics, define content hierarchy, and maintain strict
-              adherence to brand guidelines. This required balancing creative design
-              with strategic thinking to ensure that each page effectively communicated
-              key information while remaining visually engaging. Working at Virtus also
-              meant collaborating across multiple affiliate teams, giving me the
-              opportunity to align Silvant's design with broader organizational
-              standards while still tailoring the experience to their unique audience
-              and goals.
+              Throughout the project, I worked closely with several product managers to
+              create infographics, organize content structure, and make sure everything
+              stayed aligned with brand guidelines. A big part of the process was
+              finding the balance between making information easy to understand while
+              still keeping the pages visually engaging and clean. Since Virtus has
+              multiple affiliate teams, I also had the opportunity to collaborate
+              across different groups and make sure the Silvant redesign fit within the
+              larger company standards while still feeling tailored to Silvant&apos;s
+              audience and goals.
             </p>
             <div className="pt-6 md:pt-10">
               <ProjectMediaCaption caption="Homepage and firm design">
