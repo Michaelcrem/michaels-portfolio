@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import SiteFooter from "@/components/SiteFooter";
 import {
   getProductionSiteUrl,
   SOCIAL_PREVIEW_IMAGE_PATH,
@@ -75,19 +76,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentYear = new Date().getFullYear();
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <footer className="border-t border-[color:var(--border)] py-4">
-          <div className="mx-auto w-full max-w-5xl px-4 text-center text-xs text-[var(--muted-strong)] sm:px-8 md:px-12 lg:px-20 xl:px-24">
-            © {currentYear} Michael Cremonini
-          </div>
-        </footer>
+        <SiteFooter />
       </body>
     </html>
   );

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import ZoomableImage from "@/components/ZoomableImage";
+import { experienceEntries } from "@/data/experience";
 import { projects } from "@/data/projects";
 import {
   getProductionSiteUrl,
@@ -324,6 +325,37 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </div>
         </div>
+
+        {slug === "insight-dashboard" ? (
+          <section
+            id="experience"
+            className="flex flex-col gap-8 border-t border-[color:var(--border)] pt-10 md:gap-10"
+          >
+            <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
+              Experience
+            </h2>
+            <div className="flex flex-col gap-8 md:gap-10">
+              {experienceEntries.map((item) => (
+                <div
+                  key={`${item.role}-${item.company}`}
+                  className="grid grid-cols-1 gap-2 sm:grid-cols-[11rem_1fr] sm:gap-x-4 sm:gap-y-0 md:gap-x-6 lg:gap-x-8"
+                >
+                  <p className="whitespace-nowrap text-lg tabular-nums leading-snug text-[var(--muted-strong)] sm:pt-0.5 md:text-xl">
+                    {item.time}
+                  </p>
+                  <div className="flex min-w-0 flex-col gap-1">
+                    <p className="min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] md:text-xl">
+                      {item.role} at {item.company}
+                    </p>
+                    <p className="max-w-2xl text-sm leading-5 text-[#666666] md:text-base md:leading-relaxed">
+                      {item.detail}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         {isRuleManager && (
           <div className="flex flex-col gap-8">

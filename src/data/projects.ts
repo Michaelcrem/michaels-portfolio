@@ -37,7 +37,7 @@ export const projects: Project[] = [
   },
   {
     slug: "insight-dashboard",
-    title: "User mobile profile",
+    title: "About Me",
     description:
       "Web developer with a passion for film and photography, blending creativity and technology to build engaging digital experiences.",
     year: "2024",

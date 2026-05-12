@@ -4,8 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CRISP_SCREENSHOT_IMG } from "@/lib/crisp-screenshot-image";
+import { experienceEntries } from "@/data/experience";
 import { projects } from "@/data/projects";
+import { CRISP_SCREENSHOT_IMG } from "@/lib/crisp-screenshot-image";
 
 export default function Home() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -237,22 +238,7 @@ export default function Home() {
             Experience
           </h2>
           <div className="flex flex-col gap-8 md:gap-10">
-            {[
-              {
-                role: "Digital Specialist",
-                company: "Virtus Investment Partners",
-                time: "2024 – now",
-                detail:
-                  "Designed marketing and product experiences with a focus on user experience and conversion.",
-              },
-              {
-                role: "Web Developer",
-                company: "American Bureau of Shipping",
-                time: "2023 – 2024",
-                detail:
-                  "Developed React components and led the front-end design for EU ETS Calculator.",
-              },
-            ].map((item) => (
+            {experienceEntries.map((item) => (
               <div
                 key={`${item.role}-${item.company}`}
                 className="grid grid-cols-1 gap-2 sm:grid-cols-[11rem_1fr] sm:gap-x-4 sm:gap-y-0 md:gap-x-6 lg:gap-x-8"
