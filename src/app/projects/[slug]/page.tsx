@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import ZoomableImage from "@/components/ZoomableImage";
+import { AboutMeIntroWithPhotographyHover } from "@/components/AboutMeIntroWithPhotographyHover";
 import { experienceEntries } from "@/data/experience";
 import { projects } from "@/data/projects";
 import {
@@ -90,7 +91,7 @@ const projectDetails: Record<
   },
   "insight-dashboard": {
     intro:
-      "I have experience working as a Web Developer across multiple organizations, where I’ve focused on building applications with React and designing intuitive, user-friendly interfaces. In my previous role at American Bureau of Shipping, I contributed to developing and enhancing web platforms using React and Adobe Experience Manager (AEM), including co-creating a tool that helped ship owners estimate fuel usage and emissions costs.\n\nIn my current role at Virtus Investment Partners, I manage and support multiple affiliate websites, working closely with development, marketing, and social media teams to implement design updates and create cohesive digital experiences. Overall, my work centers on combining strong React development skills with thoughtful UI design to build efficient and engaging web applications.",
+      "I'm a web developer and UI designer currently working at Virtus Investment Partners, where I manage and support multiple affiliate websites across development, design, and digital marketing initiatives. Previously, I worked at American Bureau of Shipping building React applications and internal web tools, including an emissions and fuel cost calculator for ship owners. My work mainly focuses on React development, scalable UI systems, and creating digital experiences that feel clean, intuitive, and easy to use.\n\nI completed a full-stack engineering program — and enjoy photography outside of software, especially experimenting with film and vintage-era cameras.",
     type: "Product",
     stack: ["Pug", "Chart.js"],
     liveUrl: "https://mortgage--calculator-c1611120b7c4.herokuapp.com/",
@@ -319,9 +320,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 isMedicalPortfolio || slug === "clinic-scheduler" ? "py-6 md:py-10" : ""
               }`}
             >
-              {splitParagraphs(details.intro).map((paragraph, index) => (
-                <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
-              ))}
+              {slug === "insight-dashboard" ? (
+                <AboutMeIntroWithPhotographyHover intro={details.intro} />
+              ) : (
+                splitParagraphs(details.intro).map((paragraph, index) => (
+                  <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
+                ))
+              )}
             </div>
           </div>
         </div>
