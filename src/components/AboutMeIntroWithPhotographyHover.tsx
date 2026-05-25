@@ -22,6 +22,13 @@ function splitParagraphs(text: string) {
 
 const PHOTO_WORD = /\b(photography)\b/i;
 
+function deviceHasHover() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  );
+}
+
 function ParagraphWithPhotographyHover({ paragraph }: { paragraph: string }) {
   const match = paragraph.match(PHOTO_WORD);
   if (!match || match.index === undefined || aboutPhotographySlides.length === 0) {
@@ -182,8 +189,12 @@ function PhotographyHoverWord({ label }: { label: string }) {
           outline: "none",
           boxShadow: "none",
         }}
-        onMouseEnter={openNow}
-        onMouseLeave={scheduleClose}
+        onMouseEnter={() => {
+          if (deviceHasHover()) openNow();
+        }}
+        onMouseLeave={() => {
+          if (deviceHasHover()) scheduleClose();
+        }}
       >
         <div className="relative aspect-[2/3] w-full shrink-0 overflow-hidden rounded-t-2xl">
           <Image
@@ -202,36 +213,45 @@ function PhotographyHoverWord({ label }: { label: string }) {
       </div>
     ) : null;
 
+  const togglePanel = useCallback(() => {
+    setOpen((isOpen) => {
+      if (isOpen) {
+        setPanelPos(null);
+        return false;
+      }
+      clearHideTimer();
+      return true;
+    });
+  }, [clearHideTimer]);
+
   return (
     <span ref={wrapRef} className="relative inline">
-      <span
-        role="button"
-        tabIndex={0}
-        className="cursor-help border-b border-dotted border-[color:var(--muted-strong)] underline-offset-2 outline-none transition hover:border-[#2E90FA] hover:text-[#2E90FA] focus-visible:ring-2 focus-visible:ring-[#2E90FA]/40 focus-visible:ring-offset-2"
+      <button
+        type="button"
+        className="inline cursor-pointer touch-manipulation border-0 border-b border-dotted border-[color:var(--muted-strong)] bg-transparent p-0 font-inherit text-inherit underline-offset-2 transition hover:border-[#2E90FA] hover:text-[#2E90FA] focus-visible:ring-2 focus-visible:ring-[#2E90FA]/40 focus-visible:ring-offset-2"
         aria-expanded={open}
         aria-controls={panelId}
         aria-haspopup="dialog"
         aria-label="Photography: show sample images"
-        onMouseEnter={openNow}
-        onMouseLeave={scheduleClose}
+        onMouseEnter={() => {
+          if (deviceHasHover()) openNow();
+        }}
+        onMouseLeave={() => {
+          if (deviceHasHover()) scheduleClose();
+        }}
         onFocus={openNow}
         onBlur={(e) => {
           const next = e.relatedTarget as Node | null;
           if (panelRef.current?.contains(next)) return;
           scheduleClose();
         }}
-        onClick={() => {
-          setOpen((v) => !v);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setOpen((v) => !v);
-          }
+        onClick={(e) => {
+          e.stopPropagation();
+          togglePanel();
         }}
       >
         {label}
-      </span>
+      </button>
       {panel ? createPortal(panel, document.body) : null}
     </span>
   );

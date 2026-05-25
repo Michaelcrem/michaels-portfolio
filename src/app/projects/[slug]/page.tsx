@@ -35,7 +35,7 @@ const projectDetails: Record<
     role: string[];
   }
 > = {
-  "clinic-scheduler": {
+  "eu-ets-calculator": {
     intro:
       "Collaborated with an engineer to build a maritime compliance analytics tool using Dash. Contributed to the app’s design and prototyping, shaping the user experience and interface architecture. The platform enables ship owners to calculate annual compliance costs, total CO₂ emissions, taxable CO₂, and total fuel consumption.",
     type: "Product",
@@ -61,7 +61,7 @@ const projectDetails: Record<
     ],
     role: ["Lead Designer", "Front-End Developer"],
   },
-  "portfolio-os": {
+  "medical-student-portfolio": {
     intro:
       "This is a residency-focused portfolio site for a medical student built with React and a Node.js development workflow. The design is clean and minimal, with a focus on highlighting the student’s experiences while also giving space for their personality and story to come through.",
     type: "Portfolio",
@@ -89,7 +89,7 @@ const projectDetails: Record<
     ],
     role: ["Lead Designer", "Lead Developer"],
   },
-  "insight-dashboard": {
+  "get-to-know-me": {
     intro:
       "I'm a web developer and UI designer currently working at Virtus Investment Partners, where I manage and support multiple affiliate websites across development, design, and digital marketing initiatives. Previously, I worked at American Bureau of Shipping building React applications and internal web tools, including an emissions and fuel cost calculator for ship owners. My work mainly focuses on React development, scalable UI systems, and creating digital experiences that feel clean, intuitive, and easy to use.\n\nI completed a full-stack engineering program — and enjoy photography outside of software, especially experimenting with film and vintage-era cameras.",
     type: "Product",
@@ -99,7 +99,7 @@ const projectDetails: Record<
       "The purpose of this project was to create an intuitive, visually engaging mortgage calculator that simplifies what is often a complex financial decision. Through multiple iterations, I refined both the calculation logic and UI interactions—ensuring accurate monthly payment computations, dynamic updates as users adjust sliders, and a clear breakdown of principal, property tax, and insurance. I designed the interface with a clean gradient overlay and a circular payment visualization to make the financial breakdown immediately digestible, while sliders and dropdowns keep the experience interactive and easy to use. Significant effort went into connecting the front-end inputs to reliable amortization logic, handling edge cases, and ensuring real-time responsiveness so the tool feels seamless and fully functional.",
     stackExplanation:
       "This project began with designing the full user interface and interaction flow in Adobe XD, where I mapped out the layout, visual hierarchy, and user experience before development. I then implemented the application using the Pug template engine to create clean, reusable, and maintainable HTML structures. For the data visualization, I integrated Chart.js to dynamically render the circular breakdown of monthly payments, allowing users to see real-time updates as inputs change. This stack allowed me to combine thoughtful design with efficient templating and interactive front-end visualization to deliver a polished, fully functional tool.",
-    heroImage: "/projects/insight-dashboard.png",
+    heroImage: "/projects/about-me-preview-group77.svg",
     detailImages: [],
     timeline: [
       "January 2024, UX Design",
@@ -108,7 +108,7 @@ const projectDetails: Record<
     ],
     role: ["UI designer", "Front-end developer"],
   },
-  "workflow-automations": {
+  "financial-site-design": {
     intro: "",
     type: "Product",
     stack: ["Documentation", "UX", "Web"],
@@ -119,7 +119,7 @@ const projectDetails: Record<
       "Following the acquisition of Silvant by Virtus Investment Partners, the primary goal of the project was to centralize and elevate Silvant’s marketing and web presence under a unified strategy. As part of a broader initiative, we were simultaneously transitioning affiliate sites from KERN to Statamic CMS, which created a natural opportunity to modernize Silvant’s digital experience. The purpose of the redesign was not only to improve performance and scalability through a more flexible CMS, but also to ensure a seamless transition for all stakeholders involved—including Financial Advisors, Marketing Managers, and Product Owners—by prioritizing usability, clarity, and efficient content management workflows.\n\nA key component of the project’s purpose was to balance innovation with brand continuity. Through extensive research into current trends in financial services design, we aimed to enhance the site’s visual and functional appeal while preserving the recognizable elements that existing users trusted. Maintaining Silvant’s signature earthy green color palette was a deliberate decision to support brand familiarity, while introducing a more refined layout, improved information hierarchy, and modern design elements. Ultimately, the project was driven by the need to create a refreshed, cohesive, and user-centered experience that aligned with both Silvant’s identity and the evolving standards of the financial industry.",
     stackExplanation:
       "This project was built using Ceros as the primary design and development tool. I chose Ceros because it allows for rapid, drag-and-drop creation of interactive web experiences without requiring extensive front-end development, making it ideal for a fast-moving enterprise rollout. Its visual editor enabled me to design structured layouts, embed visuals, and maintain strong visual hierarchy while keeping the experience user-friendly. After completing the build in Ceros, the page was integrated and hosted within Adobe Experience Manager (AEM) to align with the organization’s broader web infrastructure. Hosting it in AEM ensured consistency with brand standards, centralized content management, and seamless deployment within the existing ABS digital ecosystem. This stack allowed for both speed in design and stability in enterprise-level hosting.",
-    heroImage: "/projects/rule-manager-hero.svg",
+    heroImage: "/projects/financial-site-design-preview-group72-3200w.png",
     detailImages: [],
     timeline: [
       "October 2024, Requirements",
@@ -254,15 +254,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     role: ["Designer", "Developer"],
   };
 
-  const isMedicalPortfolio = slug === "portfolio-os";
-  const isRuleManager = slug === "workflow-automations";
+  const isMedicalPortfolio = slug === "medical-student-portfolio";
+  const isRuleManager = slug === "financial-site-design";
   const relatedProjects = projects.filter(
-    (item) => item.slug !== slug && item.slug !== "insight-dashboard",
+    (item) => item.slug !== slug && item.slug !== "get-to-know-me",
   );
   const lessonsLearnedText =
-    slug === "workflow-automations"
+    slug === "financial-site-design"
       ? "This project taught me how to balance brand consistency with modernization inside a large financial organization. I learned to translate stakeholder feedback from product, marketing, and engineering into a cohesive interface system that stayed true to Silvant's identity while aligning with Virtus standards. It also reinforced the value of designing content-first, reusable components during a CMS migration so teams can publish confidently without breaking visual consistency."
-      : slug === "clinic-scheduler"
+      : slug === "eu-ets-calculator"
         ? "This project reinforced how critical clarity is when designing tools for complex, data-heavy decisions. I learned to simplify technical EU ETS calculations into a guided flow that users could trust quickly, while still preserving analytical depth. It also highlighted the importance of close collaboration with engineering to align UI behavior, edge-case handling, and real-time calculation feedback so the final product felt both accurate and intuitive."
         : "First and foremost, this project was where I really learned how to use Figma and Cursor together in my workflow. I was also new to working with the Untitled UI design system, so I spent a lot of time learning how to create and manage assets, variables, and reusable styles within a larger design structure.\n\nAt first, I wasn’t sure how helpful Cursor would actually be while building the project in React, but it ended up being a huge help, especially when setting up the initial scaffolding and structure of the site. It made the development process feel much smoother and more efficient than I expected.\n\nHonestly, the hardest part of the project was coordinating with the student and gathering all of the content and information needed for the site. I’m excited with how it’s coming together though, and hoping to have it launched soon.";
 
@@ -278,7 +278,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <div className="flex flex-col gap-8">
           <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl">{project.title}</h1>
-          {slug !== "insight-dashboard" && (
+          {slug !== "get-to-know-me" && (
             <div className="rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]/90 px-5 py-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:rounded-3xl sm:px-8 sm:py-9 md:px-10 md:py-10">
               <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-10 md:gap-x-14">
                 <div className="flex min-w-0 flex-col gap-3 sm:gap-3.5">
@@ -317,10 +317,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="flex flex-col gap-8">
             <div
               className={`flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8 ${
-                isMedicalPortfolio || slug === "clinic-scheduler" ? "py-6 md:py-10" : ""
+                isMedicalPortfolio || slug === "eu-ets-calculator" ? "py-6 md:py-10" : ""
               }`}
             >
-              {slug === "insight-dashboard" ? (
+              {slug === "get-to-know-me" ? (
                 <AboutMeIntroWithPhotographyHover intro={details.intro} />
               ) : (
                 splitParagraphs(details.intro).map((paragraph, index) => (
@@ -331,7 +331,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
 
-        {slug === "insight-dashboard" ? (
+        {slug === "get-to-know-me" ? (
           <section
             id="experience"
             className="flex flex-col gap-8 border-t border-[color:var(--border)] pt-10 md:gap-10"
@@ -523,11 +523,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               ))}
             </div>
           </div>
-        ) : slug === "workflow-automations" || slug === "insight-dashboard" ? null : (
+        ) : slug === "financial-site-design" || slug === "get-to-know-me" ? null : (
           <ProjectMediaCaption caption={`${project.title} — hero preview`}>
             <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
               <div className="relative aspect-[1/1] w-full sm:aspect-[16/10] md:aspect-[16/9]">
-                {slug === "clinic-scheduler" ? (
+                {slug === "eu-ets-calculator" ? (
                   <>
                     <div className="absolute inset-0 sm:hidden">
                       <ZoomableImage
@@ -573,7 +573,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {!isRuleManager && (
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-8">
-              {slug !== "insight-dashboard" && (
+              {slug !== "get-to-know-me" && (
                 <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold">Project Purpose and Goal</h2>
                   <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
@@ -583,7 +583,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </div>
               )}
-              {slug !== "insight-dashboard" && (
+              {slug !== "get-to-know-me" && (
                 <div className="flex flex-col gap-8">
               {isMedicalPortfolio && (
                 <ProjectMediaCaption caption="Medical student portfolio — about section">
@@ -601,7 +601,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </ProjectMediaCaption>
               )}
-              {slug === "clinic-scheduler" && (
+              {slug === "eu-ets-calculator" && (
                 <ProjectMediaCaption caption="EU ETS calculator — growth and traction metrics">
                   <div className="overflow-hidden rounded-2xl bg-[var(--surface)]">
                     <div className="relative aspect-[5/2] w-full">
@@ -641,7 +641,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </ProjectMediaCaption>
               )}
-              {slug === "workflow-automations" && (
+              {slug === "financial-site-design" && (
                 <ProjectMediaCaption caption="Rule Manager — help guide design approach">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                     <div className="relative aspect-[1/1] w-full sm:aspect-[16/9]">
@@ -656,7 +656,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </ProjectMediaCaption>
               )}
-              {slug === "workflow-automations" && (
+              {slug === "financial-site-design" && (
                 <ProjectMediaCaption caption="Rule Manager — help guide interaction preview">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
                     <div className="relative aspect-[1/1] w-full sm:aspect-video">
@@ -672,7 +672,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </ProjectMediaCaption>
               )}
-              {slug === "clinic-scheduler" && (
+              {slug === "eu-ets-calculator" && (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
                   <ProjectMediaCaption caption="EU ETS calculator — color palette">
                     <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
@@ -705,7 +705,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               )}
             </div>
             <div className="flex flex-col gap-8">
-            {slug === "clinic-scheduler" && (
+            {slug === "eu-ets-calculator" && (
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-6 py-6 md:py-10">
                   <h2 className="text-2xl font-semibold">
@@ -844,7 +844,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </ProjectMediaCaption>
               </div>
           )}
-          {slug !== "insight-dashboard" && (
+          {slug !== "get-to-know-me" && (
             <div className="flex flex-col gap-6 py-6 md:py-10">
               <h2 className="text-2xl font-semibold">Web Stack Explanation</h2>
               <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
@@ -855,7 +855,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           )}
             {!isMedicalPortfolio &&
-              slug !== "workflow-automations" &&
+              slug !== "financial-site-design" &&
               details.detailImages.length > 0 && (
               <div className="flex flex-col gap-8">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
@@ -912,7 +912,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         )}
 
-        {slug !== "insight-dashboard" && (
+        {slug !== "get-to-know-me" && (
           <section className="flex flex-col gap-4 rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-8">
             <h2 className="text-2xl font-semibold">Lessons Learned</h2>
             <div className="flex flex-col gap-4 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">

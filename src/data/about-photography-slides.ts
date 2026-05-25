@@ -1,5 +1,5 @@
 /**
- * Slides shown when hovering “photography” on the About Me page.
+ * Slides shown when hovering “photography” on the Get to Know Me page.
  * Images live in `public/photography/` (PNG).
  */
 export const aboutPhotographySlides: { src: string; alt: string }[] = [

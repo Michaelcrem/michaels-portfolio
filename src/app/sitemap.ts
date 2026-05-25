@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { projects } from "@/data/projects";
+
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://michaels-portfolio.vercel.app";
 
@@ -11,29 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    {
-      url: `${siteUrl}/projects/portfolio-os`,
+    ...projects.map((project) => ({
+      url: `${siteUrl}/projects/${project.slug}`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "monthly" as const,
       priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/projects/workflow-automations`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/projects/clinic-scheduler`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/projects/insight-dashboard`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    })),
   ];
 }

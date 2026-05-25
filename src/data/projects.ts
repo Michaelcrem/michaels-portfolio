@@ -12,7 +12,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "portfolio-os",
+    slug: "medical-student-portfolio",
     title: "Medical Student Portfolio",
     description:
       "A lightweight, modular portfolio site showcasing a medical student’s experience and personal story.",
@@ -20,7 +20,7 @@ export const projects: Project[] = [
     image: "/projects/medical-portfolio-preview-group67.svg",
   },
   {
-    slug: "workflow-automations",
+    slug: "financial-site-design",
     title: "Financial Site Design",
     description:
       "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
@@ -28,7 +28,7 @@ export const projects: Project[] = [
     image: "/projects/financial-site-design-preview-group72-3200w.png",
   },
   {
-    slug: "clinic-scheduler",
+    slug: "eu-ets-calculator",
     title: "EU ETS Calculator",
     description:
       "A tool that allows ship owners to reduce fuel emissions by calculating their ship's EU Taxed CO2, Total Fuel, Total CO2, and Total Cost.",
@@ -36,11 +36,11 @@ export const projects: Project[] = [
     image: "/projects/eu-ets-preview-v2.png",
   },
   {
-    slug: "insight-dashboard",
-    title: "About Me",
+    slug: "get-to-know-me",
+    title: "Get to Know Me",
     description:
       "Web developer with a passion for film and photography, blending creativity and technology to build engaging digital experiences.",
     year: "2024",
-    image: "/projects/user-profile-mobile-tile-1200w.png",
+    image: "/projects/about-me-preview-group77.svg",
   },
 ];

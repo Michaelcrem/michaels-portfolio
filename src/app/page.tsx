@@ -14,7 +14,7 @@ export default function Home() {
   const closeMobileNav = () => setIsMobileNavOpen(false);
 
   const featuredProjectCards = projects.filter(
-    (project) => project.slug !== "insight-dashboard",
+    (project) => project.slug !== "get-to-know-me",
   );
 
   return (
@@ -56,7 +56,7 @@ export default function Home() {
             </a>
             <Link
               className="transition hover:opacity-60"
-              href="/projects/insight-dashboard"
+              href="/projects/get-to-know-me"
             >
               About
             </Link>
@@ -82,7 +82,7 @@ export default function Home() {
             </a>
             <Link
               className="transition hover:opacity-60"
-              href="/projects/insight-dashboard"
+              href="/projects/get-to-know-me"
               onClick={closeMobileNav}
             >
               About
@@ -125,13 +125,7 @@ export default function Home() {
                 style={{ zIndex: index }}
               >
                 <Link
-                  href={
-                    project.slug === "insight-dashboard"
-                      ? "https://dribbble.com/shots/26098752-User-Profile-Mobile-Prototype"
-                      : `/projects/${project.slug}`
-                  }
-                  target={project.slug === "insight-dashboard" ? "_blank" : undefined}
-                  rel={project.slug === "insight-dashboard" ? "noreferrer" : undefined}
+                  href={`/projects/${project.slug}`}
                   className={`relative aspect-square h-[5.5rem] w-[5.5rem] overflow-hidden rounded-2xl border-2 border-white bg-[var(--background)] shadow-[0_14px_30px_rgba(15,23,42,0.18),0_6px_12px_rgba(15,23,42,0.08)] transition duration-300 sm:h-32 sm:w-32 md:h-[10.5rem] md:w-[10.5rem] hover:z-20 ${
                     project.previewUnoptimized ? "" : "hover:scale-[1.02]"
                   } hover:rotate-0 hover:shadow-[0_26px_56px_rgba(15,23,42,0.32),0_10px_20px_rgba(15,23,42,0.14)] ${
@@ -197,7 +191,7 @@ export default function Home() {
                       alt={`${project.title} preview`}
                       fill
                       sizes={
-                        project.slug === "workflow-automations"
+                        project.slug === "financial-site-design"
                           ? "(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
                           : "(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 896px"
                       }
