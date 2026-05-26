@@ -165,8 +165,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" className="flex flex-col gap-10 md:gap-10">
-          <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
+        <section className="flex flex-col gap-10 md:gap-10">
+          <h2
+            id="projects"
+            className="scroll-mt-24 text-2xl font-semibold tracking-tight text-[var(--foreground)] md:scroll-mt-[7.25rem]"
+          >
             Featured projects
           </h2>
           <div className="flex flex-col gap-14 md:gap-14 lg:gap-16">
@@ -227,8 +230,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience" className="flex flex-col gap-8 md:gap-10">
-          <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
+        <section className="flex flex-col gap-8 md:gap-10">
+          <h2
+            id="experience"
+            className="scroll-mt-24 text-2xl font-semibold tracking-tight text-[var(--foreground)] md:scroll-mt-[7.25rem]"
+          >
             Experience
           </h2>
           <div className="flex flex-col gap-8 md:gap-10">

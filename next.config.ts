@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
   ],
   headers: async () => [
     {
-      source: "/portfolio-share-preview-cv20260503.png",
+      source: "/portfolio-share-preview-cv20260525.png",
       headers: [
         {
           key: "Cache-Control",

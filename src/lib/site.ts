@@ -1,6 +1,6 @@
 /** Homepage screenshot used for Open Graph / Twitter cards (1024×544 PNG). */
 export const SOCIAL_PREVIEW_IMAGE_PATH =
-  "/portfolio-share-preview-cv20260503.png";
+  "/portfolio-share-preview-cv20260525.png";
 
 /**
  * Canonical site origin for metadata and absolute URLs. Prefer explicit env so
