@@ -14,13 +14,13 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "medical-student-portfolio",
-    title: "Medical Student Portfolio",
+    slug: "eu-ets-calculator",
+    title: "EU ETS Calculator",
     description:
-      "A lightweight, modular portfolio site showcasing a medical student’s experience and personal story.",
-    year: "2026",
-    image: "/projects/medical-portfolio-preview-group67.svg",
-    technologies: ["React", "Node.js", "Figma"],
+      "Developed a Python/Dash emissions calculator used by 45K+ users in its first month to estimate maritime compliance costs under the EU Emmisions Trading System.",
+    year: "2025",
+    image: "/projects/eu-ets-preview-v2.png",
+    technologies: ["Dash", "Python", "Figma"],
   },
   {
     slug: "financial-site-design",
@@ -32,13 +32,13 @@ export const projects: Project[] = [
     technologies: ["Figma", "Statamic"],
   },
   {
-    slug: "eu-ets-calculator",
-    title: "EU ETS Calculator",
+    slug: "medical-student-portfolio",
+    title: "Medical Student Portfolio",
     description:
-      "Developed a Python/Dash emissions calculator used by 45K+ users in its first month to estimate maritime compliance costs under the EU Emmisions Trading System.",
-    year: "2025",
-    image: "/projects/eu-ets-preview-v2.png",
-    technologies: ["Dash", "Python", "Figma"],
+      "A lightweight, modular portfolio site showcasing a medical student’s experience and personal story.",
+    year: "2026",
+    image: "/projects/medical-portfolio-preview-group67.svg",
+    technologies: ["React", "Node.js", "Figma"],
   },
   {
     slug: "get-to-know-me",
