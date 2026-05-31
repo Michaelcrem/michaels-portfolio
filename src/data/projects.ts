@@ -8,6 +8,8 @@ export type Project = {
   isWide?: boolean;
   /** Skip next/image compression for sharper screenshots at the same pixel size. */
   previewUnoptimized?: boolean;
+  /** Shown as badges on homepage featured project cards. */
+  technologies?: string[];
 };
 
 export const projects: Project[] = [
@@ -18,6 +20,7 @@ export const projects: Project[] = [
       "A lightweight, modular portfolio site showcasing a medical student’s experience and personal story.",
     year: "2026",
     image: "/projects/medical-portfolio-preview-group67.svg",
+    technologies: ["React", "Node.js", "Figma"],
   },
   {
     slug: "financial-site-design",
@@ -26,6 +29,7 @@ export const projects: Project[] = [
       "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
     year: "2024",
     image: "/projects/financial-site-design-preview-group72-3200w.png",
+    technologies: ["Figma", "Statamic"],
   },
   {
     slug: "eu-ets-calculator",
@@ -34,6 +38,7 @@ export const projects: Project[] = [
       "A tool that allows ship owners to reduce fuel emissions by calculating their ship's EU Taxed CO2, Total Fuel, Total CO2, and Total Cost.",
     year: "2025",
     image: "/projects/eu-ets-preview-v2.png",
+    technologies: ["Dash", "Python", "Analytics"],
   },
   {
     slug: "get-to-know-me",

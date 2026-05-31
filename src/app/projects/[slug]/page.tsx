@@ -111,7 +111,7 @@ const projectDetails: Record<
   "financial-site-design": {
     intro: "",
     type: "Product",
-    stack: ["Documentation", "UX", "Web"],
+    stack: ["Figma", "Statamic"],
     liveUrl: "#",
     purposePreamble:
       "I redesigned the Silvant Financial website, an affiliate of Virtus Investment Partners, with a focus on creating a cleaner and more user-friendly experience. I worked closely with the development team to make sure the designs translated smoothly into the final build while still meeting technical needs. My work included redesigning page layouts, improving the overall site structure, and helping create a more cohesive visual style across the site.\n\nThroughout the project, I worked closely with several product managers to create infographics, organize content structure, and make sure everything stayed aligned with brand guidelines. A big part of the process was finding the balance between making information easy to understand while still keeping the pages visually engaging and clean. Since Virtus has multiple affiliate teams, I also had the opportunity to collaborate across different groups and make sure the Silvant redesign fit within the larger company standards while still feeling tailored to Silvant’s audience and goals.",

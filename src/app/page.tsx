@@ -174,16 +174,13 @@ export default function Home() {
           </h2>
           <div className="flex flex-col gap-14 md:gap-14 lg:gap-16">
             {featuredProjectCards.map((project) => (
-              <article
-                key={project.slug}
-                className="flex min-w-0 flex-col gap-7 md:gap-8"
-              >
+              <article key={project.slug} className="min-w-0">
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="group block overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--background)] transition md:rounded-3xl"
+                  className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--background)] transition hover:border-[#c4c4c4] md:rounded-3xl"
                 >
                   <div
-                    className={`relative w-full ${
+                    className={`relative w-full overflow-hidden ${
                       project.isWide
                         ? "aspect-[16/9] sm:aspect-[22/9]"
                         : "aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9]"
@@ -213,18 +210,29 @@ export default function Home() {
                       }`}
                     />
                   </div>
+                  <div className="flex flex-col gap-2.5 bg-[var(--surface)] px-5 py-6 sm:gap-3 sm:px-7 sm:py-7 md:gap-3.5 md:px-8 md:py-8">
+                    <h3 className="text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] sm:text-xl md:text-2xl md:leading-snug">
+                      {project.title}
+                    </h3>
+                    <p className="max-w-2xl text-sm leading-5 text-[#666666] md:text-base md:leading-relaxed">
+                      {project.description}
+                    </p>
+                    {project.technologies && project.technologies.length > 0 && (
+                      <ul
+                        className="flex flex-wrap gap-2 pt-1"
+                        aria-label={`${project.title} technologies`}
+                      >
+                        {project.technologies.map((tech) => (
+                          <li key={tech}>
+                            <span className="inline-flex rounded-full border border-[color:var(--border)] bg-[var(--surface-strong)] px-2.5 py-1 text-[11px] font-semibold leading-tight text-[var(--foreground)] sm:px-3 sm:py-1 sm:text-xs">
+                              {tech}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </Link>
-                <div className="flex min-w-0 flex-col gap-2.5 md:gap-2.5">
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="block w-full min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-[var(--foreground)] transition hover:opacity-70 md:text-xl"
-                  >
-                    {project.title}
-                  </Link>
-                  <p className="max-w-2xl text-sm leading-5 text-[#666666] md:text-base md:leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
               </article>
             ))}
           </div>
