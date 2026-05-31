@@ -26,7 +26,7 @@ export const projects: Project[] = [
     slug: "financial-site-design",
     title: "Financial Site Design",
     description:
-      "Silvant affiliate redesign, Virtus standards, and how I approach financial web experiences.",
+      "Led the redesign and development of key client-facing webpages, increasing content engagement by 8% through improved information architecture and usability.",
     year: "2024",
     image: "/projects/financial-site-design-preview-group72-3200w.png",
     technologies: ["Figma", "Statamic"],
@@ -35,10 +35,10 @@ export const projects: Project[] = [
     slug: "eu-ets-calculator",
     title: "EU ETS Calculator",
     description:
-      "A tool that allows ship owners to reduce fuel emissions by calculating their ship's EU Taxed CO2, Total Fuel, Total CO2, and Total Cost.",
+      "Developed a Python/Dash emissions calculator used by 45K+ users in its first month to estimate maritime compliance costs under the EU Emmisions Trading System.",
     year: "2025",
     image: "/projects/eu-ets-preview-v2.png",
-    technologies: ["Dash", "Python", "Analytics"],
+    technologies: ["Dash", "Python", "Figma"],
   },
   {
     slug: "get-to-know-me",

@@ -39,7 +39,7 @@ const projectDetails: Record<
     intro:
       "Collaborated with an engineer to build a maritime compliance analytics tool using Dash. Contributed to the app’s design and prototyping, shaping the user experience and interface architecture. The platform enables ship owners to calculate annual compliance costs, total CO₂ emissions, taxable CO₂, and total fuel consumption.",
     type: "Product",
-    stack: ["Dash", "Python", "Analytics"],
+    stack: ["Dash", "Python", "Figma"],
     liveUrl: "#",
     purpose:
       "The purpose of this project was to develop an intuitive, easy-to-use Dash application that enables ship owners to calculate annual compliance costs, total CO₂ emissions, taxable CO₂, and total fuel consumption. The goal was to provide ship owners with clear, actionable insights into their fuel emissions so they can better understand their environmental impact and prevent future compliance risks. During the initial release, the tool was fully public-facing to maximize visibility and drive traffic to the site. After gaining strong early traction, access to the application was transitioned to a login-based model, requiring users to register before using the tool. The platform reached over 45,000 users within its first month, demonstrating strong demand and engagement.",
