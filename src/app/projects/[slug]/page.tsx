@@ -8,6 +8,7 @@ import ZoomableImage from "@/components/ZoomableImage";
 import { AboutMeIntroWithPhotographyHover } from "@/components/AboutMeIntroWithPhotographyHover";
 import { experienceEntries } from "@/data/experience";
 import { projects } from "@/data/projects";
+import { CRISP_SCREENSHOT_IMG } from "@/lib/crisp-screenshot-image";
 import {
   getProductionSiteUrl,
   SOCIAL_PREVIEW_IMAGE_PATH,
@@ -28,6 +29,12 @@ const projectDetails: Record<
     purposePreamble?: string;
     /** Shown after purpose + visuals on Financial Site Design when set. */
     designApproach?: string;
+    /** Shown in a dedicated “Prototype Flow Explanation” section when set. */
+    prototypeFlow?: string;
+    /** Shown in a dedicated “Entering Text” section when set. */
+    enteringText?: string;
+    /** Shown in a dedicated “File Upload” section when set. */
+    fileUpload?: string;
     stackExplanation: string;
     heroImage: string;
     detailImages: { src: string; alt: string }[];
@@ -130,6 +137,44 @@ const projectDetails: Record<
     role: ["UI Designer"],
     designApproach:
       "My design approach for Silvant started in Figma with low-fidelity page shells, then moved to higher fidelity as content models stabilized in Statamic. I prioritized scan-friendly layouts for advisory audiences: generous whitespace, a clear typographic scale for headings and body copy, and repeatable patterns for product tiles, disclosures, and calls to action.\n\nI iterated with engineering on breakpoints and CMS-driven components so marketing could publish updates without breaking the visual system. Infographics and iconography were simplified to align with broader Virtus patterns while keeping Silvant’s earthy greens as the anchor for recognition and trust.",
+  },
+  "ai-messaging-schedular": {
+    intro:
+      "AI Messaging Schedular is an AI-assisted tool for drafting, organizing, and scheduling messages so teams can stay consistent without the busywork of manual follow-ups.",
+    type: "Product",
+    stack: ["React", "AI"],
+    liveUrl: "#",
+    purpose:
+      "The purpose of this project was to make message planning and delivery more efficient by combining AI drafting support with a clear scheduling workflow. The goal was to help users prepare messages in advance, review them quickly, and send them on a reliable cadence.",
+    prototypeFlow:
+      "The prototype maps a complete path from first open to a finished schedule. Users start on the Scheduler AI landing screen, continue with Google or email, then land on a help-centered home with quick actions like Start Planning. Choosing Start Planning opens a chat with the AI, where they describe what they need—such as a morning routine or a plant-watering plan. The assistant asks clarifying questions, then generates downloadable schedule assets the user can review and refine in the same conversation.",
+    enteringText:
+      "Once Start Planning is selected, the conversation becomes the main workspace. Users can tap a quick action or type freely into the Ask anything field—describing something like a monthly plant-watering routine—while Scheduler AI responds in chat and keeps the preferred tone available at the top. The keyboard and send controls stay anchored at the bottom so refining a request feels as natural as texting.",
+    fileUpload:
+      "Users can also bring existing materials into the conversation through a dedicated File Upload flow. From the chat, they open an upload sheet to add PDFs, videos, or design files, watch progress states as each file finishes, then return to the thread where attachments appear inline so Scheduler AI can incorporate them into the next schedule draft.",
+    stackExplanation:
+      "This project was built with React for a responsive, component-driven interface, with AI integrated into the drafting and scheduling flow to reduce repetitive writing and help users move from idea to scheduled message faster.",
+    heroImage: "/projects/ai-messaging-schedular-preview.png",
+    detailImages: [
+      {
+        src: "/projects/ai-messaging-schedular-flow.png",
+        alt: "Scheduler AI prototype flow from onboarding through chat to generated schedules",
+      },
+      {
+        src: "/projects/ai-messaging-schedular-entering-text.png",
+        alt: "Scheduler AI home quick actions beside the entering-text chat state",
+      },
+      {
+        src: "/projects/ai-messaging-schedular-file-upload.png",
+        alt: "Scheduler AI file upload sheet beside chat with attached files",
+      },
+    ],
+    timeline: [
+      "2026, Discovery",
+      "2026, Design",
+      "2026, Build",
+    ],
+    role: ["Designer", "Developer"],
   },
 };
 
@@ -526,7 +571,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         ) : slug === "financial-site-design" || slug === "get-to-know-me" ? null : (
           <ProjectMediaCaption caption={`${project.title} — hero preview`}>
             <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
-              <div className="relative aspect-[1/1] w-full sm:aspect-[16/10] md:aspect-[16/9]">
+              <div
+                className={`relative w-full ${
+                  slug === "ai-messaging-schedular"
+                    ? "aspect-[1024/661] bg-[#c5daf5]"
+                    : "aspect-[1/1] sm:aspect-[16/10] md:aspect-[16/9]"
+                }`}
+              >
                 {slug === "eu-ets-calculator" ? (
                   <>
                     <div className="absolute inset-0 sm:hidden">
@@ -559,10 +610,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     src={details.heroImage}
                     alt={`${project.title} preview`}
                     fill
-                    sizes="(max-width: 768px) 100vw, 900px"
-                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 1800px"
+                    className={
+                      slug === "ai-messaging-schedular"
+                        ? `object-contain object-center ${CRISP_SCREENSHOT_IMG}`
+                        : "object-cover"
+                    }
                     priority
-                    unoptimized={details.heroImage.endsWith(".svg")}
+                    quality={slug === "ai-messaging-schedular" ? 100 : undefined}
+                    decoding={
+                      slug === "ai-messaging-schedular" ? "sync" : undefined
+                    }
+                    unoptimized={
+                      details.heroImage.endsWith(".svg") ||
+                      slug === "ai-messaging-schedular"
+                    }
                   />
                 )}
               </div>
@@ -581,6 +643,112 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
                     ))}
                   </div>
+                </div>
+              )}
+              {slug === "ai-messaging-schedular" && details.prototypeFlow && (
+                <div className="flex flex-col gap-8">
+                  <div className="flex flex-col gap-6 py-6 md:py-10">
+                    <h2 className="text-2xl font-semibold">
+                      Prototype Flow Explanation
+                    </h2>
+                    <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
+                      {splitParagraphs(details.prototypeFlow).map((paragraph, index) => (
+                        <p key={`prototype-flow-${paragraph.slice(0, 24)}-${index}`}>
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                  {details.detailImages[0] && (
+                    <ProjectMediaCaption caption={details.detailImages[0].alt}>
+                      <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                        <div className="relative aspect-[1024/355] w-full bg-white">
+                          <ZoomableImage
+                            src={details.detailImages[0].src}
+                            alt={details.detailImages[0].alt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 1800px"
+                            quality={100}
+                            decoding="sync"
+                            unoptimized
+                            className={`object-contain object-center ${CRISP_SCREENSHOT_IMG}`}
+                          />
+                        </div>
+                      </div>
+                    </ProjectMediaCaption>
+                  )}
+                  {details.enteringText && (
+                    <>
+                      <div className="flex flex-col gap-6 py-6 md:py-10">
+                        <h2 className="text-2xl font-semibold">Entering Text</h2>
+                        <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
+                          {splitParagraphs(details.enteringText).map(
+                            (paragraph, index) => (
+                              <p
+                                key={`entering-text-${paragraph.slice(0, 24)}-${index}`}
+                              >
+                                {paragraph}
+                              </p>
+                            ),
+                          )}
+                        </div>
+                      </div>
+                      {details.detailImages[1] && (
+                        <ProjectMediaCaption caption={details.detailImages[1].alt}>
+                          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                            <div className="relative aspect-[1024/661] w-full bg-[#c5daf5]">
+                              <ZoomableImage
+                                src={details.detailImages[1].src}
+                                alt={details.detailImages[1].alt}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 1800px"
+                                quality={100}
+                                decoding="sync"
+                                unoptimized
+                                className={`object-contain object-center ${CRISP_SCREENSHOT_IMG}`}
+                              />
+                            </div>
+                          </div>
+                        </ProjectMediaCaption>
+                      )}
+                    </>
+                  )}
+                  {details.fileUpload && (
+                    <>
+                      <div className="flex flex-col gap-6 py-6 md:py-10">
+                        <h2 className="text-2xl font-semibold">File Upload</h2>
+                        <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
+                          {splitParagraphs(details.fileUpload).map(
+                            (paragraph, index) => (
+                              <p
+                                key={`file-upload-${paragraph.slice(0, 24)}-${index}`}
+                              >
+                                {paragraph}
+                              </p>
+                            ),
+                          )}
+                        </div>
+                      </div>
+                      {details.detailImages[2] && (
+                        <ProjectMediaCaption caption={details.detailImages[2].alt}>
+                          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
+                            <div className="relative aspect-[1024/661] w-full bg-[#c5daf5]">
+                              <ZoomableImage
+                                src={details.detailImages[2].src}
+                                alt={details.detailImages[2].alt}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 1800px"
+                                quality={100}
+                                decoding="sync"
+                                unoptimized
+                                className={`object-contain object-center ${CRISP_SCREENSHOT_IMG}`}
+                              />
+                            </div>
+                          </div>
+                        </ProjectMediaCaption>
+                      )}
+                    </>
+                  )}
                 </div>
               )}
               {slug !== "get-to-know-me" && (
@@ -616,6 +784,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 </ProjectMediaCaption>
               )}
+              {slug !== "ai-messaging-schedular" && (
               <div className="flex flex-col gap-6 py-6 md:py-10">
                 <h2 className="text-2xl font-semibold">Design Approach</h2>
                 <div className="flex w-full flex-col gap-5 md:gap-8 text-base leading-7 text-[var(--muted)] md:text-lg md:leading-8">
@@ -626,6 +795,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   ))}
                 </div>
               </div>
+              )}
               {isMedicalPortfolio && (
                 <ProjectMediaCaption caption="Medical student portfolio — experience grid layout">
                   <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
@@ -856,6 +1026,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           )}
             {!isMedicalPortfolio &&
               slug !== "financial-site-design" &&
+              slug !== "ai-messaging-schedular" &&
               details.detailImages.length > 0 && (
               <div className="flex flex-col gap-8">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
@@ -947,14 +1118,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 href={`/projects/${item.slug}`}
                 className="group flex min-w-0 gap-3 rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] p-3 transition hover:border-[#2E90FA]/35 hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] sm:p-3.5"
               >
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-lg border border-[color:var(--border)] bg-[var(--surface-strong)] sm:h-16 sm:w-24">
+                <div
+                  className={`relative size-14 shrink-0 overflow-hidden rounded-lg border border-[color:var(--border)] sm:h-16 sm:w-24 ${
+                    item.previewContain ? "bg-[#c5daf5]" : "bg-[var(--surface-strong)]"
+                  }`}
+                >
                   <Image
                     src={item.image}
                     alt={`${item.title} preview`}
                     fill
                     sizes="96px"
                     quality={85}
-                    className="object-cover object-center"
+                    className={`object-center ${
+                      item.previewContain ? "object-contain" : "object-cover"
+                    }`}
                     unoptimized={
                       Boolean(item.isWide) ||
                       Boolean(item.previewUnoptimized) ||

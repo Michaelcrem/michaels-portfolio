@@ -116,7 +116,9 @@ export default function Home() {
           className="-mt-8 bg-[var(--background)] py-4 md:-mt-9 md:py-5"
         >
           <div className="flex w-full flex-nowrap items-center justify-center gap-0 px-1 sm:px-0">
-            {projects.map((project, index) => (
+            {projects
+              .filter((project) => project.slug !== "get-to-know-me")
+              .map((project, index) => (
               <div
                 key={`preview-${project.slug}`}
                 className={`group relative flex flex-col items-center ${
@@ -181,9 +183,11 @@ export default function Home() {
                 >
                   <div
                     className={`relative w-full overflow-hidden ${
-                      project.isWide
-                        ? "aspect-[16/9] sm:aspect-[22/9]"
-                        : "aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9]"
+                      project.previewContain
+                        ? "aspect-[1024/661] bg-[#c5daf5]"
+                        : project.isWide
+                          ? "aspect-[16/9] sm:aspect-[22/9]"
+                          : "aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9]"
                     }`}
                   >
                     <Image
@@ -203,7 +207,9 @@ export default function Home() {
                         Boolean(project.previewUnoptimized) ||
                         project.image.endsWith(".svg")
                       }
-                      className={`h-full w-full object-cover object-center ${
+                      className={`h-full w-full object-center ${
+                        project.previewContain ? "object-contain" : "object-cover"
+                      } ${
                         project.previewUnoptimized
                           ? CRISP_SCREENSHOT_IMG
                           : "transition duration-300 ease-out group-hover:scale-[1.02]"

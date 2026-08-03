@@ -6,6 +6,8 @@ export type Project = {
   image: string;
   previewImage?: string;
   isWide?: boolean;
+  /** Show the full image without cropping (object-contain) on featured cards / heroes. */
+  previewContain?: boolean;
   /** Skip next/image compression for sharper screenshots at the same pixel size. */
   previewUnoptimized?: boolean;
   /** Shown as badges on homepage featured project cards. */
@@ -30,6 +32,17 @@ export const projects: Project[] = [
     year: "2024",
     image: "/projects/financial-site-design-preview-group72-3200w.png",
     technologies: ["Figma", "Statamic"],
+  },
+  {
+    slug: "ai-messaging-schedular",
+    title: "AI Messaging Schedular",
+    description:
+      "An AI-assisted messaging scheduler for planning, drafting, and sending messages on a set cadence.",
+    year: "2026",
+    image: "/projects/ai-messaging-schedular-preview.png",
+    previewContain: true,
+    previewUnoptimized: true,
+    technologies: ["React", "AI"],
   },
   {
     slug: "medical-student-portfolio",
