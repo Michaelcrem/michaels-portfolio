@@ -8,7 +8,6 @@ import ZoomableImage from "@/components/ZoomableImage";
 import { AboutMeIntroWithPhotographyHover } from "@/components/AboutMeIntroWithPhotographyHover";
 import { experienceEntries } from "@/data/experience";
 import { projects } from "@/data/projects";
-import { CRISP_SCREENSHOT_IMG } from "@/lib/crisp-screenshot-image";
 import {
   getProductionSiteUrl,
   SOCIAL_PREVIEW_IMAGE_PATH,
@@ -572,64 +571,64 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         ) : slug === "financial-site-design" || slug === "get-to-know-me" ? null : (
           <ProjectMediaCaption caption={`${project.title} — hero preview`}>
-            <div className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[var(--surface)]">
-              <div
-                className={`relative w-full ${
-                  slug === "ai-messaging-schedular"
-                    ? "aspect-[1728/1117] bg-[#c5daf5]"
-                    : "aspect-[1/1] sm:aspect-[16/10] md:aspect-[16/9]"
-                }`}
-              >
-                {slug === "eu-ets-calculator" ? (
-                  <>
-                    <div className="absolute inset-0 sm:hidden">
-                      <ZoomableImage
-                        src={project.previewImage ?? project.image}
-                        alt={`${project.title} preview`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 900px"
-                        className="object-cover"
-                        priority
-                        unoptimized={(project.previewImage ?? project.image).endsWith(
-                          ".svg",
-                        )}
-                      />
-                    </div>
-                    <div className="absolute inset-0 hidden sm:block">
-                      <ZoomableImage
-                        src={details.heroImage}
-                        alt={`${project.title} preview`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 900px"
-                        className="object-cover"
-                        loading="lazy"
-                        unoptimized={details.heroImage.endsWith(".svg")}
-                      />
-                    </div>
-                  </>
-                ) : (
+            <div
+              className={`overflow-hidden rounded-3xl border border-[color:var(--border)] ${
+                slug === "ai-messaging-schedular"
+                  ? "bg-[#c5daf5]"
+                  : "bg-[var(--surface)]"
+              }`}
+            >
+              {slug === "eu-ets-calculator" ? (
+                <div className="relative aspect-[1/1] w-full sm:aspect-[16/10] md:aspect-[16/9]">
+                  <div className="absolute inset-0 sm:hidden">
+                    <ZoomableImage
+                      src={project.previewImage ?? project.image}
+                      alt={`${project.title} preview`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 900px"
+                      className="object-cover"
+                      priority
+                      unoptimized={(project.previewImage ?? project.image).endsWith(
+                        ".svg",
+                      )}
+                    />
+                  </div>
+                  <div className="absolute inset-0 hidden sm:block">
+                    <ZoomableImage
+                      src={details.heroImage}
+                      alt={`${project.title} preview`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 900px"
+                      className="object-cover"
+                      loading="lazy"
+                      unoptimized={details.heroImage.endsWith(".svg")}
+                    />
+                  </div>
+                </div>
+              ) : slug === "ai-messaging-schedular" ? (
+                <ZoomableImage
+                  src={details.heroImage}
+                  alt={`${project.title} preview`}
+                  width={1728}
+                  height={1117}
+                  sizes="(max-width: 768px) 100vw, 896px"
+                  className="h-auto w-full"
+                  priority
+                  unoptimized
+                />
+              ) : (
+                <div className="relative aspect-[1/1] w-full sm:aspect-[16/10] md:aspect-[16/9]">
                   <ZoomableImage
                     src={details.heroImage}
                     alt={`${project.title} preview`}
                     fill
-                    sizes="(max-width: 768px) 100vw, 1800px"
-                    className={
-                      slug === "ai-messaging-schedular"
-                        ? `object-contain object-center ${CRISP_SCREENSHOT_IMG}`
-                        : "object-cover"
-                    }
+                    sizes="(max-width: 768px) 100vw, 900px"
+                    className="object-cover"
                     priority
-                    quality={slug === "ai-messaging-schedular" ? 100 : undefined}
-                    decoding={
-                      slug === "ai-messaging-schedular" ? "sync" : undefined
-                    }
-                    unoptimized={
-                      details.heroImage.endsWith(".svg") ||
-                      slug === "ai-messaging-schedular"
-                    }
+                    unoptimized={details.heroImage.endsWith(".svg")}
                   />
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </ProjectMediaCaption>
         )}
@@ -663,19 +662,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                   {details.detailImages[0] && (
                     <ProjectMediaCaption caption={details.detailImages[0].alt}>
-                      <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                        <div className="relative aspect-[1658/562] w-full bg-white">
-                          <ZoomableImage
-                            src={details.detailImages[0].src}
-                            alt={details.detailImages[0].alt}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 1800px"
-                            quality={100}
-                            decoding="sync"
-                            unoptimized
-                            className={`object-contain object-center ${CRISP_SCREENSHOT_IMG}`}
-                          />
-                        </div>
+                      <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-white">
+                        <ZoomableImage
+                          src={details.detailImages[0].src}
+                          alt={details.detailImages[0].alt}
+                          width={1658}
+                          height={562}
+                          sizes="(max-width: 768px) 100vw, 896px"
+                          className="h-auto w-full"
+                          unoptimized
+                        />
                       </div>
                     </ProjectMediaCaption>
                   )}
@@ -697,19 +693,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       </div>
                       {details.detailImages[1] && (
                         <ProjectMediaCaption caption={details.detailImages[1].alt}>
-                          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                            <div className="relative aspect-[1728/1117] w-full bg-[#c5daf5]">
-                              <ZoomableImage
-                                src={details.detailImages[1].src}
-                                alt={details.detailImages[1].alt}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 1800px"
-                                quality={100}
-                                decoding="sync"
-                                unoptimized
-                                className={`object-contain object-center ${CRISP_SCREENSHOT_IMG}`}
-                              />
-                            </div>
+                          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[#c5daf5]">
+                            <ZoomableImage
+                              src={details.detailImages[1].src}
+                              alt={details.detailImages[1].alt}
+                              width={1728}
+                              height={1117}
+                              sizes="(max-width: 768px) 100vw, 896px"
+                              className="h-auto w-full"
+                              unoptimized
+                            />
                           </div>
                         </ProjectMediaCaption>
                       )}
@@ -733,19 +726,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       </div>
                       {details.detailImages[2] && (
                         <ProjectMediaCaption caption={details.detailImages[2].alt}>
-                          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                            <div className="relative aspect-[1728/1117] w-full bg-[#c5daf5]">
-                              <ZoomableImage
-                                src={details.detailImages[2].src}
-                                alt={details.detailImages[2].alt}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 1800px"
-                                quality={100}
-                                decoding="sync"
-                                unoptimized
-                                className={`object-contain object-center ${CRISP_SCREENSHOT_IMG}`}
-                              />
-                            </div>
+                          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[#c5daf5]">
+                            <ZoomableImage
+                              src={details.detailImages[2].src}
+                              alt={details.detailImages[2].alt}
+                              width={1728}
+                              height={1117}
+                              sizes="(max-width: 768px) 100vw, 896px"
+                              className="h-auto w-full"
+                              unoptimized
+                            />
                           </div>
                         </ProjectMediaCaption>
                       )}

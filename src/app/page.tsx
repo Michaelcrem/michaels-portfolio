@@ -208,11 +208,11 @@ export default function Home() {
                         project.image.endsWith(".svg")
                       }
                       className={`h-full w-full object-center ${
-                        project.previewContain ? "object-contain" : "object-cover"
-                      } ${
-                        project.previewUnoptimized
-                          ? CRISP_SCREENSHOT_IMG
-                          : "transition duration-300 ease-out group-hover:scale-[1.02]"
+                        project.previewContain
+                          ? "object-contain"
+                          : project.previewUnoptimized
+                            ? `object-cover ${CRISP_SCREENSHOT_IMG}`
+                            : "object-cover transition duration-300 ease-out group-hover:scale-[1.02]"
                       }`}
                     />
                   </div>
