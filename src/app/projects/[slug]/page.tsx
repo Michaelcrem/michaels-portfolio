@@ -157,7 +157,7 @@ const projectDetails: Record<
     heroImage: "/projects/ai-messaging-schedular-preview.svg",
     detailImages: [
       {
-        src: "/projects/ai-messaging-schedular-flow.png",
+        src: "/projects/ai-messaging-schedular-flow.svg",
         alt: "Scheduler AI prototype flow from onboarding through chat to generated schedules",
       },
       {
@@ -664,7 +664,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   {details.detailImages[0] && (
                     <ProjectMediaCaption caption={details.detailImages[0].alt}>
                       <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                        <div className="relative aspect-[1024/355] w-full bg-white">
+                        <div className="relative aspect-[1658/562] w-full bg-white">
                           <ZoomableImage
                             src={details.detailImages[0].src}
                             alt={details.detailImages[0].alt}
