@@ -140,12 +140,12 @@ const projectDetails: Record<
   },
   "ai-messaging-schedular": {
     intro:
-      "AI Messaging Schedular is an AI-assisted tool for drafting, organizing, and scheduling messages so teams can stay consistent without the busywork of manual follow-ups.",
+      "Designed an AI-powered scheduling and messaging app that helps users plan routines, draft and organize messages, schedule communications, and automate follow-ups—all in one streamlined experience.",
     type: "Product",
-    stack: ["React", "AI"],
+    stack: ["Figma", "AI messaging"],
     liveUrl: "#",
     purpose:
-      "The purpose of this project was to make message planning and delivery more efficient by combining AI drafting support with a clear scheduling workflow. The goal was to help users prepare messages in advance, review them quickly, and send them on a reliable cadence.",
+      "The goal of this project was to design a clear, intuitive messaging experience where users can chat with an AI assistant, provide relevant documents and information, and use that context to schedule and plan important events, meetings, and communications. I wanted to simplify the planning process by bringing AI assistance, messaging, and scheduling into one seamless workflow.",
     prototypeFlow:
       "The prototype maps a complete path from first open to a finished schedule. Users start on the Scheduler AI landing screen, continue with Google or email, then land on a help-centered home with quick actions like Start Planning. Choosing Start Planning opens a chat with the AI, where they describe what they need—such as a morning routine or a plant-watering plan. The assistant asks clarifying questions, then generates downloadable schedule assets the user can review and refine in the same conversation.",
     enteringText:
@@ -153,7 +153,7 @@ const projectDetails: Record<
     fileUpload:
       "Users can also bring existing materials into the conversation through a dedicated File Upload flow. From the chat, they open an upload sheet to add PDFs, videos, or design files, watch progress states as each file finishes, then return to the thread where attachments appear inline so Scheduler AI can incorporate them into the next schedule draft.",
     stackExplanation:
-      "This project was built with React for a responsive, component-driven interface, with AI integrated into the drafting and scheduling flow to reduce repetitive writing and help users move from idea to scheduled message faster.",
+      "I designed the experience in Figma using the Untitled UI design system, mapping user journeys and creating wireframes to define the core messaging and scheduling workflows. I then developed high-fidelity designs and interactive prototypes to refine key interactions and create a consistent, intuitive experience across the product.",
     heroImage: "/projects/ai-messaging-schedular-preview.png",
     detailImages: [
       {
@@ -174,7 +174,7 @@ const projectDetails: Record<
       "2026, Design",
       "2026, Build",
     ],
-    role: ["Designer", "Developer"],
+    role: ["Designer"],
   },
 };
 
@@ -309,7 +309,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       ? "This project taught me how to balance brand consistency with modernization inside a large financial organization. I learned to translate stakeholder feedback from product, marketing, and engineering into a cohesive interface system that stayed true to Silvant's identity while aligning with Virtus standards. It also reinforced the value of designing content-first, reusable components during a CMS migration so teams can publish confidently without breaking visual consistency."
       : slug === "eu-ets-calculator"
         ? "This project reinforced how critical clarity is when designing tools for complex, data-heavy decisions. I learned to simplify technical EU ETS calculations into a guided flow that users could trust quickly, while still preserving analytical depth. It also highlighted the importance of close collaboration with engineering to align UI behavior, edge-case handling, and real-time calculation feedback so the final product felt both accurate and intuitive."
-        : "First and foremost, this project was where I really learned how to use Figma and Cursor together in my workflow. I was also new to working with the Untitled UI design system, so I spent a lot of time learning how to create and manage assets, variables, and reusable styles within a larger design structure.\n\nAt first, I wasn’t sure how helpful Cursor would actually be while building the project in React, but it ended up being a huge help, especially when setting up the initial scaffolding and structure of the site. It made the development process feel much smoother and more efficient than I expected.\n\nHonestly, the hardest part of the project was coordinating with the student and gathering all of the content and information needed for the site. I’m excited with how it’s coming together though, and hoping to have it launched soon.";
+        : slug === "ai-messaging-schedular"
+          ? "This project reinforced how important it is to keep conversational AI experiences simple and guided. I learned that quick actions, clear tone controls, and structured file-upload states help users feel confident when planning with an assistant—especially when messaging and scheduling live in the same flow. Designing the journeys in Figma with Untitled UI also showed me how early wireframes and interactive prototypes make it easier to refine complex interactions before they become hard to change."
+          : "First and foremost, this project was where I really learned how to use Figma and Cursor together in my workflow. I was also new to working with the Untitled UI design system, so I spent a lot of time learning how to create and manage assets, variables, and reusable styles within a larger design structure.\n\nAt first, I wasn’t sure how helpful Cursor would actually be while building the project in React, but it ended up being a huge help, especially when setting up the initial scaffolding and structure of the site. It made the development process feel much smoother and more efficient than I expected.\n\nHonestly, the hardest part of the project was coordinating with the student and gathering all of the content and information needed for the site. I’m excited with how it’s coming together though, and hoping to have it launched soon.";
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">

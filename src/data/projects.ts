@@ -35,14 +35,14 @@ export const projects: Project[] = [
   },
   {
     slug: "ai-messaging-schedular",
-    title: "AI Messaging Schedular",
+    title: "AI Messaging Scheduler",
     description:
       "An AI-assisted messaging scheduler for planning, drafting, and sending messages on a set cadence.",
     year: "2026",
     image: "/projects/ai-messaging-schedular-preview.png",
     previewContain: true,
     previewUnoptimized: true,
-    technologies: ["React", "AI"],
+    technologies: ["Figma", "AI messaging"],
   },
   {
     slug: "medical-student-portfolio",
