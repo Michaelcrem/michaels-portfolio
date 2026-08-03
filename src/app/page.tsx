@@ -184,7 +184,7 @@ export default function Home() {
                   <div
                     className={`relative w-full overflow-hidden ${
                       project.previewContain
-                        ? "aspect-[1024/661] bg-[#c5daf5]"
+                        ? "aspect-[1728/1117] bg-[#c5daf5]"
                         : project.isWide
                           ? "aspect-[16/9] sm:aspect-[22/9]"
                           : "aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9]"

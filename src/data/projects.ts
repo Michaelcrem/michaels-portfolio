@@ -39,7 +39,7 @@ export const projects: Project[] = [
     description:
       "An AI-assisted messaging scheduler for planning, drafting, and sending messages on a set cadence.",
     year: "2026",
-    image: "/projects/ai-messaging-schedular-preview.png",
+    image: "/projects/ai-messaging-schedular-preview.svg",
     previewContain: true,
     previewUnoptimized: true,
     technologies: ["Figma", "AI messaging"],

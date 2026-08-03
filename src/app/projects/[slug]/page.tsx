@@ -154,18 +154,18 @@ const projectDetails: Record<
       "Users can also bring existing materials into the conversation through a dedicated File Upload flow. From the chat, they open an upload sheet to add PDFs, videos, or design files, watch progress states as each file finishes, then return to the thread where attachments appear inline so Scheduler AI can incorporate them into the next schedule draft.",
     stackExplanation:
       "I designed the experience in Figma using the Untitled UI design system, mapping user journeys and creating wireframes to define the core messaging and scheduling workflows. I then developed high-fidelity designs and interactive prototypes to refine key interactions and create a consistent, intuitive experience across the product.",
-    heroImage: "/projects/ai-messaging-schedular-preview.png",
+    heroImage: "/projects/ai-messaging-schedular-preview.svg",
     detailImages: [
       {
         src: "/projects/ai-messaging-schedular-flow.png",
         alt: "Scheduler AI prototype flow from onboarding through chat to generated schedules",
       },
       {
-        src: "/projects/ai-messaging-schedular-entering-text.png",
+        src: "/projects/ai-messaging-schedular-entering-text.svg",
         alt: "Scheduler AI home quick actions beside the entering-text chat state",
       },
       {
-        src: "/projects/ai-messaging-schedular-file-upload.png",
+        src: "/projects/ai-messaging-schedular-file-upload.svg",
         alt: "Scheduler AI file upload sheet beside chat with attached files",
       },
     ],
@@ -576,7 +576,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <div
                 className={`relative w-full ${
                   slug === "ai-messaging-schedular"
-                    ? "aspect-[1024/661] bg-[#c5daf5]"
+                    ? "aspect-[1728/1117] bg-[#c5daf5]"
                     : "aspect-[1/1] sm:aspect-[16/10] md:aspect-[16/9]"
                 }`}
               >
@@ -698,7 +698,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       {details.detailImages[1] && (
                         <ProjectMediaCaption caption={details.detailImages[1].alt}>
                           <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                            <div className="relative aspect-[1024/661] w-full bg-[#c5daf5]">
+                            <div className="relative aspect-[1728/1117] w-full bg-[#c5daf5]">
                               <ZoomableImage
                                 src={details.detailImages[1].src}
                                 alt={details.detailImages[1].alt}
@@ -734,7 +734,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       {details.detailImages[2] && (
                         <ProjectMediaCaption caption={details.detailImages[2].alt}>
                           <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--surface)]">
-                            <div className="relative aspect-[1024/661] w-full bg-[#c5daf5]">
+                            <div className="relative aspect-[1728/1117] w-full bg-[#c5daf5]">
                               <ZoomableImage
                                 src={details.detailImages[2].src}
                                 alt={details.detailImages[2].alt}
