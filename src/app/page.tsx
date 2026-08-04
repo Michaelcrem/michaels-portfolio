@@ -98,7 +98,7 @@ export default function Home() {
         )}
       </header>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-14 pb-28 pt-8 md:gap-28 md:px-24 md:pb-40 md:pt-14 lg:gap-32 lg:px-32 lg:pt-16 xl:px-40 2xl:px-52">
+      <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-24 px-4 pb-28 pt-8 sm:px-8 md:gap-28 md:px-24 md:pb-40 md:pt-14 lg:gap-32 lg:px-32 lg:pt-16 xl:px-40 2xl:px-52">
         <section id="about" className="flex w-full flex-col gap-8 md:gap-10">
           <div className="flex max-w-4xl flex-col items-start gap-3 md:gap-4">
             <h1 className="whitespace-nowrap text-[clamp(1.65rem,6.8vw,3.15rem)] font-semibold leading-tight tracking-[0.02em] text-[var(--foreground)] md:tracking-[0.035em]">
